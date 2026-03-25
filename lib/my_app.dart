@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/features/onboarding/ui/onboarding_screen.dart';
+import 'package:flutter_project/features/onboarding/ui/page_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyApp extends StatelessWidget {
@@ -8,12 +8,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(390, 916),
+      designSize: Size(390, 914),
       minTextAdapt: true,
       splitScreenMode: true,
 
       child: MaterialApp(
-        home: OnboardingScreen(),
+        home: OnboardingContainer(),
         debugShowCheckedModeBanner: false,
       ),
     );

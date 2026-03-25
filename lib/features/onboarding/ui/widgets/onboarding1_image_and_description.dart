@@ -2,24 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/core/theming/style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ImageAndDescription extends StatelessWidget {
-  const ImageAndDescription({super.key});
+class OnboardingImageAndDescription extends StatelessWidget {
+  final String image;
+  final String maintext;
+  final String discription;
+  const OnboardingImageAndDescription({super.key, required this.image, required this.maintext, required this.discription});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image.asset("assets/images/onboardingimage1.png"),
-        SizedBox(height: 32.h),
+        Image.asset("assets/images/$image"),
+        SizedBox(height: 15.h),
         Text(
           textAlign: TextAlign.center,
-          "Discover Cutting-\nEdge Research",
+          maintext,
           style: AppTextStyle.font32bolddarkblue,
         ),
-        SizedBox(height: 10.h),
+        SizedBox(height: 4.h),
         Text(
-          "Access a vast library of high-quality\nscientific papers and journals from around\nthe globe at your fingertips.",
+          discription,
           textAlign: TextAlign.center,
           style: AppTextStyle.font16regularbluewithopacity,
         ),
