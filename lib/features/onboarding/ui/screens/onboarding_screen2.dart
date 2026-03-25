@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/core/theming/style.dart';
-import 'package:flutter_project/features/onboarding/ui/widgets/button_and_transition.dart';
-import 'package:flutter_project/features/onboarding/ui/widgets/image_and_description.dart';
+import 'package:flutter_project/features/onboarding/ui/widgets/onboarding1_image_and_description.dart';
+import 'package:flutter_project/features/onboarding/ui/widgets/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class OnboardingScreen extends StatelessWidget {
-  const OnboardingScreen({super.key});
+class OnboardingScreen2 extends StatelessWidget {
+  const OnboardingScreen2({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
+    return SafeArea(
+      child: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
@@ -21,7 +21,7 @@ class OnboardingScreen extends StatelessWidget {
                     Expanded(child: SizedBox()),
                     Text(
                       "Skip",
-                      style: AppTextStyle.font16boldgray,
+                      style: AppTextStyle.font16boldlightblue,
                       textAlign: TextAlign.left,
                     ),
                   ],
@@ -29,12 +29,13 @@ class OnboardingScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 8.h),
-            ImageAndDescription(),
-            SizedBox(height: 32.h),
-            SizedBox(
-              height: 50, // مهم جداً
-              child: ButtonAndTransition(),
+            OnboardingImageAndDescription(
+              image: 'laptop_background.png',
+              maintext: 'Publish Easily',
+              discription:
+                  'Share your content with the world in just a\n few taps. Simple, fast, and intuitive tools\ndesigned for creators like you.',
             ),
+            Services(),
           ],
         ),
       ),
