@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/core/theming/color.dart';
-import 'package:flutter_project/core/theming/style.dart';
+import 'package:flutter_project/core/constants/app_color.dart';
+import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FeatureCard extends StatelessWidget {
