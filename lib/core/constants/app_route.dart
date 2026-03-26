@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/features/home/ui/home_screen.dart';
-import 'package:flutter_project/features/onboarding/ui/onboarding_screen.dart';
+import 'package:flutter_project/features/onboarding/ui/page_controller.dart';
 
 class AppRoutes {
   static const String home = '/home';
@@ -12,7 +12,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const HomeScreen());
 
       case onBoarding:
-        return MaterialPageRoute(builder: (_) => const OnboardingScreen());
+        return MaterialPageRoute(builder: (_) => const OnboardingContainer());
 
       default:
         return MaterialPageRoute(
