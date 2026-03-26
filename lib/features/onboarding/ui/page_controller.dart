@@ -108,16 +108,7 @@ class _OnboardingContainerState extends State<OnboardingContainer> {
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                 ),
-                onPressed: () {
-                  if (currentPage < 2) {
-                    _controller.nextPage(
-                      duration: const Duration(milliseconds: 400),
-                      curve: Curves.easeInOut,
-                    );
-                  } else {
-                    // Navigate to Home
-                  }
-                },
+                onPressed: () {},
                 child: Text(
                   "Log In",
                   style: AppTextStyle.font16boldlightblue.copyWith(
