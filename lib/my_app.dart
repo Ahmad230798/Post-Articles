@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.onBoarding, // أو AppRoutes.onBoarding
+        initialRoute: AppRoutes.articleDetails, // أو AppRoutes.onBoarding
         onGenerateRoute: AppRoutes.generateRoute,
       ),
     );

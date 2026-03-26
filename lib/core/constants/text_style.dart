@@ -4,6 +4,12 @@ import 'package:flutter_project/core/constants/app_font.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextStyle {
+  static TextStyle font16boldlightblue = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 16.sp,
+    color: AppColor.lightblue,
+  );
+
   static TextStyle font16boldgray = TextStyle(
     fontWeight: FontWeight.w700,
     fontSize: 16.sp,
@@ -51,5 +57,25 @@ class AppTextStyle {
     fontWeight: FontWeight.w400,
     fontFamily: AppFont.lexend,
     color: Colors.white70,
+  );
+
+  static TextStyle font12regulergray = TextStyle(
+    color: AppColor.gray,
+    fontWeight: FontWeight.w400,
+    fontSize: 12.sp,
+    height: 16 / 12.h,
+  );
+
+  static TextStyle font14regularGrey = TextStyle(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: AppColor.grey,
+    fontFamily: "Lexend",
+  );
+
+  static TextStyle font14semiboldgray = TextStyle(
+    color: Colors.black,
+    fontWeight: FontWeight.w600,
+    fontSize: 14.sp,
   );
 }
