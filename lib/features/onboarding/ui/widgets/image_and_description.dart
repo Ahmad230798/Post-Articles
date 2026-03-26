@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/core/theming/style.dart';
+import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ImageAndDescription extends StatelessWidget {
