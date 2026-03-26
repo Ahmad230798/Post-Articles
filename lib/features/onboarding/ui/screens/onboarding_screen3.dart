@@ -3,7 +3,6 @@ import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_project/features/onboarding/ui/widgets/feature_card.dart';
 import 'package:flutter_project/features/onboarding/ui/widgets/onboarding1_image_and_description.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 class OnboardingScreen3 extends StatelessWidget {
   const OnboardingScreen3({super.key});

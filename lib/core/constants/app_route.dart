@@ -14,7 +14,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const HomeScreen());
 
       case onBoarding:
-        return MaterialPageRoute(builder: (_) => const OnboardingContainer());
+        return MaterialPageRoute(builder: (_) => OnboardingContainer());
 
       case articleDetails:
         return MaterialPageRoute(builder: (_) => const ArticleDetailsScreen());

@@ -27,12 +27,14 @@ class _OnboardingContainerState extends State<OnboardingContainer> {
           Expanded(
             child: PageView(
               controller: _controller,
+              physics: const AlwaysScrollableScrollPhysics(),
               onPageChanged: (index) {
+                 print("PAGE: $index"); // مهم جدًا
                 setState(() {
                   currentPage = index;
                 });
               },
-              children: [
+              children: const [
                 OnboardingScreen(),
                 OnboardingScreen2(),
                 OnboardingScreen3(),
@@ -70,8 +72,10 @@ class _OnboardingContainerState extends State<OnboardingContainer> {
                   ),
                 ),
                 onPressed: () {
+                  print("next");
                   if (currentPage < 2) {
-                    _controller.nextPage(
+                    _controller.animateToPage(
+                      currentPage + 1,
                       duration: const Duration(milliseconds: 400),
                       curve: Curves.easeInOut,
                     );
@@ -108,16 +112,7 @@ class _OnboardingContainerState extends State<OnboardingContainer> {
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                 ),
-                onPressed: () {
-                  if (currentPage < 2) {
-                    _controller.nextPage(
-                      duration: const Duration(milliseconds: 400),
-                      curve: Curves.easeInOut,
-                    );
-                  } else {
-                    // Navigate to Home
-                  }
-                },
+                onPressed: () {},
                 child: Text(
                   "Log In",
                   style: AppTextStyle.font16boldlightblue.copyWith(
