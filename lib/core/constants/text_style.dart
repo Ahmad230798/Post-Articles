@@ -14,7 +14,7 @@ class AppTextStyle {
     fontWeight: FontWeight.w700,
     fontSize: 16.sp,
     fontFamily: AppFont.lexend,
-    color: AppColor.gray,
+    color: AppColor.darkblue,
   );
 
   static TextStyle font20boldPrimary = TextStyle(
@@ -35,7 +35,7 @@ class AppTextStyle {
     fontWeight: FontWeight.w400,
     fontSize: 16.sp,
     fontFamily: AppFont.lexend,
-    color: Color(0xff1A365D).withOpacity(0.8),
+    color:AppColor.darkblue.withOpacity(0.8),
   );
 
   static TextStyle font10boldWhite = TextStyle(
@@ -60,7 +60,7 @@ class AppTextStyle {
   );
 
   static TextStyle font12regulergray = TextStyle(
-    color: AppColor.gray,
+    color: AppColor.darkblue,
     fontWeight: FontWeight.w400,
     fontSize: 12.sp,
     height: 16 / 12.h,
