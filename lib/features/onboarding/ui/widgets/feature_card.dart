@@ -26,7 +26,7 @@ class FeatureCard extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: AppTextStyle.font14semiboldgray,
+            style: AppTextStyle.font14semibolddark,
           ),
         ],
       ),

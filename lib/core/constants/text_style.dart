@@ -1,81 +1,118 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/constants/app_font.dart';
+import 'package:flutter_project/core/theming/font_weight_helper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextStyle {
   static TextStyle font16boldlightblue = TextStyle(
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeightHelper.bold,
     fontSize: 16.sp,
     color: AppColor.lightblue,
   );
 
   static TextStyle font16boldgray = TextStyle(
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeightHelper.bold,
     fontSize: 16.sp,
     fontFamily: AppFont.lexend,
     color: AppColor.darkblue,
   );
+  static TextStyle font16boldwhite = TextStyle(
+    fontWeight: FontWeightHelper.bold,
+    fontSize: 16.sp,
+    fontFamily: AppFont.lexend,
+    color: Colors.white,
+  );
+  static TextStyle font14regulardarkblue = TextStyle(
+    fontWeight: FontWeightHelper.medium,
+    fontSize: 14.sp,
+    fontFamily: AppFont.lexend,
+    color: AppColor.darkblue,
+  );
+  static TextStyle font16regularlightgray = TextStyle(
+    fontWeight: FontWeightHelper.normal,
+    fontSize: 16.sp,
+    fontFamily: AppFont.lexend,
+    color: AppColor.lightgrey,
+  );
 
   static TextStyle font20boldPrimary = TextStyle(
     fontSize: 20.sp,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeightHelper.bold,
     fontFamily: AppFont.lexend,
     color: AppColor.primary,
   );
 
   static TextStyle font32bolddarkblue = TextStyle(
     fontSize: 32.sp,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeightHelper.bold,
     fontFamily: AppFont.lexend,
     color: Color(0xff1A365D),
   );
 
   static TextStyle font16regularbluewithopacity = TextStyle(
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeightHelper.normal,
     fontSize: 16.sp,
     fontFamily: AppFont.lexend,
-    color:AppColor.darkblue.withOpacity(0.8),
+    color: AppColor.darkblue.withOpacity(0.8),
   );
 
   static TextStyle font10boldWhite = TextStyle(
     fontSize: 10.sp,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeightHelper.bold,
     fontFamily: AppFont.lexend,
     color: Colors.white,
   );
 
   static TextStyle font20boldWhite = TextStyle(
     fontSize: 20.sp,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeightHelper.bold,
     fontFamily: AppFont.lexend,
     color: Colors.white,
+  );
+  static TextStyle font30boldblack = TextStyle(
+    fontSize: 30.sp,
+    fontWeight: FontWeightHelper.bold,
+    fontFamily: AppFont.lexend,
+    color: AppColor.textDark,
   );
 
   static TextStyle font12regularWhite70 = TextStyle(
     fontSize: 12.sp,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeightHelper.normal,
     fontFamily: AppFont.lexend,
     color: Colors.white70,
   );
 
   static TextStyle font12regulergray = TextStyle(
     color: AppColor.darkblue,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeightHelper.normal,
     fontSize: 12.sp,
     height: 16 / 12.h,
   );
 
   static TextStyle font14regularGrey = TextStyle(
     fontSize: 14,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeightHelper.normal,
     color: AppColor.grey,
     fontFamily: "Lexend",
   );
 
-  static TextStyle font14semiboldgray = TextStyle(
+  static TextStyle font14semibolddark = TextStyle(
     color: Colors.black,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeightHelper.semibold,
     fontSize: 14.sp,
+  );
+
+  static TextStyle font14semiboldbluegray = TextStyle(
+    color: AppColor.blueGrey,
+    fontWeight: FontWeightHelper.semibold,
+    fontSize: 14.sp,
+    fontFamily: AppFont.lexend,
+  );
+  static TextStyle font18boldlightblue = TextStyle(
+    fontSize: 18.sp,
+    color: AppColor.primary,
+    fontWeight: FontWeightHelper.bold,
   );
 }
