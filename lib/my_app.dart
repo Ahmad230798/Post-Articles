@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/core/constants/app_route.dart';
+import 'package:flutter_project/core/routing/app_route.dart';
+import 'package:flutter_project/core/routing/routes.dart';
+import 'package:flutter_project/core/theming/color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AppRoute appRoute;
+  const MyApp({super.key, required this.appRoute});
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +16,9 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.onBoarding, // أو AppRoutes.onBoarding
-        onGenerateRoute: AppRoutes.generateRoute,
+        theme: ThemeData(scaffoldBackgroundColor: AppColor.backgroundcolor),
+        initialRoute: Routes.onBoardingScreen,
+        onGenerateRoute: appRoute.generateRoute,
       ),
     );
   }
