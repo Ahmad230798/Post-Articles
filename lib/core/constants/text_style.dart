@@ -23,11 +23,35 @@ class AppTextStyle {
     fontFamily: AppFont.lexend,
     color: Colors.white,
   );
+  static TextStyle font24bolddark = TextStyle(
+    fontWeight: FontWeightHelper.bold,
+    fontSize: 24.sp,
+    fontFamily: AppFont.lexend,
+    color: AppColor.textDark,
+  );
   static TextStyle font14regulardarkblue = TextStyle(
     fontWeight: FontWeightHelper.medium,
     fontSize: 14.sp,
     fontFamily: AppFont.lexend,
     color: AppColor.darkblue,
+  );
+  static TextStyle font12regulardarkblue = TextStyle(
+    fontWeight: FontWeightHelper.medium,
+    fontSize: 12.sp,
+    fontFamily: AppFont.lexend,
+    color: AppColor.darkblue,
+  );
+  static TextStyle font12regulargreen = TextStyle(
+    fontWeight: FontWeightHelper.medium,
+    fontSize: 12.sp,
+    fontFamily: AppFont.lexend,
+    color: AppColor.green,
+  );
+  static TextStyle font14meduimbluegray = TextStyle(
+    fontWeight: FontWeightHelper.medium,
+    fontSize: 14.sp,
+    fontFamily: AppFont.lexend,
+    color: AppColor.blueGrey,
   );
   static TextStyle font14bolddarkblue = TextStyle(
     fontWeight: FontWeightHelper.bold,
