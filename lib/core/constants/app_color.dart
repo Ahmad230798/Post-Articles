@@ -18,6 +18,7 @@ class AppColor {
   static const Color lightgrey = Color(0xFF64748B);
 
   static const Color border = Color(0x1A1A355B);
+  static  Color shadow = Color(0xff000000).withOpacity(0.25);
 
   static const Color green = Color(0xff319795);
   static const Color lightblue = Color(0xff1A365D);

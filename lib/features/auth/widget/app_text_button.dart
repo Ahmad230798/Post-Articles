@@ -21,7 +21,9 @@ class AppTextButton extends StatelessWidget {
     this.horizontalPadaing,
     this.buttonWidth,
     this.buttonHight,
-    this.onPressed, required this.buttonText, this.textStyle,
+    this.onPressed,
+    required this.buttonText,
+    this.textStyle,
   });
 
   @override
@@ -48,7 +50,7 @@ class AppTextButton extends StatelessWidget {
       ),
 
       onPressed: onPressed,
-      child: Text(buttonText,style: textStyle?? AppTextStyle.font16boldwhite,),
+      child: Text(buttonText, style: textStyle ?? AppTextStyle.font16boldwhite),
     );
   }
 }
