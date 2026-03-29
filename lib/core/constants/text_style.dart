@@ -29,6 +29,12 @@ class AppTextStyle {
     fontFamily: AppFont.lexend,
     color: AppColor.darkblue,
   );
+  static TextStyle font14bolddarkblue = TextStyle(
+    fontWeight: FontWeightHelper.bold,
+    fontSize: 14.sp,
+    fontFamily: AppFont.lexend,
+    color: AppColor.darkblue,
+  );
   static TextStyle font16regularlightgray = TextStyle(
     fontWeight: FontWeightHelper.normal,
     fontSize: 16.sp,
@@ -87,6 +93,14 @@ class AppTextStyle {
   static TextStyle font12regulergray = TextStyle(
     color: AppColor.darkblue,
     fontWeight: FontWeightHelper.normal,
+    fontFamily: AppFont.lexend,
+    fontSize: 12.sp,
+    height: 16 / 12.h,
+  );
+  static TextStyle font12meduimlightgray = TextStyle(
+    color: AppColor.lightgrey,
+    fontWeight: FontWeightHelper.medium,
+    fontFamily: AppFont.lexend,
     fontSize: 12.sp,
     height: 16 / 12.h,
   );

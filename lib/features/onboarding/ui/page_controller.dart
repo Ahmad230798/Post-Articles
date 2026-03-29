@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_project/core/helpers/extentions.dart';
-import 'package:flutter_project/core/routing/app_route.dart';
 import 'package:flutter_project/core/routing/routes.dart';
 import 'package:flutter_project/features/onboarding/ui/screens/onboarding_screen.dart';
 import 'package:flutter_project/features/onboarding/ui/screens/onboarding_screen2.dart';
