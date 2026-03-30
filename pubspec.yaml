@@ -47,3 +47,20 @@ flutter:
           weight: 800
         - asset: assets/fonts/Lexend/static/Lexend-Black.ttf
           weight: 900
+    - family: Newsreader
+      fonts:
+        - asset: assets/fonts/new_sreader/static/Newsreader_9pt-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/new_sreader/static/Newsreader_14pt-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/new_sreader/static/Newsreader_14pt-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/new_sreader/static/Newsreader_14pt-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/new_sreader/static/Newsreader_14pt-Italic.ttf
+          style: italic
+    - family: PublicSans
+      fonts:
+        - asset: assets/fonts/PublicSans/PublicSans-VariableFont_wght.ttf
+        - asset: assets/fonts/PublicSans/PublicSans-Italic-VariableFont_wght.ttf
+          style: italic

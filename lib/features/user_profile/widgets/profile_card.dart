@@ -19,7 +19,7 @@ class ProfileCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Color(0xffE2E8F0), width: 1),
+        border: Border.all(color: AppColor.borderGrey, width: 1),
       ),
       child: Card(
         elevation: 0,
