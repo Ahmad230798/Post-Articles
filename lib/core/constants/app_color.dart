@@ -1,7 +1,8 @@
+// ignore_for_file: deprecated_member_use, use_full_hex_values_for_flutter_colors
+
 import 'package:flutter/material.dart';
 
 class AppColor {
-
   static const Color darkblue = Color(0xff1A365D);
   static const Color profileAppBar = Color(0xff1A355B);
   static const Color onboardingtransitiongray = Color(0xff1A355B33);
@@ -18,14 +19,18 @@ class AppColor {
 
   static const Color grey = Color(0xFF94A3B8);
   static const Color lightgrey = Color(0xFF64748B);
-
+  static const Color red = Color(0xFFBA1A1A);
   static const Color border = Color(0xff1A355B);
-  static  Color shadow = Color(0xff000000).withOpacity(0.25);
-  static  Color avatarShadow = Color(0xff000000).withOpacity(0.25);
+  static const Color borderGrey = Color(0xffE2E8F0);
+  static Color shadow = Color(0xff000000).withOpacity(0.25);
+  static Color avatarShadow = Color(0xff000000).withOpacity(0.25);
 
   static const Color green = Color(0xff319795);
   static const Color lightblue = Color(0xff1A365D);
 
   static const Color blueGrey = Color(0xff334155);
   static const Color darkBlueGray = Color(0xFF475569);
+  static const Color lightBlueGray = Color(0xffEDF2F7);
+  static const Color lightGray = Color(0xff718096);
+  static const Color veryLightGray = Color(0xffCBD5E0);
 }

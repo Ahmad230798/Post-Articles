@@ -10,6 +10,12 @@ class AppTextStyle {
     fontSize: 16.sp,
     color: AppColor.lightblue,
   );
+  static TextStyle font16semiboldred = TextStyle(
+    fontWeight: FontWeightHelper.semibold,
+    fontSize: 16.sp,
+    fontFamily: AppFont.publicSans,
+    color: AppColor.red,
+  );
 
   static TextStyle font16boldgray = TextStyle(
     fontWeight: FontWeightHelper.bold,
@@ -39,6 +45,7 @@ class AppTextStyle {
     fontWeight: FontWeightHelper.normal,
     fontSize: 14.sp,
     fontFamily: AppFont.lexend,
+    letterSpacing: 0,
     color: AppColor.darkblue,
   );
   static TextStyle font12regulardarkblue = TextStyle(
@@ -46,6 +53,13 @@ class AppTextStyle {
     fontSize: 12.sp,
     fontFamily: AppFont.lexend,
     color: AppColor.darkblue,
+  );
+  static TextStyle font12semiboldbluegray = TextStyle(
+    fontWeight: FontWeightHelper.semibold,
+    fontSize: 12.sp,
+    fontFamily: AppFont.newsreader,
+    color: AppColor.blueGrey,
+    letterSpacing: 1.8,
   );
   static TextStyle font12regulargreen = TextStyle(
     fontWeight: FontWeightHelper.medium,
@@ -99,6 +113,20 @@ class AppTextStyle {
     fontFamily: AppFont.lexend,
     color: Colors.white,
   );
+  static TextStyle font10meduimWgray = TextStyle(
+    fontSize: 10.sp,
+    fontWeight: FontWeightHelper.medium,
+    fontFamily: AppFont.publicSans,
+    letterSpacing: 1,
+    color: AppColor.lightGray,
+  );
+  static TextStyle font10regulargray = TextStyle(
+    fontSize: 10.sp,
+    fontWeight: FontWeightHelper.normal,
+    fontFamily: AppFont.publicSans,
+    letterSpacing: 0,
+    color: AppColor.veryLightGray,
+  );
 
   static TextStyle font20boldWhite = TextStyle(
     fontSize: 20.sp,
@@ -111,6 +139,13 @@ class AppTextStyle {
     fontWeight: FontWeightHelper.bold,
     fontFamily: AppFont.lexend,
     color: AppColor.textDark,
+  );
+  static TextStyle font20regularblack = TextStyle(
+    fontSize: 30.sp,
+    fontWeight: FontWeightHelper.medium,
+    fontFamily: AppFont.newsreader,
+    color: AppColor.textDark,
+    letterSpacing: 0,
   );
 
   static TextStyle font12regularWhite70 = TextStyle(
