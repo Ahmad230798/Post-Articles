@@ -5,7 +5,7 @@ import 'package:flutter_project/core/helpers/spacing.dart';
 import 'package:flutter_project/core/widgets/app_text_form_field.dart';
 import 'package:flutter_project/features/auth/widget/agree_on_terms_and_conditions.dart';
 import 'package:flutter_project/features/auth/widget/already_have_an_account_text.dart';
-import 'package:flutter_project/features/auth/widget/app_text_button.dart';
+import 'package:flutter_project/core/widgets/app_text_button.dart';
 import 'package:flutter_project/features/auth/widget/drop_down_menue.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
