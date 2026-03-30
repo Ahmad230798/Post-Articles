@@ -3,6 +3,7 @@ import 'package:flutter_project/core/routing/routes.dart';
 import 'package:flutter_project/features/auth/ui/login_screen.dart';
 import 'package:flutter_project/features/auth/ui/sign_up_screen.dart';
 import 'package:flutter_project/features/onboarding/ui/page_controller.dart';
+import 'package:flutter_project/features/user_profile/ui/user_profile.dart';
 
 class AppRoute {
   Route generateRoute(RouteSettings settings) {
@@ -14,7 +15,8 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case Routes.signUpScreen:
         return MaterialPageRoute(builder: (_) => SignUpScreen());
-
+      case Routes.userProfileScreen:
+        return MaterialPageRoute(builder: (_) => UserProfile());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

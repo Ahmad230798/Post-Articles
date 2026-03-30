@@ -4,7 +4,7 @@ import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_project/core/helpers/spacing.dart';
 import 'package:flutter_project/core/widgets/app_text_form_field.dart';
 import 'package:flutter_project/features/auth/widget/already_have_an_account_text.dart';
-import 'package:flutter_project/features/auth/widget/app_text_button.dart';
+import 'package:flutter_project/core/widgets/app_text_button.dart';
 import 'package:flutter_project/features/auth/widget/terms_and_conditions_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
