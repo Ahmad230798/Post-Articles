@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AppColor {
+  static const Color background = Color(0xFFF6F7F8);
   static const Color darkblue = Color(0xff1A365D);
+  // ignore: use_full_hex_values_for_flutter_colors
   static const Color onboardingtransitiongray = Color(0xff1A355B33);
   static const Color onboardingtransitiongreen = Color(0xff319795);
 

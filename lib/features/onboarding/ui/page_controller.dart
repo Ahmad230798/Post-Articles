@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
