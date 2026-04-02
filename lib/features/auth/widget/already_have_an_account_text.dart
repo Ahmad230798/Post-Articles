@@ -5,7 +5,13 @@ import 'package:flutter_project/core/helpers/extentions.dart';
 import 'package:flutter_project/core/routing/routes.dart';
 
 class AlreadyHaveAnAccountText extends StatelessWidget {
-  const AlreadyHaveAnAccountText({super.key});
+  final String firstText;
+  final String secondText;
+  const AlreadyHaveAnAccountText({
+    super.key,
+    required this.firstText,
+    required this.secondText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,16 +19,14 @@ class AlreadyHaveAnAccountText extends StatelessWidget {
       textAlign: TextAlign.center,
       text: TextSpan(
         children: [
+          TextSpan(text: firstText, style: AppTextStyle.font14regulardarkblue),
           TextSpan(
-            text: "Don't have an account? ",
-            style: AppTextStyle.font14regulardarkblue,
-          ),
-          TextSpan(
-            text: "Sign up for free",
+            text: secondText,
             style: AppTextStyle.font14bolddarkblue,
-            recognizer: TapGestureRecognizer()..onTap = () {
-              context.pushNamed(Routes.signUpScreen);
-            },
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                context.pushNamed(Routes.signUpScreen);
+              },
           ),
         ],
       ),
