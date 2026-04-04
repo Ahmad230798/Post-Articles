@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
@@ -14,7 +16,7 @@ class HomeHeroStory extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
         image: const DecorationImage(
-          image: const AssetImage("assets/images/articles/article1.png"),
+          image: AssetImage("assets/images/articles/article1.png"),
           fit: BoxFit.cover,
         ),
       ),

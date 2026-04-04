@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
-// ignore_for_file: deprecated_member_use, use_full_hex_values_for_flutter_colors
-
 class AppColor {
+  static const Color background = Color(0xFFF6F7F8);
+  static const Color darkblue = Color(0xff1A365D);
+  static const Color onboardingtransitiongray = Color(0xff1A355B33);
+  static const Color onboardingtransitiongreen = Color(0xff319795);
+  // ignore_for_file: deprecated_member_use, use_full_hex_values_for_flutter_colors
+
   // 🔵 Primary Colors
   static const Color primary = Color(0xFF1A355B);
   static const Color accent = Color(0xFF319795);
 
   // 🔵 Blues
-  static const Color darkblue = Color(0xff1A365D);
   static const Color lightblue = Color(0xff1A365D);
   static const Color profileAppBar = Color(0xff1A355B);
 
   // 🟢 Greens
   static const Color green = Color(0xff319795);
-  static const Color onboardingtransitiongreen = Color(0xff319795);
 
   // ⚫ Backgrounds
   static const Color backgroundLight = Color(0xFFF6F7F8);
@@ -43,7 +45,4 @@ class AppColor {
   // 🌫 Shadows
   static Color shadow = Color(0xff000000).withOpacity(0.25);
   static Color avatarShadow = Color(0xff000000).withOpacity(0.25);
-
-  // 🎞 Onboarding
-  static const Color onboardingtransitiongray = Color(0xff1A355B33);
 }

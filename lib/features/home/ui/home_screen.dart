@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/core/widgets/category_pills.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
+import 'package:flutter_project/core/widgets/article_card.dart';
+import 'package:flutter_project/core/widgets/app_bottom_nav.dart';
+
 import 'widgets/home_header.dart';
-import 'widgets/home_categories.dart';
 import 'widgets/home_hero_story.dart';
-import 'widgets/home_article_card.dart';
-import 'widgets/home_bottom_nav.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,22 +16,39 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColor.backgroundLight,
 
-      // 🔥 الشريط السفلي
-      bottomNavigationBar: const HomeBottomNav(),
+      // 🔵 الشريط السفلي المشترك
+      bottomNavigationBar: AppBottomNav(
+        currentIndex: 0,
+        onTap: (index) {
+          // TODO: Navigate to page
+        },
+      ),
 
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            // 🔥 الهيدر
+            // 🔵 الهيدر
             SliverToBoxAdapter(child: HomeHeader()),
 
-            // 🔥 التصنيفات
-            SliverToBoxAdapter(child: HomeCategories()),
+            // 🔵 التصنيفات
+            SliverToBoxAdapter(
+              child: CategoryPills(
+                variant: CategoryVariant.tabs,
+                categories: [
+                  "Featured",
+                  "Technology",
+                  "Health",
+                  "Science",
+                  "Business",
+                ],
+                activeIndex: 0,
+              ),
+            ),
 
-            // 🔥 القصة الرئيسية
+            // 🔵 القصة الرئيسية
             SliverToBoxAdapter(child: HomeHeroStory()),
 
-            // 🔥 عنوان Latest Stories
+            // 🔵 عنوان Latest Stories
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
               sliver: SliverToBoxAdapter(
@@ -45,7 +63,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // 🔥 قائمة المقالات
+            // 🔵 قائمة المقالات
             SliverPadding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               sliver: SliverList(
@@ -53,19 +71,19 @@ class HomeScreen extends StatelessWidget {
                   final item = demoArticles[index];
                   return Padding(
                     padding: EdgeInsets.only(bottom: 16.h),
-                    child: HomeArticleCard(
-                      title: item["title"] ?? '',
-                      category: item["category"] ?? '',
+                    child: ArticleCard(
                       image: item["image"] ?? '',
-                      likes: item["likes"] ?? '',
-                      shares: item["shares"] ?? '',
+                      category: item["category"] ?? '',
+                      title: item["title"] ?? '',
+                      likes: item["likes"],
+                      shares: item["shares"],
                     ),
                   );
                 }, childCount: demoArticles.length),
               ),
             ),
 
-            // 🔥 مساحة تحت للـ BottomNav
+            // 🔵 مساحة تحت للـ BottomNav
             SliverToBoxAdapter(child: SizedBox(height: 80.h)),
           ],
         ),

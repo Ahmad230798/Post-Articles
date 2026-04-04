@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/core/routing/routes.dart';
+import 'package:flutter_project/features/article_details/ui/article_details_screen.dart';
 import 'package:flutter_project/features/auth/ui/login_screen.dart';
-import 'package:flutter_project/features/auth/ui/sign_up_screen.dart';
+import 'package:flutter_project/features/comments/ui/comments_screen.dart';
+import 'package:flutter_project/features/explore/ui/explore_filters_screen.dart';
+import 'package:flutter_project/features/home/ui/home_screen.dart';
 import 'package:flutter_project/features/onboarding/ui/page_controller.dart';
+import 'package:flutter_project/features/publish/step1/ui/publish_step1_screen.dart';
+import 'package:flutter_project/features/saved/ui/saved_screen.dart';
+import 'package:flutter_project/features/auth/ui/sign_up_screen.dart';
 import 'package:flutter_project/features/setting/ui/setting_screen.dart';
 import 'package:flutter_project/features/user_profile/ui/user_profile.dart';
 
@@ -16,6 +22,18 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => LoginScreen());
       case Routes.signUpScreen:
         return MaterialPageRoute(builder: (_) => SignUpScreen());
+      case Routes.exploreFiltersScreen:
+        return MaterialPageRoute(builder: (_) => ExploreFiltersScreen());
+      case Routes.publishStep1Screen:
+        return MaterialPageRoute(builder: (_) => PublishStep1Screen());
+      case Routes.commentsScreen:
+        return MaterialPageRoute(builder: (_) => CommentsScreen());
+      case Routes.savedScreen:
+        return MaterialPageRoute(builder: (_) => SavedScreen());
+      case Routes.homeScreen:
+        return MaterialPageRoute(builder: (_) => HomeScreen());
+      case Routes.articleDetailsScreen:
+        return MaterialPageRoute(builder: (_) => ArticleDetailsScreen());
       case Routes.userProfileScreen:
         return MaterialPageRoute(builder: (_) => UserProfile());
       case Routes.settingScreen:
