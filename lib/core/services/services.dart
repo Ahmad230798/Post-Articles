@@ -1,0 +1,51 @@
+// ignore_for_file: unnecessary_this, avoid_print
+
+import 'package:flutter_project/core/constants/constant.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+
+class SharedPreferencesService {
+  SharedPreferences? _sharedPrefences;
+
+  // Lazy initialization
+  Future<SharedPreferences> get _prefs async {
+    return _sharedPrefences ??= await SharedPreferences.getInstance();
+  }
+
+  // استرجاع قيمة
+  Future<String?> getStringValue(String key) async {
+    final prefs = await _prefs;
+    return prefs.getString(key);
+  }
+
+  // حفظ قيمة
+  Future<void> saveStringValue(String key, String value) async {
+    final prefs = await _prefs;
+    await prefs.setString(key, value);
+  }
+
+  // حذف مفتاح
+  Future<void> removeData(String key) async {
+    final prefs = await _prefs;
+    await prefs.remove(key);
+  }
+
+  // حفظ التوكن
+  Future<void> saveTokenUser(String token) async {
+    await saveStringValue(ConstantData.usertokenKey, token);
+    ConstantData.usertoken = token;
+  }
+
+  Future<void> saveUserEmail(String email) async {
+    await saveStringValue(ConstantData.useremailKey, email);
+    ConstantData.useremail = email;
+  }
+
+  // حذف كل البيانات
+  Future<void> removeAllData() async {
+    final prefs = await _prefs;
+    await prefs.clear();
+    removeData(ConstantData.usertoken);
+    removeData(ConstantData.useremail);
+  }
+}

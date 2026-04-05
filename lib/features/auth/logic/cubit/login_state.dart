@@ -1,11 +1,35 @@
+import 'package:equatable/equatable.dart';
+import 'package:flutter_project/features/auth/data/model/login_response.dart';
 
+abstract class LoginState extends Equatable {
+  const LoginState();
 
-import 'package:freezed_annotation/freezed_annotation.dart';
-part 'login_state.freezed.dart';
-@freezed
-class LoginState<T> with _$LoginState<T>{
-  const factory LoginState.initial() = _Initial;
-  const factory LoginState.loading() = Loading;
-  const factory LoginState.success(T data) = _Success;
-  const factory LoginState.failure({required String error}) = _Failure;
+  @override
+  List<Object?> get props => [];
+}
+
+class LoginInitial extends LoginState {
+  const LoginInitial();
+}
+
+class LoginLoading extends LoginState {
+  const LoginLoading();
+}
+
+class LoginSuccess extends LoginState {
+  final LoginResponse loginResponse;
+
+  const LoginSuccess(this.loginResponse);
+
+  @override
+  List<Object?> get props => [loginResponse];
+}
+
+class LoginFailure extends LoginState {
+  final String errorMessage;
+
+  const LoginFailure(this.errorMessage);
+
+  @override
+  List<Object?> get props => [errorMessage];
 }

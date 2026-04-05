@@ -25,7 +25,7 @@ class AlreadyHaveAnAccountText extends StatelessWidget {
             style: AppTextStyle.font14bolddarkblue,
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                context.pushNamed(Routes.signUpScreen);
+                context.pushNamed(Routes.loginScreen);
               },
           ),
         ],
