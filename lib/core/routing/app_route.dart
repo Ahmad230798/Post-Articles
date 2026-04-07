@@ -30,7 +30,7 @@ class AppRoute {
           builder: (_) => BlocProvider(
             create: (_) =>
                 LoginCubit(AuthRepo(ApiServices(), SharedPreferencesService())),
-            child: const LoginScreen(),
+            child:  LoginScreen(),
           ),
         );
       case Routes.signUpScreen:
