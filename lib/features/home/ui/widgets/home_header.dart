@@ -13,17 +13,35 @@ class HomeHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(Icons.menu, size: 28.sp, color: AppColor.primary),
+          // 🔹 زر فتح السايد مينيو
+          GestureDetector(
+            onTap: () {
+              Scaffold.of(context).openDrawer();
+            },
+            child: Icon(Icons.menu, size: 28.sp, color: AppColor.primary),
+          ),
 
           Text("InsightHub", style: AppTextStyle.font20boldPrimary),
 
           Row(
             children: [
-              Icon(Icons.search, size: 24.sp, color: AppColor.primary),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, "/exploreFiltersScreen");
+                },
+                child: Icon(Icons.search, size: 24.sp, color: AppColor.primary),
+              ),
               SizedBox(width: 12.w),
-              CircleAvatar(
-                radius: 16.r,
-                backgroundImage: const AssetImage("assets/images/profile.png"),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushNamed(context, "/userProfileScreen");
+                },
+                child: CircleAvatar(
+                  radius: 16.r,
+                  backgroundImage: const AssetImage(
+                    "assets/images/profile.png",
+                  ),
+                ),
               ),
             ],
           ),

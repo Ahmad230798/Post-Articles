@@ -11,6 +11,7 @@ class AppTextFormField extends StatelessWidget {
   final String hinttText;
   final bool? isObscureText;
   final Widget? suffixIcone;
+  final ValueChanged<String>? onChanged;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   const AppTextFormField({
@@ -18,6 +19,7 @@ class AppTextFormField extends StatelessWidget {
     required this.hinttText,
     this.isObscureText,
     this.suffixIcone,
+    this.onChanged,
     this.contentPadding,
     this.focusedBorder,
     this.enabledBorder,
@@ -29,6 +31,7 @@ class AppTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       validator: validator,
       controller: controller,
       decoration: InputDecoration(
