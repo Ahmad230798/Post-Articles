@@ -7,10 +7,12 @@ import 'package:flutter_project/core/routing/routes.dart';
 class AlreadyHaveAnAccountText extends StatelessWidget {
   final String firstText;
   final String secondText;
+ final GestureRecognizer recognizer;
   const AlreadyHaveAnAccountText({
     super.key,
     required this.firstText,
-    required this.secondText,
+    required this.secondText, required this.recognizer,
+    
   });
 
   @override
@@ -23,10 +25,7 @@ class AlreadyHaveAnAccountText extends StatelessWidget {
           TextSpan(
             text: secondText,
             style: AppTextStyle.font14bolddarkblue,
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                context.pushNamed(Routes.loginScreen);
-              },
+            recognizer: recognizer
           ),
         ],
       ),

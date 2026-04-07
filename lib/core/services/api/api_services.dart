@@ -62,7 +62,7 @@ class ApiServices {
       if ([200, 201, 204].contains(response.statusCode)) {
         return response.data;
       } else {
-        throw ServerFailure.fromResponse(response.statusCode);
+        throw ServerFailure.fromResponse(response.statusCode, response.data);
       }
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e);
@@ -72,12 +72,10 @@ class ApiServices {
   /// POST
   Future postData({
     required String url,
-    Map? body,
+    Map<String, dynamic>? body,
     Map<String, String>? headers,
     String? token,
   }) async {
-    print('URL: $url');
-    print('BODY: $body');
     try {
       final finalHeaders = {
         'Accept': 'application/json',
@@ -99,7 +97,7 @@ class ApiServices {
       if ([200, 201, 204].contains(response.statusCode)) {
         return response.data;
       } else {
-        throw ServerFailure.fromResponse(response.statusCode);
+        throw ServerFailure.fromResponse(response.statusCode, response.data);
       }
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e);
@@ -109,7 +107,7 @@ class ApiServices {
   /// PUT
   Future putData({
     required String url,
-    Map? body,
+    Map<String, dynamic>? body,
     Map<String, String>? headers,
     String? token,
     BuildContext? context,
@@ -131,7 +129,7 @@ class ApiServices {
       if ([200, 201, 204].contains(response.statusCode)) {
         return response.data;
       } else {
-        throw ServerFailure.fromResponse(response.statusCode);
+        throw ServerFailure.fromResponse(response.statusCode, response.data);
       }
     } on DioException catch (e) {
       throw ServerFailure.fromDioError(e);

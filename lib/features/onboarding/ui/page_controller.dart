@@ -84,7 +84,7 @@ class _OnboardingContainerState extends State<OnboardingContainer> {
                       curve: Curves.easeInOut,
                     );
                   } else {
-                    context.pushNamed(Routes.loginScreen);
+                    context.pushReplacementNamed(Routes.loginScreen);
                   }
                 },
                 child: Row(

@@ -1,51 +1,38 @@
-// ignore_for_file: unnecessary_this, avoid_print
 
-import 'package:flutter_project/core/constants/constant.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class SharedPreferencesService {
-  SharedPreferences? _sharedPrefences;
-
-  // Lazy initialization
+  SharedPreferences? _pref;
   Future<SharedPreferences> get _prefs async {
-    return _sharedPrefences ??= await SharedPreferences.getInstance();
+    return _pref ??= await SharedPreferences.getInstance();
   }
 
-  // استرجاع قيمة
-  Future<String?> getStringValue(String key) async {
+  static const String accessTokenKey = 'access_token';
+  static const String refreshTokenKey = 'refresh_token';
+
+  Future<void> saveTokens({
+    required String accessToken,
+    required String refreshToken,
+  }) async {
     final prefs = await _prefs;
-    return prefs.getString(key);
+    await prefs.setString(accessTokenKey, accessToken);
+    await prefs.setString(refreshTokenKey, refreshToken);
   }
 
-  // حفظ قيمة
-  Future<void> saveStringValue(String key, String value) async {
+  Future<String?> getAccessToken() async {
     final prefs = await _prefs;
-    await prefs.setString(key, value);
+    return prefs.getString(accessTokenKey);
   }
 
-  // حذف مفتاح
-  Future<void> removeData(String key) async {
+  Future<String?> getRefreshToken() async {
     final prefs = await _prefs;
-    await prefs.remove(key);
+    return prefs.getString(refreshTokenKey);
   }
 
-  // حفظ التوكن
-  Future<void> saveTokenUser(String token) async {
-    await saveStringValue(ConstantData.usertokenKey, token);
-    ConstantData.usertoken = token;
-  }
-
-  Future<void> saveUserEmail(String email) async {
-    await saveStringValue(ConstantData.useremailKey, email);
-    ConstantData.useremail = email;
-  }
-
-  // حذف كل البيانات
-  Future<void> removeAllData() async {
+  Future<void> clearTokens() async {
     final prefs = await _prefs;
-    await prefs.clear();
-    removeData(ConstantData.usertoken);
-    removeData(ConstantData.useremail);
+    await prefs.remove(accessTokenKey);
+    await prefs.remove(refreshTokenKey);
   }
 }

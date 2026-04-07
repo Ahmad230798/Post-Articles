@@ -59,7 +59,7 @@ class AppTextButton extends StatelessWidget {
       ),
 
       onPressed: onPressed,
-      child: isLoading!
+      child: isLoading ?? false
           ? SizedBox(
               width: 24,
               height: 24,

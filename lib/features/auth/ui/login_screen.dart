@@ -1,10 +1,13 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
+import 'package:flutter_project/core/helpers/extentions.dart';
 import 'package:flutter_project/core/helpers/spacing.dart';
+import 'package:flutter_project/core/routing/routes.dart';
 import 'package:flutter_project/core/widgets/app_text_form_field.dart';
-import 'package:flutter_project/features/auth/data/model/login_request_body.dart';
+import 'package:flutter_project/features/auth/data/model/login_model/login_request_body.dart';
 import 'package:flutter_project/features/auth/logic/cubit/login_cubit.dart';
 import 'package:flutter_project/features/auth/logic/cubit/login_state.dart';
 import 'package:flutter_project/features/auth/widget/already_have_an_account_text.dart';
@@ -61,8 +64,10 @@ class _LoginScreenState extends State<LoginScreen> {
             context,
           ).showSnackBar(const SnackBar(content: Text('Login successful')));
 
-          // مثال:
-          // Navigator.pushReplacementNamed(context, Routes.homeScreen);
+          context.pushAndRemoveUntil(
+            Routes.homeScreen,
+            predicate: (Route<dynamic> route) => false,
+          );
         }
 
         if (state is LoginFailure) {
@@ -162,6 +167,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                   verticalspace(8),
                                   AppTextFormField(
                                     controller: emailController,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "Email is required";
+                                      }
+
+                                      final emailRegex = RegExp(
+                                        r'^[^@]+@[^@]+\.[^@]+',
+                                      );
+                                      if (!emailRegex.hasMatch(value)) {
+                                        return "Enter a valid email";
+                                      }
+
+                                      return null;
+                                    },
                                     hinttText: "name@university.edu",
                                   ),
                                   verticalspace(20),
@@ -191,6 +210,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                   verticalspace(8),
                                   AppTextFormField(
                                     controller: passwordController,
+                                    validator: (value) {
+                                      if (value == null || value.isEmpty) {
+                                        return "Password is required";
+                                      }
+                                      if (value.length < 6) {
+                                        return "Password must be at least 6 characters";
+                                      }
+                                      return null;
+                                    },
                                     hinttText: "Enter your password",
                                     suffixIcone: IconButton(
                                       onPressed: () {
@@ -216,7 +244,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                       Checkbox(
                                         value: isClicked,
                                         onChanged: (value) {
-                                          isClicked = value!;
+                                          setState(() {
+                                            isClicked = value!;
+                                          });
                                         },
                                       ),
                                       Text("Remember me for 30 days"),
@@ -232,6 +262,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   AlreadyHaveAnAccountText(
                                     firstText: "Don't have an account?",
                                     secondText: 'Sign up for free',
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () {
+                                        context.pushNamed(Routes.signUpScreen);
+                                      },
                                   ),
                                 ],
                               ),

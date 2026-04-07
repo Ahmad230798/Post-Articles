@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/core/routing/routes.dart';
-import 'package:flutter_project/core/services/api/api_services.dart' show ApiServices;
+import 'package:flutter_project/core/services/api/api_services.dart'
+    show ApiServices;
+import 'package:flutter_project/core/services/services.dart';
 import 'package:flutter_project/features/article_details/ui/article_details_screen.dart';
 import 'package:flutter_project/features/auth/logic/cubit/login_cubit.dart';
+import 'package:flutter_project/features/auth/logic/cubit/signup_cubit.dart';
+import 'package:flutter_project/features/auth/repo/auth_repo.dart';
 import 'package:flutter_project/features/auth/ui/login_screen.dart';
+import 'package:flutter_project/features/auth/ui/sign_up_screen.dart';
 import 'package:flutter_project/features/comments/ui/comments_screen.dart';
 import 'package:flutter_project/features/explore/ui/explore_filters_screen.dart';
 import 'package:flutter_project/features/home/ui/home_screen.dart';
 import 'package:flutter_project/features/onboarding/ui/page_controller.dart';
 import 'package:flutter_project/features/publish/step1/ui/publish_step1_screen.dart';
 import 'package:flutter_project/features/saved/ui/saved_screen.dart';
-import 'package:flutter_project/features/auth/ui/sign_up_screen.dart';
 import 'package:flutter_project/features/setting/ui/setting_screen.dart';
 import 'package:flutter_project/features/user_profile/ui/user_profile.dart';
 
@@ -22,14 +26,22 @@ class AppRoute {
       case Routes.onBoardingScreen:
         return MaterialPageRoute(builder: (_) => OnboardingContainer());
       case Routes.loginScreen:
-  return MaterialPageRoute(
-    builder: (_) => BlocProvider(
-      create: (_) => LoginCubit(ApiServices()),
-      child: const LoginScreen(),
-    ),
-  );
-      // case Routes.signUpScreen:
-      //   return MaterialPageRoute(builder: (_) => SignUpScreen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) =>
+                LoginCubit(AuthRepo(ApiServices(), SharedPreferencesService())),
+            child: const LoginScreen(),
+          ),
+        );
+      case Routes.signUpScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => SignupCubit(
+              AuthRepo(ApiServices(), SharedPreferencesService()),
+            ),
+            child: SignUpScreen(),
+          ),
+        );
       case Routes.exploreFiltersScreen:
         return MaterialPageRoute(builder: (_) => ExploreFiltersScreen());
       case Routes.publishStep1Screen:

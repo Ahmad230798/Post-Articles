@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class DropDownMenue extends StatefulWidget {
-  const DropDownMenue({super.key});
+class DropDownMenue extends StatelessWidget {
+  final String value;
+  final ValueChanged<String?> onChanged;
 
-  @override
-  State<DropDownMenue> createState() => _DropDownMenueState();
-}
+  const DropDownMenue({
+    super.key,
+    required this.value,
+    required this.onChanged,
+  });
 
-class _DropDownMenueState extends State<DropDownMenue> {
-  String selectedSubject = 'Theoretical Physics';
-  final subjects = [
-    'Theoretical Physics',
-    'Experimental Physics',
-    'Quantum Mechanics',
+  static const List<String> subjects = [
+    'graduate',
+    'phd',
+    'professor',
+    'researcher',
+    'undergraduate',
+    'other',
   ];
 
   @override
@@ -30,18 +34,14 @@ class _DropDownMenueState extends State<DropDownMenue> {
         menuMaxHeight: 1.sh,
         borderRadius: BorderRadius.circular(8.r),
         isExpanded: true,
-        underline: SizedBox(),
-        icon: Icon(Icons.keyboard_arrow_down_outlined),
-        value: selectedSubject,
-        onChanged: (String? newValue) {
-          setState(() {
-            selectedSubject = newValue!;
-          });
-        },
-        items: subjects.map<DropdownMenuItem<String>>((String value) {
+        underline: const SizedBox(),
+        icon: const Icon(Icons.keyboard_arrow_down_outlined),
+        value: value,
+        onChanged: onChanged,
+        items: subjects.map((String item) {
           return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value, style: AppTextStyle.font14regulardarkblue),
+            value: item,
+            child: Text(item, style: AppTextStyle.font14regulardarkblue),
           );
         }).toList(),
       ),
