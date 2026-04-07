@@ -14,6 +14,7 @@ class AppTextButton extends StatelessWidget {
   final String buttonText;
   final Color? borderColor;
   final TextStyle? textStyle;
+  final bool? isLoading;
   final Widget? widget;
   const AppTextButton({
     super.key,
@@ -28,6 +29,7 @@ class AppTextButton extends StatelessWidget {
     this.textStyle,
     this.borderColor,
     this.widget,
+    this.isLoading,
   });
 
   @override
@@ -57,13 +59,25 @@ class AppTextButton extends StatelessWidget {
       ),
 
       onPressed: onPressed,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          widget ?? SizedBox(),
-          Text(buttonText, style: textStyle ?? AppTextStyle.font16boldwhite),
-        ],
-      ),
+      child: isLoading ?? false
+          ? SizedBox(
+              width: 24,
+              height: 24,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              ),
+            )
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                widget ?? SizedBox(),
+                Text(
+                  buttonText,
+                  style: textStyle ?? AppTextStyle.font16boldwhite,
+                ),
+              ],
+            ),
     );
   }
 }
