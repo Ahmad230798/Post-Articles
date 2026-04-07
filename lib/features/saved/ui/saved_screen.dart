@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/core/widgets/app_top_nav_bar.dart';
 import 'package:flutter_project/core/widgets/article_card.dart';
 import 'package:flutter_project/core/widgets/category_pills.dart';
-import 'package:flutter_project/core/widgets/app_bottom_nav.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/saved_header.dart';
@@ -15,14 +14,6 @@ class SavedScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF7FAFC),
-
-      // 🔵 الشريط السفلي المشترك
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: 2,
-        onTap: (index) {
-          // TODO: Navigate to page
-        },
-      ),
 
       body: Stack(
         children: [

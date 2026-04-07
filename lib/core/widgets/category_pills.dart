@@ -10,11 +10,14 @@ class CategoryPills extends StatelessWidget {
   final List<String> categories;
   final int activeIndex;
 
+  final Function(int)? onTap;
+
   const CategoryPills({
     super.key,
     required this.variant,
     required this.categories,
     this.activeIndex = 0,
+    this.onTap,
   });
 
   @override
@@ -29,19 +32,28 @@ class CategoryPills extends StatelessWidget {
             separatorBuilder: (_, _) => SizedBox(width: 8.w),
             itemBuilder: (context, index) {
               final isActive = index == activeIndex;
-              return Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                decoration: BoxDecoration(
-                  color: isActive ? AppColor.accent : const Color(0xFFEDF2F7),
-                  borderRadius: BorderRadius.circular(999.r),
-                ),
-                child: Center(
-                  child: Text(
-                    categories[index],
-                    style: TextStyle(
-                      fontSize: 11.sp,
-                      fontWeight: FontWeight.w600,
-                      color: isActive ? Colors.white : const Color(0xFF4A5568),
+
+              return GestureDetector(
+                onTap: () => onTap?.call(index),
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 8.h,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isActive ? AppColor.accent : const Color(0xFFEDF2F7),
+                    borderRadius: BorderRadius.circular(999.r),
+                  ),
+                  child: Center(
+                    child: Text(
+                      categories[index],
+                      style: TextStyle(
+                        fontSize: 11.sp,
+                        fontWeight: FontWeight.w600,
+                        color: isActive
+                            ? Colors.white
+                            : const Color(0xFF4A5568),
+                      ),
                     ),
                   ),
                 ),
@@ -60,25 +72,29 @@ class CategoryPills extends StatelessWidget {
             separatorBuilder: (_, _) => SizedBox(width: 24.w),
             itemBuilder: (context, index) {
               final isActive = index == activeIndex;
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    categories[index],
-                    style: isActive
-                        ? AppTextStyle.font16boldgray.copyWith(
-                            color: AppColor.primary,
-                          )
-                        : AppTextStyle.font16regularbluewithopacity,
-                  ),
-                  SizedBox(height: 4.h),
-                  if (isActive)
-                    Container(
-                      height: 3.h,
-                      width: 30.w,
-                      color: AppColor.primary,
+
+              return GestureDetector(
+                onTap: () => onTap?.call(index),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      categories[index],
+                      style: isActive
+                          ? AppTextStyle.font16boldgray.copyWith(
+                              color: AppColor.primary,
+                            )
+                          : AppTextStyle.font16regularbluewithopacity,
                     ),
-                ],
+                    SizedBox(height: 4.h),
+                    if (isActive)
+                      Container(
+                        height: 3.h,
+                        width: 30.w,
+                        color: AppColor.primary,
+                      ),
+                  ],
+                ),
               );
             },
           ),

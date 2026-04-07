@@ -6,7 +6,9 @@ import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
 
 class EFSearchBar extends StatelessWidget {
-  const EFSearchBar({super.key});
+  final Function(String)? onChanged;
+
+  const EFSearchBar({super.key, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -22,29 +24,18 @@ class EFSearchBar extends StatelessWidget {
         child: Row(
           children: [
             SizedBox(width: 12.w),
-
             Icon(Icons.search, color: AppColor.grey, size: 22.sp),
-
             SizedBox(width: 12.w),
 
             Expanded(
               child: TextField(
+                onChanged: onChanged,
                 decoration: InputDecoration(
                   hintText: "Search for items, brands...",
                   hintStyle: AppTextStyle.font14regularGrey,
                   border: InputBorder.none,
                 ),
               ),
-            ),
-
-            Container(
-              margin: EdgeInsets.only(right: 8.w),
-              padding: EdgeInsets.all(6.w),
-              decoration: BoxDecoration(
-                color: AppColor.accent,
-                borderRadius: BorderRadius.circular(10.r),
-              ),
-              child: Icon(Icons.tune, color: Colors.white, size: 20.sp),
             ),
           ],
         ),

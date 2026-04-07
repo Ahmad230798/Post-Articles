@@ -1,4 +1,6 @@
 class Routes {
+  static const String main = "/main";
+
   static const String onBoardingScreen = '/pagecontroller';
   static const String loginScreen = '/loginScreen';
   static const String exploreFiltersScreen = '/exploreFiltersScreen';
