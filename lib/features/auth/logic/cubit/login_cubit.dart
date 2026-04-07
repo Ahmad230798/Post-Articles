@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/core/errors/failur_request.dart';
 
@@ -11,6 +12,20 @@ class LoginCubit extends Cubit<LoginState> {
   final AuthRepo loginRepo;
 
   LoginCubit(this.loginRepo) : super(const LoginInitial());
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  bool isObscure = true;
+  bool rememberMe = false;
+  void togglePasswordVisibility() {
+    isObscure = !isObscure;
+    emit(LoginInitial());
+  }
+
+  void toggleRememberMe(bool value) {
+    rememberMe = value;
+    emit(LoginInitial());
+  }
 
   Future<void> login(LoginRequestBody loginRequestBody) async {
     emit(const LoginLoading());
