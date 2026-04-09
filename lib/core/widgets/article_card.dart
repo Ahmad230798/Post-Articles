@@ -1,32 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../constants/app_color.dart';
+import 'package:flutter_project/core/constants/app_color.dart';
+import 'package:flutter_project/features/home/models/article_model.dart';
 
 class ArticleCard extends StatelessWidget {
-  final String image;
-  final String category;
-  final String title;
-  final String? readTime;
-  final String? description;
-  final String? likes;
-  final String? shares;
-  final String? authorAvatar;
-  final String? authorName;
-  final bool isSaved;
+  final ArticleModel article;
 
-  const ArticleCard({
-    super.key,
-    required this.image,
-    required this.category,
-    required this.title,
-    this.readTime,
-    this.description,
-    this.likes,
-    this.shares,
-    this.authorAvatar,
-    this.authorName,
-    this.isSaved = false,
-  });
+  const ArticleCard({super.key, required this.article});
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +14,8 @@ class ArticleCard extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          "/articleDetailsScreen", // اسم الروت اللي بتعرفه بالـ MaterialApp
-          arguments: {
-            "image": image,
-            "category": category,
-            "title": title,
-            "readTime": readTime,
-            "description": description,
-            "likes": likes,
-            "shares": shares,
-            "authorAvatar": authorAvatar,
-            "authorName": authorName,
-          },
+          "/articleDetailsScreen",
+          arguments: article,
         );
       },
       child: Container(
@@ -60,12 +30,20 @@ class ArticleCard extends StatelessWidget {
             // IMAGE
             ClipRRect(
               borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
-              child: Image.asset(
-                image,
-                height: 150.h,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
+              child:
+                  (article.coverImage != null && article.coverImage!.isNotEmpty)
+                  ? Image.network(
+                      article.coverImage!,
+                      height: 150.h,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                    )
+                  : Container(
+                      height: 150.h,
+                      width: double.infinity,
+                      color: Colors.grey.shade300,
+                      child: const Icon(Icons.image, size: 40),
+                    ),
             ),
 
             Padding(
@@ -78,7 +56,7 @@ class ArticleCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        category,
+                        article.categoryName ?? "Unknown",
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.bold,
@@ -86,7 +64,7 @@ class ArticleCard extends StatelessWidget {
                         ),
                       ),
                       Icon(
-                        isSaved ? Icons.bookmark : Icons.bookmark_border,
+                        Icons.bookmark_border,
                         color: AppColor.grey,
                         size: 20.sp,
                       ),
@@ -97,7 +75,9 @@ class ArticleCard extends StatelessWidget {
 
                   // TITLE
                   Text(
-                    title,
+                    article.title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
@@ -105,91 +85,65 @@ class ArticleCard extends StatelessWidget {
                     ),
                   ),
 
-                  if (readTime != null || description != null) ...[
-                    SizedBox(height: 8.h),
-                    if (readTime != null)
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.schedule,
-                            size: 14,
-                            color: Color(0xFF4A5568),
-                          ),
-                          SizedBox(width: 4.w),
-                          Text(
-                            readTime!,
-                            style: TextStyle(
-                              fontSize: 10.sp,
-                              color: const Color(0xFF4A5568),
-                            ),
-                          ),
-                        ],
+                  SizedBox(height: 8.h),
+
+                  // DESCRIPTION
+                  if (article.description != null)
+                    Text(
+                      article.description!,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 13.sp,
+                        color: const Color(0xFF4A5568),
                       ),
-                    if (description != null)
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.h),
-                        child: Text(
-                          description!,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 13.sp,
-                            color: const Color(0xFF4A5568),
-                          ),
+                    ),
+
+                  SizedBox(height: 8.h),
+
+                  // LIKES + COMMENTS
+                  Row(
+                    children: [
+                      Icon(Icons.favorite, size: 16.sp, color: AppColor.accent),
+                      SizedBox(width: 4.w),
+                      Text(
+                        "${article.likesCount ?? 0}",
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: AppColor.textDark,
                         ),
                       ),
-                  ],
+                      SizedBox(width: 16.w),
+                      Icon(
+                        Icons.chat_bubble,
+                        size: 16.sp,
+                        color: AppColor.accent,
+                      ),
+                      SizedBox(width: 4.w),
+                      Text(
+                        "${article.commentsCount ?? 0}",
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          color: AppColor.textDark,
+                        ),
+                      ),
+                    ],
+                  ),
 
-                  if (likes != null || shares != null) ...[
-                    SizedBox(height: 8.h),
-                    Row(
-                      children: [
-                        if (likes != null) ...[
-                          Icon(
-                            Icons.favorite,
-                            size: 16.sp,
-                            color: AppColor.accent,
-                          ),
-                          SizedBox(width: 4.w),
-                          Text(
-                            likes!,
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              color: AppColor.textDark,
-                            ),
-                          ),
-                        ],
-                        if (shares != null) ...[
-                          SizedBox(width: 16.w),
-                          Icon(
-                            Icons.share,
-                            size: 16.sp,
-                            color: AppColor.accent,
-                          ),
-                          SizedBox(width: 4.w),
-                          Text(
-                            shares!,
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              color: AppColor.textDark,
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
-                  ],
+                  SizedBox(height: 12.h),
 
-                  if (authorAvatar != null && authorName != null) ...[
-                    SizedBox(height: 12.h),
+                  // AUTHOR
+                  if (article.authorName != null)
                     Row(
                       children: [
                         CircleAvatar(
                           radius: 16.r,
-                          backgroundImage: AssetImage(authorAvatar!),
+                          backgroundColor: Colors.grey.shade300,
+                          child: const Icon(Icons.person, color: Colors.white),
                         ),
                         SizedBox(width: 8.w),
                         Text(
-                          authorName!,
+                          article.authorName!,
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,
@@ -198,7 +152,6 @@ class ArticleCard extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ],
                 ],
               ),
             ),

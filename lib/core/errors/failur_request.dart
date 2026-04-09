@@ -1,3 +1,5 @@
+// ignore_for_file: unreachable_switch_default
+
 import 'dart:io';
 import 'package:dio/dio.dart';
 
