@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../models/article_model.dart';
+import 'package:flutter_project/features/home/models/article_model.dart';
 
 class ExploreState extends Equatable {
   final String searchQuery;

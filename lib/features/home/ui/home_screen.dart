@@ -16,171 +16,158 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => HomeCubit()..loadArticlesForCategory(0),
-      child: BlocBuilder<HomeCubit, HomeState>(
-        builder: (context, state) {
-          final cubit = context.read<HomeCubit>();
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        final cubit = context.read<HomeCubit>();
 
-          return Scaffold(
-            backgroundColor: AppColor.backgroundLight,
+        return Scaffold(
+          backgroundColor: AppColor.backgroundLight,
 
-            // 🔹 SideMenu (Drawer)
-            drawer: Drawer(
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  DrawerHeader(
-                    decoration: BoxDecoration(color: AppColor.accent),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundImage: AssetImage(
-                            "assets/images/profile.png",
-                          ),
+          // 🔹 SideMenu (Drawer)
+          drawer: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                DrawerHeader(
+                  decoration: BoxDecoration(color: AppColor.accent),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundImage: AssetImage(
+                          "assets/images/profile.png",
                         ),
-                        SizedBox(height: 8),
-                        Text(
-                          "Majd",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          "majd@example.com",
-                          style: TextStyle(color: Colors.white70, fontSize: 14),
-                        ),
-                      ],
-                    ),
-                  ),
-                  _drawerItem(context, Icons.explore, "Explore", Routes.main),
-                  _drawerItem(
-                    context,
-                    Icons.bookmark,
-                    "Saved",
-                    Routes.savedScreen,
-                  ),
-                  _drawerItem(
-                    context,
-                    Icons.person,
-                    "Profile",
-                    Routes.userProfileScreen,
-                  ),
-                  _drawerItem(
-                    context,
-                    Icons.settings,
-                    "Settings",
-                    Routes.settingScreen,
-                  ),
-                  _drawerItem(
-                    context,
-                    Icons.comment,
-                    "Comments",
-                    Routes.commentsScreen,
-                  ),
-                  SizedBox(height: 280.h),
-                  _drawerItem(
-                    context,
-                    Icons.logout,
-                    "Logout",
-                    Routes.onBoardingScreen,
-                  ),
-                ],
-              ),
-            ),
-
-            body: SafeArea(
-              child: CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(child: HomeHeader()),
-
-                  SliverToBoxAdapter(
-                    child: CategoryPills(
-                      variant: CategoryVariant.tabs,
-                      categories: const [
-                        "Featured",
-                        "Technology",
-                        "Health",
-                        "Science",
-                        "Business",
-                      ],
-                      activeIndex: state.activeCategory,
-                      onTap: cubit.changeCategory,
-                    ),
-                  ),
-
-                  SliverToBoxAdapter(child: HomeHeroStory()),
-
-                  SliverPadding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 8.h,
-                    ),
-                    sliver: SliverToBoxAdapter(
-                      child: Text(
-                        "Latest Stories",
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        "Majd",
                         style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w700,
-                          color: AppColor.primary,
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
+                      ),
+                      Text(
+                        "majd@example.com",
+                        style: TextStyle(color: Colors.white70, fontSize: 14),
+                      ),
+                    ],
+                  ),
+                ),
+                _drawerItem(context, Icons.explore, "Explore", Routes.main),
+                _drawerItem(
+                  context,
+                  Icons.bookmark,
+                  "Saved",
+                  Routes.savedScreen,
+                ),
+                _drawerItem(
+                  context,
+                  Icons.person,
+                  "Profile",
+                  Routes.userProfileScreen,
+                ),
+                _drawerItem(
+                  context,
+                  Icons.settings,
+                  "Settings",
+                  Routes.settingScreen,
+                ),
+                _drawerItem(
+                  context,
+                  Icons.comment,
+                  "Comments",
+                  Routes.commentsScreen,
+                ),
+                SizedBox(height: 280.h),
+                _drawerItem(
+                  context,
+                  Icons.logout,
+                  "Logout",
+                  Routes.onBoardingScreen,
+                ),
+              ],
+            ),
+          ),
+
+          body: SafeArea(
+            child: CustomScrollView(
+              slivers: [
+                SliverToBoxAdapter(child: HomeHeader()),
+
+                SliverToBoxAdapter(
+                  child: CategoryPills(
+                    variant: CategoryVariant.tabs,
+                    categories: state.categories.map((c) => c.name).toList(),
+                    activeIndex: state.activeCategory,
+                    onTap: cubit.changeCategory,
+                  ),
+                ),
+
+                SliverToBoxAdapter(
+                  child: HomeHeroStory(article: state.featuredArticle),
+                ),
+
+                SliverPadding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 16.w,
+                    vertical: 8.h,
+                  ),
+                  sliver: SliverToBoxAdapter(
+                    child: Text(
+                      "Latest Stories",
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w700,
+                        color: AppColor.primary,
                       ),
                     ),
                   ),
+                ),
 
-                  if (state.isLoading)
-                    const SliverToBoxAdapter(
-                      child: Center(child: CircularProgressIndicator()),
-                    )
-                  else
-                    SliverPadding(
-                      padding: EdgeInsets.symmetric(horizontal: 16.w),
-                      sliver: SliverList(
-                        delegate: SliverChildBuilderDelegate((context, index) {
-                          final item = state.articles[index];
-                          return Padding(
-                            padding: EdgeInsets.only(bottom: 16.h),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  Routes.articleDetailsScreen,
-                                  arguments: item,
-                                );
-                              },
-                              child: ArticleCard(
-                                image: item["image"] ?? '',
-                                category: item["category"] ?? '',
-                                title: item["title"] ?? '',
-                                likes: item["likes"],
-                                shares: item["shares"],
-                              ),
-                            ),
-                          );
-                        }, childCount: state.articles.length),
-                      ),
+                if (state.isLoading)
+                  const SliverToBoxAdapter(
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                else
+                  SliverPadding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final item = state.articles[index];
+                        return Padding(
+                          padding: EdgeInsets.only(bottom: 16.h),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                Routes.articleDetailsScreen,
+                                arguments: item,
+                              );
+                            },
+                            child: ArticleCard(article: item),
+                          ),
+                        );
+                      }, childCount: state.articles.length),
                     ),
+                  ),
 
-                  SliverToBoxAdapter(child: SizedBox(height: 80.h)),
-                ],
-              ),
+                SliverToBoxAdapter(child: SizedBox(height: 80.h)),
+              ],
             ),
+          ),
 
-            // 🔹 Floating Publish Button
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: AppColor.accent,
-              child: const Icon(Icons.add, color: Colors.white),
-              onPressed: () {
-                Navigator.pushNamed(context, Routes.publishStep1Screen);
-              },
-            ),
-          );
-        },
-      ),
+          // 🔹 Floating Publish Button
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: AppColor.accent,
+            child: const Icon(Icons.add, color: Colors.white),
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.publishStep1Screen);
+            },
+          ),
+        );
+      },
     );
   }
 
@@ -200,34 +187,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-final demoArticles = [
-  {
-    "title": "Quantum Leap: The New Era of Encryption Standards",
-    "category": "Technology",
-    "image": "assets/images/articles/article2.png",
-    "likes": "1.2k",
-    "shares": "89",
-  },
-  {
-    "title": "Personalized Medicine: DNA Sequencing for Everyone",
-    "category": "Health",
-    "image": "assets/images/articles/article3.png",
-    "likes": "856",
-    "shares": "142",
-  },
-  {
-    "title": "The Global Connectivity Mesh: Satellites vs Fiber",
-    "category": "Science",
-    "image": "assets/images/articles/article4.png",
-    "likes": "2.4k",
-    "shares": "312",
-  },
-  {
-    "title": "DeFi 2.0: Reshaping Global Capital Markets",
-    "category": "Business",
-    "image": "assets/images/articles/article5.png",
-    "likes": "642",
-    "shares": "54",
-  },
-];

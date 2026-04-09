@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'explore_state.dart';
-import '../models/article_model.dart';
+import 'package:flutter_project/features/home/models/article_model.dart';
 
 class ExploreCubit extends Cubit<ExploreState> {
   ExploreCubit() : super(const ExploreState());
@@ -53,16 +53,15 @@ class ExploreCubit extends Cubit<ExploreState> {
       5,
       (i) => ArticleModel(
         id: i,
+        slug: "article-$i",
         title: "Trending Article $i",
-        category: "Tech",
-        image:
-            "assets/images/articles/article${i + 1}.png", // ← يطابق الموجود عندك
-        readTime: "5 min read",
         description: "This is a short description for article $i",
-        likes: "${i * 10}",
-        shares: "${i * 2}",
+        coverImage: "https://picsum.photos/400/300?$i",
+        categoryName: "Tech",
         authorName: "Author $i",
-        authorAvatar: "assets/images/profile.png", // ← يطابق الموجود عندك
+        readTime: 5,
+        likesCount: i * 10,
+        commentsCount: i * 2,
       ),
     );
 
@@ -82,15 +81,15 @@ class ExploreCubit extends Cubit<ExploreState> {
       5,
       (i) => ArticleModel(
         id: state.articles.length + i,
+        slug: "more-${state.articles.length + i}",
         title: "More Article ${state.articles.length + i}",
-        category: "Tech",
-        image: "assets/images/article_${state.articles.length + i}.jpg",
-        readTime: "4 min read",
         description: "Extra description",
-        likes: "${i * 5}",
-        shares: "${i * 3}",
+        coverImage: "https://picsum.photos/400/300?more$i",
+        categoryName: "Tech",
         authorName: "Author ${state.articles.length + i}",
-        authorAvatar: "assets/images/profile.png",
+        readTime: 4,
+        likesCount: i * 5,
+        commentsCount: i * 3,
       ),
     );
 

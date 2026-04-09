@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ).showSnackBar(const SnackBar(content: Text('Login successful')));
 
           context.pushAndRemoveUntil(
-            Routes.homeScreen,
+            Routes.main,
             predicate: (Route<dynamic> route) => false,
           );
         }
