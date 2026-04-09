@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter_project/core/errors/failur_request.dart';
 import 'package:flutter_project/core/services/api/api_link.dart';
 import 'package:flutter_project/core/services/api/api_services.dart';
@@ -12,28 +13,32 @@ class AuthRepo {
   final SharedPreferencesService _pref;
 
   AuthRepo(this.apiServices, this._pref);
-  Future<LoginResponse> login(LoginRequestBody body) async {
+
+  Future<Either<Failure, LoginResponse>> login(LoginRequestBody body) async {
     try {
       final response = await apiServices.postData(
         url: ApiLink.login,
         body: body.toJson(),
       );
+
       final loginResponse = LoginResponse.fromJson(
         Map<String, dynamic>.from(response),
       );
+
       await _pref.saveTokens(
         accessToken: loginResponse.access,
         refreshToken: loginResponse.refresh,
       );
-      return loginResponse;
-    } on ServerFailure {
-      rethrow;
+
+      return Right(loginResponse);
+    } on ServerFailure catch (e) {
+      return Left(e);
     } catch (_) {
-      throw ServerFailure('Unexpected error');
+      return Left(ServerFailure('Unexpected error'));
     }
   }
 
-  Future<RegisterResponse> register(
+  Future<Either<Failure, RegisterResponse>> register(
     RegisterRequestBody registerRequestBody,
   ) async {
     try {
@@ -41,14 +46,16 @@ class AuthRepo {
         url: ApiLink.register,
         body: registerRequestBody.toJson(),
       );
+
       final registerResponse = RegisterResponse.fromJson(
         Map<String, dynamic>.from(response),
       );
-      return registerResponse;
-    } on ServerFailure {
-      rethrow;
+
+      return Right(registerResponse);
+    } on ServerFailure catch (e) {
+      return Left(e);
     } catch (_) {
-      throw ServerFailure("Unexpected error");
+      return Left(ServerFailure('Unexpected error'));
     }
   }
 }

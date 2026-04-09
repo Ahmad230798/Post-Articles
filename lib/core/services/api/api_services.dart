@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/core/errors/failur_request.dart';
 import 'package:flutter_project/core/services/api/api_link.dart';
+import 'package:flutter_project/core/services/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiServices {
   final Dio _dio =
@@ -21,10 +23,19 @@ class ApiServices {
         )
         ..interceptors.add(
           InterceptorsWrapper(
-            onRequest: (options, handler) {
+            onRequest: (options, handler) async {
               print(
                 "[${options.method}][${options.uri}] headers: ${options.headers}",
               );
+              final service = SharedPreferencesService();
+
+              final token = await service.getAccessToken();
+              // final token =
+              //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1NzU4NjY5LCJpYXQiOjE3NzU2NzIyNjksImp0aSI6IjgzMzY3YmM2M2ZiMTRlY2Y5NGE2YTQwMjgyNmVjNjg0IiwidXNlcl9pZCI6IjcifQ.dmloCidzip9s5XO8268eZjWl7QiZ8NNwGCRc-GB9L5o";
+
+              if (token != null && token.isNotEmpty) {
+                options.headers['Authorization'] = 'Bearer $token';
+              }
               handler.next(options);
             },
             onResponse: (response, handler) {
@@ -43,16 +54,16 @@ class ApiServices {
   Future getData({
     required String url,
     Map<String, String>? headers,
-    String? token,
+    // String? token,
     BuildContext? context,
   }) async {
     try {
       final finalHeaders = {...?headers};
 
-      // 🔥 إصلاح التوكن هنا
-      if (token != null && token.isNotEmpty) {
-        finalHeaders['Authorization'] = 'Bearer $token';
-      }
+      // // 🔥 إصلاح التوكن هنا
+      // if (token != null && token.isNotEmpty) {
+      //   finalHeaders['Authorization'] = 'Bearer $token';
+      // }
 
       final response = await _dio.get(
         url,
@@ -74,7 +85,7 @@ class ApiServices {
     required String url,
     Map<String, dynamic>? body,
     Map<String, String>? headers,
-    String? token,
+    // String? token,
   }) async {
     try {
       final finalHeaders = {
@@ -83,10 +94,10 @@ class ApiServices {
         ...?headers,
       };
 
-      // 🔥 إصلاح التوكن هنا أيضًا
-      if (token != null && token.isNotEmpty) {
-        finalHeaders['Authorization'] = 'Bearer $token';
-      }
+      // // 🔥 إصلاح التوكن هنا أيضًا
+      // if (token != null && token.isNotEmpty) {
+      //   finalHeaders['Authorization'] = 'Bearer $token';
+      // }
 
       final response = await _dio.post(
         url,
@@ -109,16 +120,16 @@ class ApiServices {
     required String url,
     Map<String, dynamic>? body,
     Map<String, String>? headers,
-    String? token,
+    // String? token,
     BuildContext? context,
   }) async {
     try {
       final finalHeaders = {...?headers};
 
-      // 🔥 هذا كان سبب الـ 401 — تم إصلاحه
-      if (token != null && token.isNotEmpty) {
-        finalHeaders['Authorization'] = 'Bearer $token';
-      }
+      // // 🔥 هذا كان سبب الـ 401 — تم إصلاحه
+      // if (token != null && token.isNotEmpty) {
+      //   finalHeaders['Authorization'] = 'Bearer $token';
+      // }
 
       final response = await _dio.put(
         url,

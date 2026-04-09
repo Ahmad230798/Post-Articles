@@ -34,7 +34,7 @@ class LoginScreen extends StatelessWidget {
                       SnackBarHelper.showSuccess(context, 'Login successful');
 
                       context.pushAndRemoveUntil(
-                        Routes.homeScreen,
+                        Routes.myProfileScreen,
                         predicate: (Route<dynamic> route) => false,
                       );
                     }
