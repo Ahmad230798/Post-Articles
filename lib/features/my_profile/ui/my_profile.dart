@@ -87,11 +87,11 @@ class MyProfile extends StatelessWidget {
                       ),
                       verticalspace(4),
                       Text(
-                        "Senior Researcher in Computational Linguistics",
+                        user.academicStatus,
                         style: AppTextStyle.font18mediumgray,
                       ),
                       Text(
-                        "Oxford Institute of Technology • Humanities Lab",
+                        user.institution,
                         style: AppTextStyle.font14regulardarkblue.copyWith(
                           fontFamily: AppFont.publicSans,
                         ),
@@ -120,7 +120,7 @@ class MyProfile extends StatelessWidget {
                               ),
                               horizentalspace(4),
                               Text(
-                                "ORCID: 0000-0002-1825-0097",
+                               user.orcidId,
                                 style: AppTextStyle.font12semiboldbluegray
                                     .copyWith(fontFamily: AppFont.publicSans),
                               ),
