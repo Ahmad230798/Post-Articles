@@ -224,7 +224,7 @@ class MyProfile extends StatelessWidget {
                             Icon(Icons.logout, size: 24, color: AppColor.red),
                             horizentalspace(12),
                             Text(
-                              "Lgout",
+                              "Logout",
                               style: AppTextStyle.font14meduimbluegray.copyWith(
                                 color: AppColor.red,
                               ),
