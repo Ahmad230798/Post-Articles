@@ -120,7 +120,7 @@ class MyProfile extends StatelessWidget {
                               ),
                               horizentalspace(4),
                               Text(
-                               user.orcidId,
+                                user.orcidId,
                                 style: AppTextStyle.font12semiboldbluegray
                                     .copyWith(fontFamily: AppFont.publicSans),
                               ),
@@ -143,7 +143,7 @@ class MyProfile extends StatelessWidget {
                             right: 12,
                           ),
                           child: Text(
-                            "Open Science Advocate",
+                            "Open Science Advocate ",
                             style: AppTextStyle.font12semiboldbluegray.copyWith(
                               fontFamily: AppFont.publicSans,
                             ),
