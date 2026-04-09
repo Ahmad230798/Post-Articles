@@ -13,6 +13,7 @@ import 'package:flutter_project/features/auth/repo/auth_repo.dart';
 import 'package:flutter_project/features/auth/ui/login_screen.dart';
 import 'package:flutter_project/features/auth/ui/sign_up_screen.dart';
 import 'package:flutter_project/features/comments/ui/comments_screen.dart';
+import 'package:flutter_project/features/my_profile/ui/my_profile.dart';
 import 'package:flutter_project/features/search/ui/explore_filters_screen.dart';
 import 'package:flutter_project/features/home/ui/home_screen.dart';
 import 'package:flutter_project/features/onboarding/ui/page_controller.dart';
@@ -32,7 +33,7 @@ class AppRoute {
           builder: (_) => BlocProvider(
             create: (_) =>
                 LoginCubit(AuthRepo(ApiServices(), SharedPreferencesService())),
-            child: const LoginScreen(),
+            child: LoginScreen(),
           ),
         );
       case Routes.signUpScreen:
@@ -62,6 +63,8 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => SettingScreen());
       case Routes.main:
         return MaterialPageRoute(builder: (_) => const MainNavigation());
+      case Routes.myProfileScreen:
+        return MaterialPageRoute(builder: (_) => const MyProfile());
 
       default:
         return MaterialPageRoute(

@@ -160,6 +160,12 @@ class AppTextStyle {
     fontFamily: AppFont.lexend,
     color: Colors.white,
   );
+  static TextStyle font10boldgray = TextStyle(
+    fontSize: 10.sp,
+    fontWeight: FontWeightHelper.bold,
+    fontFamily: AppFont.publicSans,
+    color: AppColor.darkGray,
+  );
 
   static TextStyle font10meduimWgray = TextStyle(
     fontSize: 10.sp,
@@ -213,11 +219,23 @@ class AppTextStyle {
     fontFamily: AppFont.lexend,
     color: Color(0xff1A365D),
   );
+  static TextStyle font36bolddarkblue = TextStyle(
+    fontSize: 32.sp,
+    fontWeight: FontWeightHelper.bold,
+    fontFamily: AppFont.newsreader,
+    color: Color(0xff1A365D),
+  );
 
   static TextStyle font18boldlightblue = TextStyle(
     fontSize: 18.sp,
     color: AppColor.primary,
     fontWeight: FontWeightHelper.bold,
+  );
+  static TextStyle font18mediumgray = TextStyle(
+    fontSize: 18.sp,
+    fontFamily: AppFont.publicSans,
+    color: AppColor.blueGrey,
+    fontWeight: FontWeightHelper.medium,
   );
 
   static TextStyle font18boldwhite = TextStyle(

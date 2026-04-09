@@ -1,5 +1,4 @@
 import 'package:flutter_project/features/home/models/article_model.dart';
-import 'package:flutter_project/features/home/ui/home_screen.dart';
 
 final dummyArticles = List.generate(
   5,
