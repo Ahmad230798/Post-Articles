@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_project/core/helpers/spacing.dart';
-import 'package:flutter_project/core/widgets/app_top_nav_bar.dart';
 import 'package:flutter_project/features/user_profile/widgets/areas_and_expertise.dart';
 import 'package:flutter_project/features/user_profile/widgets/profile_header.dart';
 import 'package:flutter_project/features/user_profile/widgets/user_bio.dart';

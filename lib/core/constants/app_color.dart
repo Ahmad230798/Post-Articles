@@ -17,6 +17,7 @@ class AppColor {
 
   // 🟢 Greens
   static const Color green = Color(0xff319795);
+  static const Color lightGreen = Color(0xffB2F5EA);
 
   // ⚫ Backgrounds
   static const Color backgroundLight = Color(0xFFF6F7F8);
@@ -34,6 +35,7 @@ class AppColor {
   static const Color blueGrey = Color(0xff334155);
   static const Color darkBlueGray = Color(0xFF475569);
   static const Color lightBlueGray = Color(0xffEDF2F7);
+  static const Color darkGray = Color(0xff4A5568);
 
   // 🔴 Status Colors
   static const Color red = Color(0xFFBA1A1A);

@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/widgets/app_top_nav_bar.dart';
 import '../../core/widgets/category_pills.dart';
-import '../../core/widgets/article_card.dart';
 
 import 'cubit/explore_cubit.dart';
 import 'cubit/explore_state.dart';
