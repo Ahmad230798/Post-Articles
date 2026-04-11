@@ -9,7 +9,6 @@ import 'package:flutter_project/features/my_profile/logic/cubit/my_profile_cubit
 import 'package:flutter_project/features/my_profile/logic/cubit/my_profile_state.dart';
 import 'package:flutter_project/features/my_profile/repo/my_profile_repo.dart';
 import 'package:flutter_project/features/my_profile/widgets/account_management_menue.dart';
-import 'package:flutter_project/features/my_profile/widgets/artical_card.dart';
 import 'package:flutter_project/features/my_profile/widgets/info_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

@@ -58,7 +58,7 @@ class AppRoute {
       case Routes.articleDetailsScreen:
         return MaterialPageRoute(builder: (_) => ArticleDetailsScreen());
       case Routes.userProfileScreen:
-        return MaterialPageRoute(builder: (_) => UserProfile());
+        return MaterialPageRoute(builder: (_) => UserProfile(userName: 'hello',));
       case Routes.settingScreen:
         return MaterialPageRoute(builder: (_) => SettingScreen());
       case Routes.main:

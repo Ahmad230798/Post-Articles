@@ -7,9 +7,15 @@ import 'package:flutter_project/features/user_profile/widgets/profile_header.dar
 import 'package:flutter_project/features/user_profile/widgets/user_bio.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class UserProfile extends StatelessWidget {
-  const UserProfile({super.key});
+class UserProfile extends StatefulWidget {
+  final String userName;
+  const UserProfile({super.key, required this.userName});
 
+  @override
+  State<UserProfile> createState() => _UserProfileState();
+}
+
+class _UserProfileState extends State<UserProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
