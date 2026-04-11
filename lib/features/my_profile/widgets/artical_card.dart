@@ -53,7 +53,7 @@ class ArticalCard extends StatelessWidget {
               Icon(Icons.mode_comment_outlined, size: 15),
               Text("12"),
               horizentalspace(16),
-              SvgPicture.asset("assets/svgs/save.svg"),
+              Icon(Icons.bookmark_border, size: 15),
               Text("84"),
             ],
           ),
