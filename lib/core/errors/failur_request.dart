@@ -128,7 +128,7 @@ class ServerFailure extends Failure {
       }
 
       if (messages.isNotEmpty) {
-        return "* ${messages.join('\n')}";
+        return " ${messages.join('\n')}";
       }
     }
 

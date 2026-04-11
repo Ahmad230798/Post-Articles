@@ -143,7 +143,7 @@ class MyProfile extends StatelessWidget {
                             right: 12,
                           ),
                           child: Text(
-                            "Open Science Advocate ",
+                            user.institution,
                             style: AppTextStyle.font12semiboldbluegray.copyWith(
                               fontFamily: AppFont.publicSans,
                             ),
@@ -155,14 +155,20 @@ class MyProfile extends StatelessWidget {
                         style: AppTextStyle.font14regulardarkblue.copyWith(
                           fontFamily: AppFont.publicSans,
                         ),
-                        "Focusing on the intersection of Large Language\nModels and historical philology. Investigating how\nsynthetic data can reconstruct lost dialects of the early Victorian era. Previously lead researcher at the Global Archive Initiative.",
+                        user.bio,
                       ),
                       verticalspace(48),
                       Row(
                         children: [
-                          InfoCard(count: '42', text: 'PUBLICATIONS'),
+                          InfoCard(
+                            count: user.postsCount.toString(),
+                            text: 'PUBLICATIONS',
+                          ),
                           horizentalspace(16),
-                          InfoCard(count: "1.2K", text: "FOLLOWERS"),
+                          InfoCard(
+                            count: user.networkCount.toString(),
+                            text: "FOLLOWERS",
+                          ),
                         ],
                       ),
                       verticalspace(48),
@@ -185,27 +191,35 @@ class MyProfile extends StatelessWidget {
                         ],
                       ),
                       verticalspace(32),
-                      ListView(
+                      ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          ArticalCard(
-                            kindAndDate: 'Research Paper • May 2024',
-                            title:
-                                'Syntactic Drift in LLM- Generated Archaic English: A Quantitative Study',
-                            text:
-                                'This paper investigates the divergence of morphological markers in synthetic text…',
-                          ),
-                          verticalspace(32),
-                          ArticalCard(
-                            kindAndDate: 'Research Paper • May 2024',
-                            title:
-                                'Syntactic Drift in LLM- Generated Archaic English: A Quantitative Study',
-                            text:
-                                'This paper investigates the divergence of morphological markers in synthetic text…',
-                          ),
-                        ],
+                        itemCount: user.postsCount,
+                        itemBuilder: (context, state) {
+                          return SizedBox();
+                        },
                       ),
+                      // ListView(
+                      //   shrinkWrap: true,
+                      //   physics: NeverScrollableScrollPhysics(),
+                      //   children: [
+                      //     ArticalCard(
+                      //       kindAndDate: 'Research Paper • May 2024',
+                      //       title:
+                      //           'Syntactic Drift in LLM- Generated Archaic English: A Quantitative Study',
+                      //       text:
+                      //           'This paper investigates the divergence of morphological markers in synthetic text…',
+                      //     ),
+                      //     verticalspace(32),
+                      //     ArticalCard(
+                      //       kindAndDate: 'Research Paper • May 2024',
+                      //       title:
+                      //           'Syntactic Drift in LLM- Generated Archaic English: A Quantitative Study',
+                      //       text:
+                      //           'This paper investigates the divergence of morphological markers in synthetic text…',
+                      //     ),
+                      //   ],
+                      // ),
                       verticalspace(48),
                       Text(
                         "ACCOUNT MANAGEMENT",
