@@ -62,6 +62,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
             isFollowingLoading: false,
           ),
         );
+        getUserProfile();
       },
     );
   }
