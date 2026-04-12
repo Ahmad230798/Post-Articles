@@ -5,7 +5,6 @@ import 'package:flutter_project/features/explore/explore_screen.dart';
 import 'package:flutter_project/features/home/ui/home_screen.dart';
 import 'package:flutter_project/features/my_profile/ui/my_profile.dart';
 import 'package:flutter_project/features/saved/ui/saved_screen.dart';
-import 'package:flutter_project/features/user_profile/ui/user_profile.dart';
 import 'package:flutter_project/features/home/cubit/home_cubit.dart';
 
 class MainNavigation extends StatefulWidget {

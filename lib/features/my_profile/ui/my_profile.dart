@@ -27,7 +27,7 @@ class MyProfile extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
           if (state is FailureState) {
-            return Center(child: Text(state.errorMessage));
+            return Scaffold(body: Center(child: Text(state.errorMessage)));
           }
           if (state is SuccessState) {
             final user = state.user;
