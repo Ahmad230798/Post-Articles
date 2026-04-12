@@ -3,8 +3,13 @@ import 'package:flutter_project/features/auth/data/model/signup_model/register_r
 
 abstract class UserProfileState extends Equatable {
   const UserProfileState();
+
   @override
   List<Object?> get props => [];
+}
+
+class UserprofileInit extends UserProfileState {
+  const UserprofileInit();
 }
 
 class UserProfileLoading extends UserProfileState {
@@ -13,14 +18,24 @@ class UserProfileLoading extends UserProfileState {
 
 class UserProfileSuccess extends UserProfileState {
   final User user;
-  const UserProfileSuccess({required this.user});
+  final bool isFollowing;
+  final bool isFollowingLoading;
+
+  const UserProfileSuccess({
+    required this.user,
+    required this.isFollowing,
+    required this.isFollowingLoading,
+  });
+
   @override
-  List<Object?> get props => [user];
+  List<Object?> get props => [user, isFollowing, isFollowingLoading];
 }
 
 class UserProfileFailure extends UserProfileState {
   final String errorMassege;
+
   const UserProfileFailure({required this.errorMassege});
+
   @override
   List<Object?> get props => [errorMassege];
 }

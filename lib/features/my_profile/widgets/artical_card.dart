@@ -4,7 +4,6 @@ import 'package:flutter_project/core/constants/app_font.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_project/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ArticalCard extends StatelessWidget {
   final String kindAndDate;
