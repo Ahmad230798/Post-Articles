@@ -13,6 +13,7 @@ import 'package:flutter_project/features/auth/repo/auth_repo.dart';
 import 'package:flutter_project/features/auth/ui/login_screen.dart';
 import 'package:flutter_project/features/auth/ui/sign_up_screen.dart';
 import 'package:flutter_project/features/comments/ui/comments_screen.dart';
+import 'package:flutter_project/features/home/models/article_model.dart';
 import 'package:flutter_project/features/my_profile/ui/my_profile.dart';
 import 'package:flutter_project/features/search/ui/explore_filters_screen.dart';
 import 'package:flutter_project/features/home/ui/home_screen.dart';
@@ -56,7 +57,11 @@ class AppRoute {
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case Routes.articleDetailsScreen:
-        return MaterialPageRoute(builder: (_) => ArticleDetailsScreen());
+        return MaterialPageRoute(
+          builder: (_) => const ArticleDetailsScreen(),
+          settings: settings,
+        );
+
       case Routes.userProfileScreen:
         return MaterialPageRoute(builder: (_) => UserProfile());
       case Routes.settingScreen:

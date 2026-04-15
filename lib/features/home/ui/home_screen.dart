@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/core/widgets/category_pills.dart';
 import 'package:flutter_project/features/home/cubit/home_cubit.dart';
 import 'package:flutter_project/features/home/cubit/home_state.dart';
+import 'package:flutter_project/features/home/models/article_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/widgets/article_card.dart';
@@ -143,7 +144,7 @@ class HomeScreen extends StatelessWidget {
                               Navigator.pushNamed(
                                 context,
                                 Routes.articleDetailsScreen,
-                                arguments: item,
+                                arguments: item, // لازم يكون ArticleModel
                               );
                             },
                             child: ArticleCard(article: item),

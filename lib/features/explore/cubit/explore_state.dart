@@ -10,16 +10,18 @@ class ExploreState extends Equatable {
   final bool isLoading;
   final bool hasMore;
   final int page;
+  final String? selectedCategorySlug;
 
   const ExploreState({
     this.searchQuery = '',
     this.selectedCategory = 0,
-    this.selectedSort = 'Most Popular',
+    this.selectedSort = "Most Relevant",
     this.selectedRating = 0,
     this.articles = const [],
     this.isLoading = false,
     this.hasMore = true,
     this.page = 1,
+    this.selectedCategorySlug,
   });
 
   ExploreState copyWith({
@@ -31,6 +33,7 @@ class ExploreState extends Equatable {
     bool? isLoading,
     bool? hasMore,
     int? page,
+    String? selectedCategorySlug,
   }) {
     return ExploreState(
       searchQuery: searchQuery ?? this.searchQuery,
@@ -54,5 +57,6 @@ class ExploreState extends Equatable {
     isLoading,
     hasMore,
     page,
+    selectedCategorySlug,
   ];
 }
