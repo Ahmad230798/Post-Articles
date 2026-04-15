@@ -143,7 +143,7 @@ class HomeScreen extends StatelessWidget {
                               Navigator.pushNamed(
                                 context,
                                 Routes.articleDetailsScreen,
-                                arguments: item,
+                                arguments: item, // لازم يكون ArticleModel
                               );
                             },
                             child: ArticleCard(article: item),

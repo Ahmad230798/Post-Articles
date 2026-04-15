@@ -1,5 +1,3 @@
-import 'package:flutter_project/core/constants/constant.dart';
-
 class Routes {
   static const String main = "/main";
 

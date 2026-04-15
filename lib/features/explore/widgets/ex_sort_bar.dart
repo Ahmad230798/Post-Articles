@@ -28,15 +28,19 @@ class ExSortBar extends StatelessWidget {
                 value: state.selectedSort,
                 items: const [
                   DropdownMenuItem(
-                    value: "Most Popular",
-                    child: Text("Most Popular"),
+                    value: "Most Relevant",
+                    child: Text("Most Relevant"),
                   ),
-                  DropdownMenuItem(value: "Newest", child: Text("Newest")),
                   DropdownMenuItem(
-                    value: "Most Shared",
-                    child: Text("Most Shared"),
+                    value: "Newest Arrivals",
+                    child: Text("Newest Arrivals"),
+                  ),
+                  DropdownMenuItem(
+                    value: "Price: High to Low",
+                    child: Text("Price: High to Low"),
                   ),
                 ],
+
                 onChanged: (val) {
                   if (val != null) cubit.updateSort(val);
                 },

@@ -6,9 +6,20 @@ import 'package:flutter_project/core/constants/text_style.dart';
 
 import '../../cubit/explore_filters_cubit.dart';
 import '../../cubit/explore_filters_state.dart';
+import '../../../home/models/category_model.dart';
+
+/// 🔥 لازم يكون فوق EFActiveFilters
+class _FilterChipData {
+  final String label;
+  final VoidCallback onRemove;
+
+  _FilterChipData({required this.label, required this.onRemove});
+}
 
 class EFActiveFilters extends StatelessWidget {
-  const EFActiveFilters({super.key});
+  final List<CategoryModel> categories;
+
+  const EFActiveFilters({super.key, required this.categories});
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +30,14 @@ class EFActiveFilters extends StatelessWidget {
         final List<_FilterChipData> filters = [];
 
         // Category
-        final categories = ["Audio", "Mobile"];
-        filters.add(
-          _FilterChipData(
-            label: categories[state.selectedCategory],
-            onRemove: () => cubit.selectCategory(0),
-          ),
-        );
+        if (categories.isNotEmpty) {
+          filters.add(
+            _FilterChipData(
+              label: categories[state.selectedCategory].name,
+              onRemove: () => cubit.selectCategory(0, categories),
+            ),
+          );
+        }
 
         // Price Range
         if (state.minPrice > 0 || state.maxPrice < 500) {
@@ -137,11 +149,4 @@ class EFActiveFilters extends StatelessWidget {
       ),
     );
   }
-}
-
-class _FilterChipData {
-  final String label;
-  final VoidCallback onRemove;
-
-  _FilterChipData({required this.label, required this.onRemove});
 }

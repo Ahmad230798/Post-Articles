@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class ExploreFiltersState extends Equatable {
   final int selectedCategory;
+  final String? selectedCategorySlug;
   final String selectedSort;
   final int selectedRating;
   final double minPrice;
@@ -11,6 +12,7 @@ class ExploreFiltersState extends Equatable {
 
   const ExploreFiltersState({
     this.selectedCategory = 0,
+    this.selectedCategorySlug,
     this.selectedSort = "Most Relevant",
     this.selectedRating = 0,
     this.minPrice = 0,
@@ -21,6 +23,7 @@ class ExploreFiltersState extends Equatable {
 
   ExploreFiltersState copyWith({
     int? selectedCategory,
+    String? selectedCategorySlug,
     String? selectedSort,
     int? selectedRating,
     double? minPrice,
@@ -30,6 +33,7 @@ class ExploreFiltersState extends Equatable {
   }) {
     return ExploreFiltersState(
       selectedCategory: selectedCategory ?? this.selectedCategory,
+      selectedCategorySlug: selectedCategorySlug ?? this.selectedCategorySlug,
       selectedSort: selectedSort ?? this.selectedSort,
       selectedRating: selectedRating ?? this.selectedRating,
       minPrice: minPrice ?? this.minPrice,
@@ -42,6 +46,7 @@ class ExploreFiltersState extends Equatable {
   @override
   List<Object?> get props => [
     selectedCategory,
+    selectedCategorySlug,
     selectedSort,
     selectedRating,
     minPrice,

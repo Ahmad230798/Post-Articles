@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project/features/home/models/category_model.dart';
 import 'explore_filters_state.dart';
 
 class ExploreFiltersCubit extends Cubit<ExploreFiltersState> {
@@ -8,8 +9,13 @@ class ExploreFiltersCubit extends Cubit<ExploreFiltersState> {
     emit(state.copyWith(searchQuery: query));
   }
 
-  void selectCategory(int index) {
-    emit(state.copyWith(selectedCategory: index));
+  void selectCategory(int index, List<CategoryModel> categories) {
+    emit(
+      state.copyWith(
+        selectedCategory: index,
+        selectedCategorySlug: categories[index].slug,
+      ),
+    );
   }
 
   void updateSort(String sort) {

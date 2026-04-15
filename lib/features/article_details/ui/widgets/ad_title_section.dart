@@ -6,7 +6,14 @@ import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
 
 class ADTitleSection extends StatelessWidget {
-  const ADTitleSection({super.key});
+  final String category;
+  final String title;
+
+  const ADTitleSection({
+    super.key,
+    required this.category,
+    required this.title,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +22,6 @@ class ADTitleSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Category Chip
           Container(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
             decoration: BoxDecoration(
@@ -23,7 +29,7 @@ class ADTitleSection extends StatelessWidget {
               borderRadius: BorderRadius.circular(20.r),
             ),
             child: Text(
-              "Architecture & Environment",
+              category,
               style: AppTextStyle.font12regularWhite70.copyWith(
                 color: AppColor.primary,
                 fontWeight: FontWeight.bold,
@@ -31,19 +37,14 @@ class ADTitleSection extends StatelessWidget {
               ),
             ),
           ),
-
           SizedBox(height: 12.h),
-
-          // Title
           Text(
-            "The Future of Sustainable Architecture in Urban Centers",
+            title,
             style: AppTextStyle.font20boldPrimary.copyWith(
               fontSize: 26.sp,
               height: 1.3,
             ),
           ),
-
-          SizedBox(height: 16.h),
         ],
       ),
     );

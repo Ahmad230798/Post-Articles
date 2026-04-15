@@ -57,7 +57,11 @@ class AppRoute {
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case Routes.articleDetailsScreen:
-        return MaterialPageRoute(builder: (_) => ArticleDetailsScreen());
+        return MaterialPageRoute(
+          builder: (_) => const ArticleDetailsScreen(),
+          settings: settings,
+        );
+
       case Routes.userProfileScreen:
         final username = (settings.arguments as String?) ?? '';
         return MaterialPageRoute(
@@ -70,7 +74,7 @@ class AppRoute {
       case Routes.myProfileScreen:
         return MaterialPageRoute(builder: (_) => const MyProfile());
       case Routes.editProfile:
-        return MaterialPageRoute(builder: (_) =>  EditProfile());
+        return MaterialPageRoute(builder: (_) => EditProfile());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

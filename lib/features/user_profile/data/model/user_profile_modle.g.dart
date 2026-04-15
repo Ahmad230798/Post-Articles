@@ -9,5 +9,6 @@ part of 'user_profile_modle.dart';
 UserProfileModle _$UserProfileModleFromJson(Map<String, dynamic> json) =>
     UserProfileModle(message: json['message'] as String);
 
+// ignore: unused_element
 Map<String, dynamic> _$UserProfileModleToJson(UserProfileModle instance) =>
     <String, dynamic>{'message': instance.message};
