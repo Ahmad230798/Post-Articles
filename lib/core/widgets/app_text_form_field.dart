@@ -4,6 +4,8 @@ import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppTextFormField extends StatelessWidget {
+  final Color? fillColor;
+  final Color? focusColor;
   final EdgeInsetsGeometry? contentPadding;
   final InputBorder? focusedBorder;
   final InputBorder? enabledBorder;
@@ -14,6 +16,8 @@ class AppTextFormField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final int? linesCount;
+  final bool? isFilled;
   const AppTextFormField({
     super.key,
     required this.hinttText,
@@ -26,15 +30,23 @@ class AppTextFormField extends StatelessWidget {
     this.hintStyle,
     this.controller,
     this.validator,
+    this.linesCount,
+    this.fillColor,
+    this.focusColor,
+    this.isFilled,
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: linesCount,
       onChanged: onChanged,
       validator: validator,
       controller: controller,
       decoration: InputDecoration(
+        filled: isFilled,
+        fillColor: fillColor,
+
         isDense: true,
         contentPadding:
             contentPadding ??

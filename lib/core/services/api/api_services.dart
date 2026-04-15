@@ -30,9 +30,9 @@ class ApiServices {
               );
               final service = SharedPreferencesService();
 
-              final token = await service.getAccessToken();
-              // final token =
-              //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1NzU4NjY5LCJpYXQiOjE3NzU2NzIyNjksImp0aSI6IjgzMzY3YmM2M2ZiMTRlY2Y5NGE2YTQwMjgyNmVjNjg0IiwidXNlcl9pZCI6IjcifQ.dmloCidzip9s5XO8268eZjWl7QiZ8NNwGCRc-GB9L5o";
+              // final token = await service.getAccessToken();
+              final token =
+                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2MzY4NjQ3LCJpYXQiOjE3NzYyODIyNDcsImp0aSI6IjdlOGYyMzM3MGM1ZTRiMzRiMDJjNWM0Yjg2NjIzMDVmIiwidXNlcl9pZCI6IjIyIn0.IOT13_EjM_AzcM3al8Nrxa-hCNE5qbS7OdKxP87bU60";
 
               if (token != null && token.isNotEmpty) {
                 options.headers['Authorization'] = 'Bearer $token';
@@ -132,7 +132,7 @@ class ApiServices {
       //   finalHeaders['Authorization'] = 'Bearer $token';
       // }
 
-      final response = await _dio.put(
+      final response = await _dio.patch(
         url,
         data: body,
         options: Options(headers: finalHeaders),

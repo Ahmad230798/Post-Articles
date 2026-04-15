@@ -4,12 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DropDownMenue extends StatelessWidget {
   final String value;
-  final ValueChanged<String?> onChanged;
-
+  final ValueChanged<String?>? onChanged;
+  final Color? dropDownColor;
+  final Color? focusColor;
+  final BoxBorder? border;
   const DropDownMenue({
     super.key,
     required this.value,
-    required this.onChanged,
+    this.onChanged,
+    this.dropDownColor,
+    this.focusColor, this.border,
   });
 
   static const List<String> subjects = [
@@ -26,10 +30,13 @@ class DropDownMenue extends StatelessWidget {
     return Container(
       height: 46.h,
       decoration: BoxDecoration(
-        border: Border.all(width: 1),
+        color: focusColor ?? Colors.white,
+
+        border: border ?? Border.all(width: 1),
         borderRadius: BorderRadius.circular(8.r),
       ),
       child: DropdownButton<String>(
+        
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
         menuMaxHeight: 1.sh,
         borderRadius: BorderRadius.circular(8.r),

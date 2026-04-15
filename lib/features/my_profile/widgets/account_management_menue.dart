@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_project/core/helpers/spacing.dart';
-import 'package:flutter_svg/svg.dart';
 
 class AccountManagementMenue extends StatelessWidget {
   const AccountManagementMenue({super.key});
@@ -14,24 +14,18 @@ class AccountManagementMenue extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           AccountManagementMenueElement(
-            icon: Icon(Icons.settings),
+            icon: Icon(Icons.settings, color: AppColor.darkGray),
             element: "Profile Settings",
           ),
           verticalspace(18),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: AccountManagementMenueElement(
-              icon: SvgPicture.asset("assets/svgs/Save20.svg"),
-              element: "Saved Articles",
-            ),
+          AccountManagementMenueElement(
+            element: "Saved Articles",
+            icon: Icon(Icons.bookmark_border, color: AppColor.darkGray),
           ),
           verticalspace(18),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 3.0),
-            child: AccountManagementMenueElement(
-              icon: Icon(Icons.privacy_tip_outlined),
-              element: "Security And Privacy",
-            ),
+          AccountManagementMenueElement(
+            icon: Icon(Icons.privacy_tip_outlined, color: AppColor.darkGray),
+            element: "Security And Privacy",
           ),
         ],
       ),
@@ -51,6 +45,7 @@ class AccountManagementMenueElement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         icon,
         horizentalspace(12),

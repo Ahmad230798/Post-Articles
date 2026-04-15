@@ -7,15 +7,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProfileHeader extends StatelessWidget {
   final String? imagePath;
+  final bool isLoading;
   final String userName;
   final String userTitle;
   final String userLocation;
+  final String bottomText;
+
+  final void Function()? onPressed;
   const ProfileHeader({
     super.key,
     this.imagePath,
     required this.userName,
     required this.userTitle,
     required this.userLocation,
+    this.onPressed,
+    required this.isLoading, required this.bottomText,
   });
 
   @override
@@ -90,7 +96,13 @@ class ProfileHeader extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 8.0),
           child: Row(
             children: [
-              Expanded(child: AppTextButton(buttonText: "Follow")),
+              Expanded(
+                child: AppTextButton(
+                  isLoading: isLoading,
+                  buttonText: bottomText,
+                  onPressed: onPressed,
+                ),
+              ),
               horizentalspace(12),
               Container(
                 decoration: BoxDecoration(

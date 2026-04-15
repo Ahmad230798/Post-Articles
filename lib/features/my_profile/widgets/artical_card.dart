@@ -4,7 +4,6 @@ import 'package:flutter_project/core/constants/app_font.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_project/core/helpers/spacing.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 
 class ArticalCard extends StatelessWidget {
   final String kindAndDate;
@@ -53,7 +52,7 @@ class ArticalCard extends StatelessWidget {
               Icon(Icons.mode_comment_outlined, size: 15),
               Text("12"),
               horizentalspace(16),
-              SvgPicture.asset("assets/svgs/save.svg"),
+              Icon(Icons.bookmark_border, size: 15),
               Text("84"),
             ],
           ),
