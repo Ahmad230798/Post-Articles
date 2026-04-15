@@ -125,20 +125,21 @@ class CategoryPills extends StatelessWidget {
                 ],
               ),
               SizedBox(height: 16.h),
-              Row(
-                children: [
-                  Expanded(
-                    child: _categoryTile(Icons.headset, categories[0], true),
-                  ),
-                  SizedBox(width: 12.w),
-                  Expanded(
+
+              // 🔥 dynamic tiles
+              Wrap(
+                spacing: 12.w,
+                runSpacing: 12.h,
+                children: List.generate(categories.length, (index) {
+                  return SizedBox(
+                    width: (MediaQuery.of(context).size.width - 48.w) / 2,
                     child: _categoryTile(
-                      Icons.smartphone,
-                      categories[1],
-                      false,
+                      Icons.category,
+                      categories[index],
+                      index == activeIndex,
                     ),
-                  ),
-                ],
+                  );
+                }),
               ),
             ],
           ),

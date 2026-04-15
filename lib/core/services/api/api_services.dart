@@ -28,12 +28,14 @@ class ApiServices {
               print(
                 "[${options.method}][${options.uri}] headers: ${options.headers}",
               );
+              // ignore: unused_local_variable
               final service = SharedPreferencesService();
 
               final token = await service.getAccessToken();
               // final token =
               //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2MzY4NjQ3LCJpYXQiOjE3NzYyODIyNDcsImp0aSI6IjdlOGYyMzM3MGM1ZTRiMzRiMDJjNWM0Yjg2NjIzMDVmIiwidXNlcl9pZCI6IjIyIn0.IOT13_EjM_AzcM3al8Nrxa-hCNE5qbS7OdKxP87bU60";
 
+              // ignore: unnecessary_null_comparison
               if (token != null && token.isNotEmpty) {
                 options.headers['Authorization'] = 'Bearer $token';
               }

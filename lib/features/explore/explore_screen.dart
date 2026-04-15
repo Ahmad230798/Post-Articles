@@ -1,16 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_project/features/explore/widgets/ex_articles_grid.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../core/widgets/app_top_nav_bar.dart';
 import '../../core/widgets/category_pills.dart';
+import '../../features/home/models/category_model.dart';
+import '../../features/home/repository/category_repository.dart';
 
 import 'cubit/explore_cubit.dart';
 import 'cubit/explore_state.dart';
+import 'widgets/ex_articles_grid.dart';
+import 'widgets/ex_sort_bar.dart';
+import 'widgets/ex_search_bar.dart';
+import 'widgets/ex_active_filters.dart';
+import 'widgets/ex_fab_button.dart';
 
-class ExploreScreen extends StatelessWidget {
+class ExploreScreen extends StatefulWidget {
   const ExploreScreen({super.key});
+
+  @override
+  State<ExploreScreen> createState() => _ExploreScreenState();
+}
+
+class _ExploreScreenState extends State<ExploreScreen> {
+  final CategoryRepository _categoryRepo = CategoryRepository();
+  List<CategoryModel> categories = [];
+  bool isCategoriesLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCategories();
+  }
+
+  Future<void> _loadCategories() async {
+    final data = await _categoryRepo.getCategories();
+    setState(() {
+      categories = data;
+      isCategoriesLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,95 +59,49 @@ class ExploreScreen extends StatelessWidget {
                     showBack: false,
                     trailing: IconButton(
                       icon: const Icon(Icons.search, color: Color(0xFF319795)),
-                      onPressed: () {
-                        // ممكن نفتح صفحة بحث أو نعمل SearchBar
-                      },
+                      onPressed: () {},
                     ),
                   ),
 
                   SizedBox(height: 12.h),
 
-                  // 🔹 Categories
+                  // 🔹 Search Bar
+                  const ExSearchBar(),
+
+                  // 🔹 Active Filters
+                  const ExActiveFilters(),
+
+                  SizedBox(height: 8.h),
+
+                  // 🔹 Categories (Dynamic)
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: CategoryPills(
-                      variant: CategoryVariant.pills,
-                      categories: const [
-                        "Trending",
-                        "Tech",
-                        "Business",
-                        "Lifestyle",
-                      ],
-                      activeIndex: state.selectedCategory,
-                      onTap: cubit.selectCategory,
-                    ),
+                    child: isCategoriesLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : CategoryPills(
+                            variant: CategoryVariant.pills,
+                            categories: categories.map((c) => c.name).toList(),
+                            activeIndex: state.selectedCategory,
+                            onTap: (index) =>
+                                cubit.selectCategory(index, categories),
+                          ),
                   ),
 
                   SizedBox(height: 12.h),
 
                   // 🔹 Sort Bar
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "${state.articles.length} Results Found",
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF1A365D),
-                          ),
-                        ),
-                        DropdownButton<String>(
-                          value: state.selectedSort,
-                          items: const [
-                            DropdownMenuItem(
-                              value: "Most Popular",
-                              child: Text("Most Popular"),
-                            ),
-                            DropdownMenuItem(
-                              value: "Newest",
-                              child: Text("Newest"),
-                            ),
-                            DropdownMenuItem(
-                              value: "Most Shared",
-                              child: Text("Most Shared"),
-                            ),
-                          ],
-                          onChanged: (val) {
-                            if (val != null) cubit.updateSort(val);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+                  const ExSortBar(),
 
                   SizedBox(height: 12.h),
 
                   // 🔹 Articles Grid
-                  Expanded(
-                    child:
-                        ExArticlesGrid(), // ← هون رح يستخدم الـ ListView بدل GridView
-                  ),
+                  const Expanded(child: ExArticlesGrid()),
                 ],
               ),
             ),
 
             // 🔹 Floating Filter Button
-            floatingActionButton: FloatingActionButton(
-              backgroundColor: const Color(0xFF319795),
-              child: const Icon(Icons.tune, color: Colors.white),
-              onPressed: () async {
-                final filters = await Navigator.pushNamed(
-                  context,
-                  "/exploreFiltersScreen",
-                );
-                if (filters is ExploreState) {
-                  cubit.applyFilters(filters);
-                }
-              },
-            ),
+            floatingActionButton: const ExFabButton(),
           );
         },
       ),

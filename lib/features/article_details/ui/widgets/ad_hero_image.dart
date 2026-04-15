@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ADHeroImage extends StatelessWidget {
-  const ADHeroImage({super.key});
+  final String? imageUrl;
+
+  const ADHeroImage({super.key, this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
@@ -14,15 +16,11 @@ class ADHeroImage extends StatelessWidget {
         height: 240.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16.r),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.08),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
-          image: const DecorationImage(
-            image: AssetImage("assets/images/articles/article1.png"),
+          image: DecorationImage(
+            image: imageUrl != null
+                ? NetworkImage(imageUrl!)
+                : const AssetImage("assets/images/placeholder.png")
+                      as ImageProvider,
             fit: BoxFit.cover,
           ),
         ),
