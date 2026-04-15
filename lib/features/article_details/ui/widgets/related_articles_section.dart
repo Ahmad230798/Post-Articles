@@ -30,6 +30,7 @@ class ADRelatedArticles extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 12.h),
+              // ignore: unnecessary_to_list_in_spreads
               ...state.related.map((a) => _relatedItem(context, a)).toList(),
             ],
           ),
