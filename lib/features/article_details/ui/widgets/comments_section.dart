@@ -33,6 +33,7 @@ class ADCommentsSection extends StatelessWidget {
               SizedBox(height: 12.h),
 
               /// 🔵 List of comments
+              // ignore: unnecessary_to_list_in_spreads
               ...state.comments.map((c) => _commentItem(c)).toList(),
 
               SizedBox(height: 16.h),

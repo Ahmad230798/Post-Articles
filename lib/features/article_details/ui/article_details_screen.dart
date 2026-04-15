@@ -20,7 +20,7 @@ import 'widgets/comments_section.dart';
 import 'widgets/related_articles_section.dart';
 
 class ArticleDetailsScreen extends StatelessWidget {
-  const ArticleDetailsScreen({Key? key}) : super(key: key);
+  const ArticleDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
