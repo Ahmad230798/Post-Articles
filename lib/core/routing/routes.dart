@@ -1,3 +1,5 @@
+import 'package:flutter_project/core/constants/constant.dart';
+
 class Routes {
   static const String main = "/main";
 
@@ -13,4 +15,5 @@ class Routes {
   static const String userProfileScreen = '/userProfileScreen';
   static const String settingScreen = '/settingScreen';
   static const String myProfileScreen = '/myProfileScreen';
+  static const String editProfile = '/editProfile';
 }

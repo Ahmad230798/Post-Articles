@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
@@ -15,11 +14,7 @@ import 'package:flutter_project/features/auth/widget/agree_on_terms_and_conditio
 import 'package:flutter_project/features/auth/widget/drop_down_menue.dart';
 
 class SignUpForm extends StatelessWidget {
-  const SignUpForm({
-    super.key,
-    required this.formKey,
-    required this.cubit,
-  });
+  const SignUpForm({super.key, required this.formKey, required this.cubit});
 
   final GlobalKey<FormState> formKey;
   final SignupCubit cubit;
@@ -33,10 +28,7 @@ class SignUpForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "User Name",
-                style: AppTextStyle.font14meduimbluegray,
-              ),
+              Text("User Name", style: AppTextStyle.font14meduimbluegray),
               verticalspace(4),
               AppTextFormField(
                 hinttText: "Isaac",
@@ -51,10 +43,7 @@ class SignUpForm extends StatelessWidget {
                 },
                 controller: cubit.userNameController,
               ),
-              Text(
-                "First Name",
-                style: AppTextStyle.font14meduimbluegray,
-              ),
+              Text("First Name", style: AppTextStyle.font14meduimbluegray),
               verticalspace(4),
               AppTextFormField(
                 hinttText: "Isaac",
@@ -66,10 +55,7 @@ class SignUpForm extends StatelessWidget {
                 },
                 controller: cubit.firstNameController,
               ),
-              Text(
-                "Last Name",
-                style: AppTextStyle.font14meduimbluegray,
-              ),
+              Text("Last Name", style: AppTextStyle.font14meduimbluegray),
               verticalspace(4),
               AppTextFormField(
                 hinttText: "Isaac",
@@ -82,10 +68,7 @@ class SignUpForm extends StatelessWidget {
                 controller: cubit.lastNameController,
               ),
               verticalspace(16),
-              Text(
-                "Email",
-                style: AppTextStyle.font14meduimbluegray,
-              ),
+              Text("Email", style: AppTextStyle.font14meduimbluegray),
               verticalspace(4),
               AppTextFormField(
                 hinttText: "isaac.newton@cambridge.edu",
@@ -93,21 +76,18 @@ class SignUpForm extends StatelessWidget {
                   if (value == null || value.isEmpty) {
                     return "Email is required";
                   }
-        
+
                   final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
                   if (!emailRegex.hasMatch(value)) {
                     return "Enter a valid email";
                   }
-        
+
                   return null;
                 },
                 controller: cubit.emailController,
               ),
               verticalspace(16),
-              Text(
-                "password",
-                style: AppTextStyle.font14meduimbluegray,
-              ),
+              Text("password", style: AppTextStyle.font14meduimbluegray),
               verticalspace(4),
               AppTextFormField(
                 controller: cubit.passwordController,
@@ -123,10 +103,7 @@ class SignUpForm extends StatelessWidget {
                 hinttText: "••••••••",
               ),
               verticalspace(16),
-              Text(
-                "verify Password",
-                style: AppTextStyle.font14meduimbluegray,
-              ),
+              Text("verify Password", style: AppTextStyle.font14meduimbluegray),
               verticalspace(4),
               AppTextFormField(
                 hinttText: "••••••••",
@@ -134,8 +111,7 @@ class SignUpForm extends StatelessWidget {
                   if (value == null || value.isEmpty) {
                     return "Please confirm your password";
                   }
-                  if (value !=
-                          cubit.verifyPasswordController.text &&
+                  if (value != cubit.verifyPasswordController.text &&
                       value != cubit.passwordController.text) {
                     return "Passwords do not match";
                   }
@@ -147,10 +123,7 @@ class SignUpForm extends StatelessWidget {
                 controller: cubit.verifyPasswordController,
               ),
               verticalspace(16),
-              Text(
-                "Field of Study",
-                style: AppTextStyle.font14meduimbluegray,
-              ),
+              Text("Field of Study", style: AppTextStyle.font14meduimbluegray),
               verticalspace(4),
               AppTextFormField(
                 hinttText: "Computer Science",
@@ -163,10 +136,7 @@ class SignUpForm extends StatelessWidget {
                 controller: cubit.fieldOfStudyController,
               ),
               verticalspace(16),
-              Text(
-                "Academic Status",
-                style: AppTextStyle.font14meduimbluegray,
-              ),
+              Text("Academic Status", style: AppTextStyle.font14meduimbluegray),
               verticalspace(4),
               BlocBuilder<SignupCubit, SignupState>(
                 builder: (context, state) {
@@ -174,19 +144,16 @@ class SignUpForm extends StatelessWidget {
                     value: cubit.selectedAcademicStatus,
                     onChanged: (newValue) {
                       if (newValue != null) {
-                        context
-                            .read<SignupCubit>()
-                            .changeAcademicStatus(newValue);
+                        context.read<SignupCubit>().changeAcademicStatus(
+                          newValue,
+                        );
                       }
                     },
                   );
                 },
               ),
               verticalspace(16),
-              Text(
-                "Institution",
-                style: AppTextStyle.font14meduimbluegray,
-              ),
+              Text("Institution", style: AppTextStyle.font14meduimbluegray),
               verticalspace(4),
               AppTextFormField(
                 controller: cubit.institutionController,
@@ -204,22 +171,16 @@ class SignUpForm extends StatelessWidget {
               BlocConsumer<SignupCubit, SignupState>(
                 listener: (context, state) {
                   if (state is SignUpSuccess) {
-                    SnackBarHelper.showSuccess(
-                      context,
-                      'SignUp successful',
-                    );
-        
+                    SnackBarHelper.showSuccess(context, 'SignUp successful');
+
                     context.pushAndRemoveUntil(
                       Routes.loginScreen,
                       predicate: (Route<dynamic> route) => false,
                     );
                   }
-        
+
                   if (state is SignUpFailure) {
-                    SnackBarHelper.showError(
-                      context,
-                      state.errorMasege,
-                    );
+                    SnackBarHelper.showError(context, state.errorMasege);
                   }
                 },
                 builder: (context, state) {
@@ -232,37 +193,23 @@ class SignUpForm extends StatelessWidget {
                             if (formKey.currentState!.validate()) {
                               cubit.signUp(
                                 RegisterRequestBody(
-                                  username: cubit
-                                      .userNameController
-                                      .text
+                                  username: cubit.userNameController.text
                                       .trim(),
-                                  email: cubit.emailController.text
+                                  email: cubit.emailController.text.trim(),
+                                  password: cubit.passwordController.text
                                       .trim(),
-                                  password: cubit
-                                      .passwordController
-                                      .text
-                                      .trim(),
-                                  password2: cubit
-                                      .verifyPasswordController
-                                      .text
+                                  password2: cubit.verifyPasswordController.text
                                       .trim(),
                                   fieldOfStudy: cubit
                                       .fieldOfStudyController
                                       .text
                                       .trim(),
-                                  academicStatus:
-                                      cubit.selectedAcademicStatus,
-                                  institution: cubit
-                                      .institutionController
-                                      .text
+                                  academicStatus: cubit.selectedAcademicStatus,
+                                  institution: cubit.institutionController.text
                                       .trim(),
-                                  firstName: cubit
-                                      .firstNameController
-                                      .text
+                                  firstName: cubit.firstNameController.text
                                       .trim(),
-                                  lastNmae: cubit
-                                      .lastNameController
-                                      .text
+                                  lastNmae: cubit.lastNameController.text
                                       .trim(),
                                 ),
                               );
@@ -273,7 +220,6 @@ class SignUpForm extends StatelessWidget {
                   );
                 },
               ),
-             
             ],
           ),
         ),
