@@ -33,7 +33,7 @@ class ApiServices {
 
               // final token = await service.getAccessToken();
               final token =
-                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2MzY4NjQ3LCJpYXQiOjE3NzYyODIyNDcsImp0aSI6IjdlOGYyMzM3MGM1ZTRiMzRiMDJjNWM0Yjg2NjIzMDVmIiwidXNlcl9pZCI6IjIyIn0.IOT13_EjM_AzcM3al8Nrxa-hCNE5qbS7OdKxP87bU60";
+                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2NDQyNTUxLCJpYXQiOjE3NzYzNTYxNTEsImp0aSI6IjFjZjk2ZDQzZjVhZTQ0ZDI5NDJiOTU5YTEzZWE1YjYzIiwidXNlcl9pZCI6IjIifQ.RoB9CbfrZhF-JtD5nk6NsFbR5aUAOBoGD4R_16t-xI8";
 
               // ignore: unnecessary_null_comparison
               if (token != null && token.isNotEmpty) {
@@ -105,6 +105,35 @@ class ApiServices {
       final response = await _dio.post(
         url,
         data: body,
+        options: Options(headers: finalHeaders),
+      );
+
+      if ([200, 201, 204].contains(response.statusCode)) {
+        return response.data;
+      } else {
+        throw ServerFailure.fromResponse(response.statusCode, response.data);
+      }
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e);
+    }
+  }
+
+  /// POST FORM-DATA (Multipart)
+  Future postFormData({
+    required String url,
+    required FormData data,
+    Map<String, String>? headers,
+  }) async {
+    try {
+      final finalHeaders = {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        ...?headers,
+      };
+
+      final response = await _dio.post(
+        url,
+        data: data,
         options: Options(headers: finalHeaders),
       );
 

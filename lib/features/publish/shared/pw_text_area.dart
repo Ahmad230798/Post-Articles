@@ -9,12 +9,14 @@ class PWTextArea extends StatelessWidget {
   final String label;
   final String hint;
   final TextEditingController? controller;
+  final ValueChanged<String>? onChanged;
 
   const PWTextArea({
     super.key,
     required this.label,
     required this.hint,
     this.controller,
+    this.onChanged,
   });
 
   @override
@@ -34,6 +36,7 @@ class PWTextArea extends StatelessWidget {
           TextField(
             controller: controller,
             maxLines: 6,
+            onChanged: onChanged,
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: AppTextStyle.font14regularGrey,

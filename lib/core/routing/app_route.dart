@@ -15,6 +15,8 @@ import 'package:flutter_project/features/auth/ui/sign_up_screen.dart';
 import 'package:flutter_project/features/comments/ui/comments_screen.dart';
 import 'package:flutter_project/features/edit_profile/ui/edit_profile.dart';
 import 'package:flutter_project/features/my_profile/ui/my_profile.dart';
+import 'package:flutter_project/features/publish/cubit/publish_cubit.dart';
+import 'package:flutter_project/features/publish/repo/publish_repository.dart';
 import 'package:flutter_project/features/search/ui/explore_filters_screen.dart';
 import 'package:flutter_project/features/home/ui/home_screen.dart';
 import 'package:flutter_project/features/onboarding/ui/page_controller.dart';
@@ -49,7 +51,13 @@ class AppRoute {
       case Routes.exploreFiltersScreen:
         return MaterialPageRoute(builder: (_) => ExploreFiltersScreen());
       case Routes.publishStep1Screen:
-        return MaterialPageRoute(builder: (_) => PublishStep1Screen());
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => PublishCubit(PublishRepository(ApiServices())),
+            child: const PublishStep1Screen(),
+          ),
+        );
+
       case Routes.commentsScreen:
         return MaterialPageRoute(builder: (_) => CommentsScreen());
       case Routes.savedScreen:
@@ -63,10 +71,9 @@ class AppRoute {
         );
 
       case Routes.userProfileScreen:
-        final username = (settings.arguments as String?) ?? '';
-        return MaterialPageRoute(
-          builder: (_) => UserProfile(userName: username),
-        );
+        final userId = settings.arguments as int;
+        return MaterialPageRoute(builder: (_) => UserProfile(userId: userId));
+
       case Routes.settingScreen:
         return MaterialPageRoute(builder: (_) => SettingScreen());
       case Routes.main:

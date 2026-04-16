@@ -113,6 +113,14 @@ class AppTextStyle {
   );
 
   // 🔹 12
+
+  static TextStyle font12regularGrey = TextStyle(
+    fontSize: 12.sp,
+    fontWeight: FontWeightHelper.normal,
+    fontFamily: AppFont.lexend,
+    color: AppColor.grey,
+  );
+
   static TextStyle font12regulardarkblue = TextStyle(
     fontWeight: FontWeightHelper.medium,
     fontSize: 12.sp,

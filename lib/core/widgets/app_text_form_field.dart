@@ -39,7 +39,7 @@ class AppTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      maxLines: linesCount,
+      maxLines: (isObscureText ?? false) ? 1 : (linesCount ?? 1),
       onChanged: onChanged,
       validator: validator,
       controller: controller,
