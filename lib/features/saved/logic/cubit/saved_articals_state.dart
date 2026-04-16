@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter_project/features/home/models/article_model.dart';
+import 'package:flutter_project/features/saved/models/saved_articals_model.dart';
 
 abstract class SavedArticalsState extends Equatable {
   const SavedArticalsState();
@@ -10,6 +10,7 @@ abstract class SavedArticalsState extends Equatable {
 class SavedArticalsStateinit extends SavedArticalsState {
   const SavedArticalsStateinit();
 }
+
 class SavedArticalsStateLoading extends SavedArticalsState {
   const SavedArticalsStateLoading();
 }
@@ -22,7 +23,7 @@ class SavedArticalsStateFailure extends SavedArticalsState {
 }
 
 class SavedArticalsStateSuccess extends SavedArticalsState {
-  final List<ArticleModel> articals;
+  final List<SavedArticleModel> articals;
   const SavedArticalsStateSuccess(this.articals);
   @override
   List<Object?> get props => [articals];
