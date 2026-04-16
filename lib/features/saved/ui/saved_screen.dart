@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/core/services/api/api_services.dart';
 import 'package:flutter_project/core/widgets/app_top_nav_bar.dart';
-import 'package:flutter_project/core/widgets/article_card.dart';
 import 'package:flutter_project/core/widgets/category_pills.dart';
 import 'package:flutter_project/features/saved/logic/cubit/saved_articals_cubit.dart';
 import 'package:flutter_project/features/saved/logic/cubit/saved_articals_state.dart';
+import 'package:flutter_project/features/saved/models/saved_articals_model.dart';
 import 'package:flutter_project/features/saved/repo/saved_articals_repo.dart';
+import 'package:flutter_project/features/saved/widgets/artice_card.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/saved_header.dart';
 import '../widgets/empty_state.dart';
-import 'package:flutter_project/features/home/models/article_model.dart';
 
 class SavedScreen extends StatefulWidget {
   const SavedScreen({super.key});
@@ -22,7 +22,7 @@ class SavedScreen extends StatefulWidget {
 
 class _SavedScreenState extends State<SavedScreen> {
   // 🔥 بيانات مؤقتة لعرضها باستخدام ArticleModel الجديد
-  List<ArticleModel> get savedArticlesList => [];
+  List<SavedArticleModel> get savedArticlesList => [];
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +117,7 @@ class _SavedScreenState extends State<SavedScreen> {
                                       ),
                                   itemCount: savedArticles.length,
                                   itemBuilder: (context, index) {
-                                    return ArticleCard(
+                                    return SavedArticleCard(
                                       article: savedArticles[index],
                                     );
                                   },
