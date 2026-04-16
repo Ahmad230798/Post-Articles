@@ -1,35 +1,46 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
-import 'package:flutter_project/features/publish/step2/ui/publish_step2_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project/features/publish/step1/widgets/step1_cover_upload.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
+import 'package:flutter_project/features/publish/cubit/publish_cubit.dart';
+import 'package:flutter_project/features/publish/cubit/publish_state.dart';
 import 'package:flutter_project/features/publish/shared/pw_header.dart';
 import 'package:flutter_project/features/publish/shared/pw_progress.dart';
 import 'package:flutter_project/features/publish/shared/pw_section_title.dart';
 import 'package:flutter_project/features/publish/shared/pw_text_field.dart';
 import 'package:flutter_project/features/publish/shared/pw_text_area.dart';
-import 'package:flutter_project/features/publish/shared/pw_upload_box.dart';
-import 'package:flutter_project/features/publish/shared/pw_footer_buttons.dart';
+import 'package:flutter_project/features/publish/step2/ui/publish_step2_screen.dart';
 
-class PublishStep1Screen extends StatelessWidget {
+class PublishStep1Screen extends StatefulWidget {
   const PublishStep1Screen({super.key});
 
   @override
+  State<PublishStep1Screen> createState() => _PublishStep1ScreenState();
+}
+
+class _PublishStep1ScreenState extends State<PublishStep1Screen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<PublishCubit>().loadCategories();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final cubit = context.read<PublishCubit>();
+
     return Scaffold(
       backgroundColor: AppColor.background,
       body: SafeArea(
         child: Column(
           children: [
-            // Header
             const PWHeader(
               title: "Publish Wizard",
               showBack: false,
               showClose: true,
             ),
 
-            // Progress bar (Step 1 of 3)
             const PWProgress(
               step: 1,
               totalSteps: 3,
@@ -42,108 +53,123 @@ class PublishStep1Screen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Section title
-                    const PWSectionTitle(title: "Tell us about your project"),
+                    const PWSectionTitle(title: "Basic Information"),
 
                     SizedBox(height: 12.h),
 
-                    // Project Title
-                    const PWTextField(
-                      label: "Project Title",
-                      hint: "Enter a catchy name for your masterpiece",
+                    PWTextField(
+                      label: "Title",
+                      hint: "Enter a title...",
+                      onChanged: cubit.updateTitle,
                     ),
 
-                    SizedBox(height: 4.h),
-                    Text(
-                      "Tip: Keep it short and memorable.",
-                      style: TextStyle(color: AppColor.grey, fontSize: 12.sp),
-                    ),
-
-                    SizedBox(height: 20.h),
-
-                    // Description
-                    const PWTextArea(
+                    PWTextArea(
                       label: "Description",
-                      hint:
-                          "Describe what you are publishing. Share the story behind it, its goals, and why people should care...",
+                      hint: "Short description...",
+                      onChanged: cubit.updateDescription,
+                    ),
+
+                    PWTextArea(
+                      label: "Abstract",
+                      hint: "Academic abstract...",
+                      onChanged: cubit.updateAbstract,
                     ),
 
                     SizedBox(height: 20.h),
 
-                    // Cover Image Upload
-                    const PWUploadBox(
-                      icon: Icons.add_photo_alternate,
-                      title: "Click to upload or drag and drop",
-                      subtitle: "PNG, JPG, or WebP (max 5MB)",
-                      buttonText: "Upload Cover",
+                    BlocBuilder<PublishCubit, PublishState>(
+                      builder: (context, state) {
+                        return GestureDetector(
+                          onTap: cubit.pickCoverImage,
+                          child: state.coverImage == null
+                              ? const Step1CoverUpload()
+                              : Container(
+                                  height: 180.h,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16.r),
+                                    image: DecorationImage(
+                                      image: FileImage(state.coverImage!),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                        );
+                      },
                     ),
 
                     SizedBox(height: 20.h),
 
-                    // Category Dropdown (custom widget)
-                    _categoryDropdown(),
+                    BlocBuilder<PublishCubit, PublishState>(
+                      builder: (context, state) {
+                        final categories = cubit.categories;
+
+                        if (categories.isEmpty) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        return DropdownButtonFormField<int>(
+                          value: state.categoryId,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                          ),
+                          hint: const Text("Select Category"),
+                          items: categories.map((cat) {
+                            return DropdownMenuItem<int>(
+                              value: cat['id'] as int,
+                              child: Text(cat['name'].toString()),
+                            );
+                          }).toList(),
+                          onChanged: cubit.updateCategory,
+                        );
+                      },
+                    ),
+
                     SizedBox(height: 40.h),
                   ],
                 ),
               ),
             ),
 
-            // Footer Buttons
-            PWFooterButtons(
-              leftText: "Save Draft",
-              rightText: "Next",
-              onLeftTap: () {},
-              onRightTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const PublishStep2Screen()),
-                );
-              },
+            Padding(
+              padding: EdgeInsets.only(bottom: 12.h),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => BlocProvider.value(
+                        value: cubit,
+                        child: const PublishStep2Screen(),
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 14.h,
+                    horizontal: 24.w,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColor.accent,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: const Text(
+                    "Next",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _categoryDropdown() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Category",
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.w600,
-            color: AppColor.textDark,
-          ),
-        ),
-        SizedBox(height: 8.h),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12.r),
-            border: Border.all(color: AppColor.grey.withOpacity(0.3)),
-          ),
-          child: DropdownButtonHideUnderline(
-            child: DropdownButton<String>(
-              value: null,
-              hint: Text(
-                "Select a category",
-                style: TextStyle(color: AppColor.grey),
-              ),
-              items: const [
-                DropdownMenuItem(value: "tech", child: Text("Technology")),
-                DropdownMenuItem(value: "art", child: Text("Digital Art")),
-                DropdownMenuItem(value: "education", child: Text("Education")),
-                DropdownMenuItem(value: "lifestyle", child: Text("Lifestyle")),
-              ],
-              onChanged: (value) {},
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

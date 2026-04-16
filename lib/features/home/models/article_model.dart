@@ -13,6 +13,7 @@ class ArticleModel extends Equatable {
   final int? likesCount;
   final int? commentsCount;
   final String? averageRating;
+  final int? authorId;
 
   const ArticleModel({
     this.id,
@@ -23,6 +24,7 @@ class ArticleModel extends Equatable {
     this.coverImage,
     this.categoryName,
     this.authorName,
+    this.authorId,
     this.readTime,
     this.likesCount,
     this.commentsCount,
@@ -45,6 +47,7 @@ class ArticleModel extends Equatable {
           ? json["comments_count"]
           : int.tryParse(json["comments_count"] ?? "0"),
       averageRating: (json["average_rating"] ?? "0").toString(),
+      authorId: json["author"]?["id"],
     );
   }
 
@@ -62,5 +65,6 @@ class ArticleModel extends Equatable {
     likesCount,
     commentsCount,
     averageRating,
+    authorId,
   ];
 }

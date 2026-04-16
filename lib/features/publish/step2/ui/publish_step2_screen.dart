@@ -1,32 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project/features/publish/step3/ui/publish_step3_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project/features/publish/step2/widgets/step2_media_upload.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
+import 'package:flutter_project/features/publish/cubit/publish_cubit.dart';
 import 'package:flutter_project/features/publish/shared/pw_header.dart';
 import 'package:flutter_project/features/publish/shared/pw_progress.dart';
 import 'package:flutter_project/features/publish/shared/pw_section_title.dart';
 import 'package:flutter_project/features/publish/shared/pw_text_area.dart';
-import 'package:flutter_project/features/publish/shared/pw_footer_buttons.dart';
-import '../widgets/step2_media_upload.dart';
+import 'package:flutter_project/features/publish/shared/pw_text_field.dart';
+import 'package:flutter_project/features/publish/step3/ui/publish_step3_screen.dart';
 
 class PublishStep2Screen extends StatelessWidget {
   const PublishStep2Screen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.read<PublishCubit>();
+
     return Scaffold(
       backgroundColor: AppColor.background,
       body: SafeArea(
         child: Column(
           children: [
-            // Header
             const PWHeader(
               title: "Publish Wizard",
               showBack: true,
               showClose: true,
             ),
 
-            // Progress (dots style)
             const PWProgress(
               step: 2,
               totalSteps: 3,
@@ -39,24 +41,36 @@ class PublishStep2Screen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Section Title
                     const PWSectionTitle(
-                      title: "Step 2: Content",
-                      subtitle: "Enhance your post with high-quality media.",
+                      title: "Content & Media",
+                      subtitle: "Add your full article content",
                     ),
 
-                    SizedBox(height: 12.h),
+                    PWTextArea(
+                      label: "Full Content",
+                      hint: "Write your full article...",
+                      onChanged: cubit.updateContent,
+                    ),
 
-                    // Media Upload Box (CUSTOM WIDGET)
-                    const Step2MediaUpload(),
+                    SizedBox(height: 20.h),
 
-                    SizedBox(height: 24.h),
+                    GestureDetector(
+                      onTap: cubit.pickPdfFile,
+                      child: const Step2MediaUpload(),
+                    ),
 
-                    // Description
-                    const PWTextArea(
-                      label: "Post Description",
-                      hint:
-                          "What's on your mind? Add some context to your media...",
+                    SizedBox(height: 20.h),
+
+                    PWTextField(
+                      label: "Tags",
+                      hint: "ai, flutter, research",
+                      onChanged: cubit.updateTagsString,
+                    ),
+
+                    PWTextField(
+                      label: "Location",
+                      hint: "Amsterdam, NL",
+                      onChanged: cubit.updateLocation,
                     ),
 
                     SizedBox(height: 40.h),
@@ -65,17 +79,35 @@ class PublishStep2Screen extends StatelessWidget {
               ),
             ),
 
-            // Footer Buttons
-            PWFooterButtons(
-              leftText: "Back",
-              rightText: "Continue to Step 3",
-              onLeftTap: () => Navigator.pop(context),
-              onRightTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const PublishStep3Screen()),
-                );
-              },
+            Padding(
+              padding: EdgeInsets.only(bottom: 12.h),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => BlocProvider.value(
+                        value: cubit,
+                        child: const PublishStep3Screen(),
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 14.h,
+                    horizontal: 24.w,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColor.accent,
+                    borderRadius: BorderRadius.circular(12.r),
+                  ),
+                  child: const Text(
+                    "Continue",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

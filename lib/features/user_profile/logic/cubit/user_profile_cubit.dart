@@ -3,15 +3,15 @@ import 'package:flutter_project/features/user_profile/logic/cubit/user_profile_s
 import 'package:flutter_project/features/user_profile/repo/user_profile_repo.dart';
 
 class UserProfileCubit extends Cubit<UserProfileState> {
-  final String userName;
+  final String username;
   final UserProfileRepo repo;
 
-  UserProfileCubit(this.repo, this.userName) : super(const UserprofileInit());
+  UserProfileCubit(this.repo, this.username) : super(const UserprofileInit());
 
   Future<void> getUserProfile() async {
     emit(const UserProfileLoading());
 
-    final result = await repo.getUserProfile(userName);
+    final result = await repo.getUserProfile(username);
 
     result.fold(
       (failure) {
@@ -42,7 +42,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
       ),
     );
 
-    final result = await repo.follow(userName);
+    final result = await repo.follow(username);
 
     result.fold(
       (failure) {
@@ -54,14 +54,15 @@ class UserProfileCubit extends Cubit<UserProfileState> {
           ),
         );
       },
-      (massege) {
+      (message) {
         emit(
           UserProfileSuccess(
             user: currentState.user,
-            isFollowing: massege == "Followed." ? true : false,
+            isFollowing: message == "Followed.",
             isFollowingLoading: false,
           ),
         );
+
         getUserProfile();
       },
     );

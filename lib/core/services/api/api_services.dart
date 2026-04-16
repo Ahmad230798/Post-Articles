@@ -118,6 +118,35 @@ class ApiServices {
     }
   }
 
+  /// POST FORM-DATA (Multipart)
+  Future postFormData({
+    required String url,
+    required FormData data,
+    Map<String, String>? headers,
+  }) async {
+    try {
+      final finalHeaders = {
+        'Accept': 'application/json',
+        'Content-Type': 'multipart/form-data',
+        ...?headers,
+      };
+
+      final response = await _dio.post(
+        url,
+        data: data,
+        options: Options(headers: finalHeaders),
+      );
+
+      if ([200, 201, 204].contains(response.statusCode)) {
+        return response.data;
+      } else {
+        throw ServerFailure.fromResponse(response.statusCode, response.data);
+      }
+    } on DioException catch (e) {
+      throw ServerFailure.fromDioError(e);
+    }
+  }
+
   /// PUT
   Future putData({
     required String url,
