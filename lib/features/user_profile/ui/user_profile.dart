@@ -13,9 +13,8 @@ import 'package:flutter_project/features/user_profile/widgets/user_bio.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class UserProfile extends StatelessWidget {
-  final int userId;
-
-  const UserProfile({super.key, required this.userId});
+  final String username;
+  const UserProfile({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {

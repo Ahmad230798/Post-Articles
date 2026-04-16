@@ -71,8 +71,10 @@ class AppRoute {
         );
 
       case Routes.userProfileScreen:
-        final userId = settings.arguments as int;
-        return MaterialPageRoute(builder: (_) => UserProfile(userId: userId));
+        final username = settings.arguments as String;
+        return MaterialPageRoute(
+          builder: (_) => UserProfile(username: username),
+        );
 
       case Routes.settingScreen:
         return MaterialPageRoute(builder: (_) => SettingScreen());

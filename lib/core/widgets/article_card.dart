@@ -240,7 +240,7 @@ class _ArticleCardState extends State<ArticleCard>
                         Navigator.pushNamed(
                           context,
                           "/userProfileScreen",
-                          arguments: article.authorId,
+                          arguments: article.authorName,
                         );
                       },
                       child: Row(

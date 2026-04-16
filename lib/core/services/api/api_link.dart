@@ -1,5 +1,5 @@
 class ApiLink {
-  static const String baseUrl = 'http://10.21.151.164:8000/api/v1';
+  static const String baseUrl = 'http://10.109.249.164:8000/api/v1';
 
   /// ================= Auth =================
   static const String register = '$baseUrl/auth/register/';

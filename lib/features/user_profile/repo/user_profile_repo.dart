@@ -9,33 +9,37 @@ class UserProfileRepo {
   final ApiServices apiServices;
 
   UserProfileRepo(this.apiServices);
-  Future<Either<Failure, User>> getUserProfile(String userName) async {
+
+  Future<Either<Failure, User>> getUserProfile(String username) async {
     try {
       final response = await apiServices.getData(
-        url: ApiLink.getUserProfile(userName),
+        url: ApiLink.getUserProfile(username),
       );
+
       final user = User.fromJson(Map<String, dynamic>.from(response));
       return right(user);
-    } on ServerFailure catch (errormassege) {
-      return left(errormassege);
+    } on ServerFailure catch (errorMessage) {
+      return left(errorMessage);
     } catch (error) {
-      return Left(ServerFailure(error.toString()));
+      return left(ServerFailure(error.toString()));
     }
   }
 
-  Future<Either<Failure, String>> follow(String userName) async {
+  Future<Either<Failure, String>> follow(String username) async {
     try {
       final response = await apiServices.postData(
-        url: ApiLink.followUser(userName),
+        url: ApiLink.followUser(username),
       );
-      final massege = UserProfileModle.fromjson(
+
+      final message = UserProfileModle.fromjson(
         Map<String, dynamic>.from(response),
       );
-      return Right(massege.message);
-    } on ServerFailure catch (errorMassge) {
-      return left(errorMassge);
-    } catch (errorMassege) {
-      return left(ServerFailure(errorMassege.toString()));
+
+      return Right(message.message);
+    } on ServerFailure catch (errorMessage) {
+      return left(errorMessage);
+    } catch (error) {
+      return left(ServerFailure(error.toString()));
     }
   }
 }
