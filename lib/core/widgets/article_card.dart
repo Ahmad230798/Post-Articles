@@ -5,8 +5,8 @@ import 'package:flutter_project/features/home/models/article_model.dart';
 
 class ArticleCard extends StatelessWidget {
   final ArticleModel article;
-
-  const ArticleCard({super.key, required this.article});
+  final void Function()? onTap;
+  const ArticleCard({super.key, required this.article, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -63,10 +63,13 @@ class ArticleCard extends StatelessWidget {
                           color: AppColor.accent,
                         ),
                       ),
-                      Icon(
-                        Icons.bookmark_border,
-                        color: AppColor.grey,
-                        size: 20.sp,
+                      InkWell(
+                        onTap: onTap,
+                        child: Icon(
+                          Icons.bookmark_border,
+                          color: AppColor.grey,
+                          size: 20.sp,
+                        ),
                       ),
                     ],
                   ),
@@ -75,7 +78,7 @@ class ArticleCard extends StatelessWidget {
 
                   // TITLE
                   Text(
-                    article.title,
+                    article.title!,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

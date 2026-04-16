@@ -14,6 +14,7 @@ import 'package:flutter_project/features/auth/ui/login_screen.dart';
 import 'package:flutter_project/features/auth/ui/sign_up_screen.dart';
 import 'package:flutter_project/features/comments/ui/comments_screen.dart';
 import 'package:flutter_project/features/edit_profile/ui/edit_profile.dart';
+import 'package:flutter_project/features/home/models/article_model.dart';
 import 'package:flutter_project/features/my_profile/ui/my_profile.dart';
 import 'package:flutter_project/features/search/ui/explore_filters_screen.dart';
 import 'package:flutter_project/features/home/ui/home_screen.dart';

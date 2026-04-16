@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/core/widgets/app_bottom_nav.dart';
 import 'package:flutter_project/features/explore/explore_screen.dart';
+import 'package:flutter_project/features/home/models/article_model.dart';
 import 'package:flutter_project/features/home/ui/home_screen.dart';
 import 'package:flutter_project/features/my_profile/ui/my_profile.dart';
 import 'package:flutter_project/features/saved/ui/saved_screen.dart';

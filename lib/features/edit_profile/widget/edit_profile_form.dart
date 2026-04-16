@@ -39,7 +39,9 @@ class EditProfileForm extends StatelessWidget {
         verticalspace(8),
         AppTextFormField(
           controller: cubit.firstNameController,
-          hinttText: "Alexander",
+          hinttText: cubit.firstNameController.text.isNotEmpty
+              ? cubit.firstNameController.text
+              : "Isaac",
           enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
           fillColor: AppColor.borderGrey,
           isFilled: true,

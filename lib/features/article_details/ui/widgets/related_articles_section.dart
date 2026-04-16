@@ -68,7 +68,7 @@ class ADRelatedArticles extends StatelessWidget {
             SizedBox(width: 12.w),
             Expanded(
               child: Text(
-                a.title,
+                a.title!,
                 style: AppTextStyle.font14regularGrey.copyWith(
                   color: AppColor.textDark,
                   fontWeight: FontWeight.bold,
