@@ -23,7 +23,9 @@ class HomeHeroStory extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.r),
         image: DecorationImage(
-          image: NetworkImage(article!.coverImage ?? ""),
+          image: article?.coverImage != null && article!.coverImage!.isNotEmpty
+              ? NetworkImage(article!.coverImage!)
+              : const AssetImage("assets/images/articles/article4.png"),
           fit: BoxFit.cover,
         ),
       ),
@@ -62,7 +64,7 @@ class HomeHeroStory extends StatelessWidget {
 
             // Title
             Text(
-              article!.title,
+              article!.title!,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               style: AppTextStyle.font20boldWhite,

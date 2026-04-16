@@ -6,19 +6,18 @@ part of 'register_request_body.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-// ignore: unused_element
-RegisterRequestBody _$RegisterRequestBodyFromJson(Map<String, dynamic> json) =>
-    RegisterRequestBody(
-      username: json['username'] as String,
-      email: json['email'] as String,
-      password: json['password'] as String,
-      password2: json['password2'] as String,
-      fieldOfStudy: json['field_of_study'] as String,
-      academicStatus: json['academic_status'] as String,
-      institution: json['institution'] as String,
-      firstName: json['first_name'] as String,
-      lastNmae: json['last_name'] as String,
-    );
+// RegisterRequestBody _$RegisterRequestBodyFromJson(Map<String, dynamic> json) =>
+//     RegisterRequestBody(
+//       username: json['username'] as String,
+//       email: json['email'] as String,
+//       password: json['password'] as String,
+//       password2: json['password2'] as String,
+//       fieldOfStudy: json['field_of_study'] as String,
+//       academicStatus: json['academic_status'] as String,
+//       institution: json['institution'] as String,
+//       firstName: json['first_name'] as String,
+//       lastNmae: json['last_name'] as String,
+//     );
 
 Map<String, dynamic> _$RegisterRequestBodyToJson(
   RegisterRequestBody instance,

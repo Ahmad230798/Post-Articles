@@ -6,8 +6,8 @@ import 'package:flutter_project/features/home/models/article_model.dart';
 
 class ArticleCard extends StatefulWidget {
   final ArticleModel article;
-
-  const ArticleCard({super.key, required this.article});
+  final void Function()? onTap;
+  const ArticleCard({super.key, required this.article, this.onTap});
 
   @override
   State<ArticleCard> createState() => _ArticleCardState();
@@ -153,7 +153,7 @@ class _ArticleCardState extends State<ArticleCard>
 
                   // TITLE
                   Text(
-                    article.title,
+                    article.title!,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

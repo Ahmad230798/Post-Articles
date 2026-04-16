@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
 class ArticleModel extends Equatable {
-  final int id;
-  final String slug;
-  final String title;
+  final int? id;
+  final String? slug;
+  final String? title;
   final String? description;
   final String? abstractText;
   final String? coverImage;
@@ -16,9 +16,9 @@ class ArticleModel extends Equatable {
   final int? authorId;
 
   const ArticleModel({
-    required this.id,
-    required this.slug,
-    required this.title,
+    this.id,
+    this.slug,
+    this.title,
     this.description,
     this.abstractText,
     this.coverImage,

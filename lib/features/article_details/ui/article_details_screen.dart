@@ -30,7 +30,7 @@ class ArticleDetailsScreen extends StatelessWidget {
 
     return BlocProvider(
       create: (_) => ArticleDetailsCubit(ArticleDetailsRepository())
-        ..loadArticle(slug)
+        ..loadArticle(slug!)
         ..loadRelated(article.categoryName ?? ""),
       child: BlocBuilder<ArticleDetailsCubit, ArticleDetailsState>(
         builder: (context, state) {
@@ -73,7 +73,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                         SliverToBoxAdapter(
                           child: ADTitleSection(
                             category: current.categoryName ?? "",
-                            title: current.title,
+                            title: current.title!,
                           ),
                         ),
 
@@ -96,8 +96,8 @@ class ArticleDetailsScreen extends StatelessWidget {
                         SliverToBoxAdapter(
                           child: ADActionsButtons(
                             isBookmarked: state.isBookmarked,
-                            onBookmark: () => cubit.toggleBookmark(slug),
-                            onCite: () => cubit.loadCitation(slug),
+                            onBookmark: () => cubit.toggleBookmark(slug!),
+                            onCite: () => cubit.loadCitation(slug!),
                             onLike: () {},
                           ),
                         ),
@@ -112,7 +112,7 @@ class ArticleDetailsScreen extends StatelessWidget {
 
                         /// 🔵 Comments Section
                         SliverToBoxAdapter(
-                          child: ADCommentsSection(slug: slug),
+                          child: ADCommentsSection(slug: slug!),
                         ),
 
                         /// 🔵 Related Articles
