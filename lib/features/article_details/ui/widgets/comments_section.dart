@@ -16,7 +16,9 @@ class ADCommentsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ArticleDetailsCubit, ArticleDetailsState>(
       builder: (context, state) {
-        final cubit = context.read<ArticleDetailsCubit>();
+        final latestComment = state.comments.isNotEmpty
+            ? state.comments.first
+            : null;
 
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
@@ -34,36 +36,38 @@ class ADCommentsSection extends StatelessWidget {
 
               SizedBox(height: 12.h),
 
-              /// 🔵 Comments List
-              // ignore: unnecessary_to_list_in_spreads
-              ...state.comments.map((c) => _commentItem(c)).toList(),
-
-              SizedBox(height: 16.h),
-
-              /// 🔵 Add Comment Input
-              TextField(
-                controller: cubit.commentController,
-                decoration: InputDecoration(
-                  hintText: "Write a comment...",
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                    borderSide: BorderSide(color: AppColor.grey),
-                  ),
+              /// 🔵 Latest Comment Preview
+              if (latestComment != null)
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      "/commentsScreen",
+                      arguments: slug,
+                    );
+                  },
+                  child: _commentItem(latestComment),
+                )
+              else
+                Text(
+                  "No comments yet. Be the first to discuss!",
+                  style: AppTextStyle.font14regularGrey,
                 ),
-              ),
 
               SizedBox(height: 8.h),
 
+              /// 🔵 View All Button
               Align(
                 alignment: Alignment.centerRight,
-                child: ElevatedButton(
+                child: TextButton(
                   onPressed: () {
-                    cubit.addComment(slug, cubit.commentController.text);
-                    cubit.commentController.clear();
+                    Navigator.pushNamed(
+                      context,
+                      "/commentsScreen",
+                      arguments: slug,
+                    );
                   },
-                  child: const Text("Post"),
+                  child: const Text("View all comments"),
                 ),
               ),
             ],
@@ -73,7 +77,7 @@ class ADCommentsSection extends StatelessWidget {
     );
   }
 
-  /// ⭐ Comment Item UI
+  /// ⭐ Single Comment Item UI
   Widget _commentItem(dynamic c) {
     final username = c["author"]?["username"] ?? "User";
     final content = c["content"] ?? "";

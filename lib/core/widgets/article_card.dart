@@ -27,8 +27,8 @@ class _ArticleCardState extends State<ArticleCard>
     super.initState();
 
     likeCount = widget.article.likesCount ?? 0;
-    isLiked = false;
-    isBookmarked = false;
+    isLiked = widget.article.isLiked ?? false; // 🔵 بدل false
+    isBookmarked = widget.article.isSaved ?? false; // 🔵 بدل false
 
     _animController = AnimationController(
       vsync: this,

@@ -17,23 +17,29 @@ class MainNavigation extends StatefulWidget {
 class _MainNavigationState extends State<MainNavigation> {
   int currentIndex = 0;
 
-  final pages = [
-    const HomeScreen(),
-    const ExploreScreen(),
-    const SavedScreen(),
-    const MyProfile(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => HomeCubit(),
       child: Scaffold(
-        body: pages[currentIndex],
+        body: IndexedStack(
+          index: currentIndex,
+          children: [
+            HomeScreen(),
+            const ExploreScreen(),
+            const SavedScreen(),
+            const MyProfile(),
+          ],
+        ),
         bottomNavigationBar: AppBottomNav(
           currentIndex: currentIndex,
           onTap: (index) {
             setState(() => currentIndex = index);
+
+            // 🔹 إذا رجعت على الـ Home tab، يعمل refresh
+            if (index == 0) {
+              context.read<HomeCubit>().loadInitialData();
+            }
           },
         ),
       ),
