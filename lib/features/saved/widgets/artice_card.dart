@@ -92,7 +92,8 @@ class SavedArticleCard extends StatelessWidget {
                   SizedBox(height: 8.h),
 
                   // DESCRIPTION
-                  if (article.article.description.isNotEmpty)
+                  if (article.article.description != null &&
+                      article.article.description!.isNotEmpty)
                     Text(
                       article.article.description!,
                       maxLines: 2,

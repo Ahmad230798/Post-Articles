@@ -40,7 +40,7 @@ class ApiServices {
               handler.next(options);
             },
             onResponse: (response, handler) {
-              print("${response.data}");
+              // print("${response.data}");
               handler.next(response);
             },
             onError: (error, handler) {

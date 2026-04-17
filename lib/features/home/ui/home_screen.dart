@@ -168,6 +168,7 @@ class HomeScreen extends StatelessWidget {
 
           // 🔹 Floating Publish Button
           floatingActionButton: FloatingActionButton(
+            heroTag: 'home_publish_fab',
             backgroundColor: AppColor.accent,
             child: const Icon(Icons.add, color: Colors.white),
             onPressed: () {
