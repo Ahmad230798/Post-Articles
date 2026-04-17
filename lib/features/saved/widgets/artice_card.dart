@@ -5,8 +5,8 @@ import 'package:flutter_project/core/constants/app_color.dart';
 
 class SavedArticleCard extends StatelessWidget {
   final SavedArticleModel article;
-  final void Function()? onTap;
-  const SavedArticleCard({super.key, required this.article, this.onTap});
+  final void Function()? onUnbookmark;
+  const SavedArticleCard({super.key, required this.article, this.onUnbookmark});
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +65,10 @@ class SavedArticleCard extends StatelessWidget {
                         ),
                       ),
                       InkWell(
-                        onTap: onTap,
+                        onTap: onUnbookmark,
                         child: Icon(
-                          Icons.bookmark_border,
-                          color: AppColor.grey,
+                          Icons.bookmark,
+                          color: AppColor.accent,
                           size: 20.sp,
                         ),
                       ),
@@ -92,7 +92,7 @@ class SavedArticleCard extends StatelessWidget {
                   SizedBox(height: 8.h),
 
                   // DESCRIPTION
-                  if (article.article.description != null)
+                  if (article.article.description.isNotEmpty)
                     Text(
                       article.article.description!,
                       maxLines: 2,

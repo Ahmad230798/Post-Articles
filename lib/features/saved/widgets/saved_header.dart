@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SavedHeader extends StatelessWidget {
-  const SavedHeader({super.key});
+  final int articlesCount;
+  const SavedHeader({super.key, required this.articlesCount});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class SavedHeader extends StatelessWidget {
         ),
         SizedBox(height: 8.h),
         Text(
-          '12 curated articles in your archive',
+          '$articlesCount curated articles in your archive',
           style: TextStyle(fontSize: 13.sp, color: const Color(0xFF4A5568)),
         ),
       ],

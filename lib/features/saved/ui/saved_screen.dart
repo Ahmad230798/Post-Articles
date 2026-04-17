@@ -85,7 +85,7 @@ class _SavedScreenState extends State<SavedScreen> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const SavedHeader(),
+                            SavedHeader(articlesCount: savedArticles.length),
                             SizedBox(height: 24.h),
 
                             const CategoryPills(

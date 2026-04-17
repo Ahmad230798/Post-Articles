@@ -92,69 +92,77 @@ class HomeScreen extends StatelessWidget {
           ),
 
           body: SafeArea(
-            child: CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(child: HomeHeader()),
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await cubit.loadInitialData(); // سحب لتحديث الصفحة
+              },
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(child: HomeHeader()),
 
-                SliverToBoxAdapter(
-                  child: CategoryPills(
-                    variant: CategoryVariant.tabs,
-                    categories: state.categories.map((c) => c.name).toList(),
-                    activeIndex: state.activeCategory,
-                    onTap: cubit.changeCategory,
+                  SliverToBoxAdapter(
+                    child: CategoryPills(
+                      variant: CategoryVariant.tabs,
+                      categories: state.categories.map((c) => c.name).toList(),
+                      activeIndex: state.activeCategory,
+                      onTap: cubit.changeCategory,
+                    ),
                   ),
-                ),
 
-                SliverToBoxAdapter(
-                  child: HomeHeroStory(article: state.featuredArticle),
-                ),
-
-                SliverPadding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16.w,
-                    vertical: 8.h,
+                  SliverToBoxAdapter(
+                    child: HomeHeroStory(article: state.featuredArticle),
                   ),
-                  sliver: SliverToBoxAdapter(
-                    child: Text(
-                      "Latest Stories",
-                      style: TextStyle(
-                        fontSize: 20.sp,
-                        fontWeight: FontWeight.w700,
-                        color: AppColor.primary,
+
+                  SliverPadding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 8.h,
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: Text(
+                        "Latest Stories",
+                        style: TextStyle(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w700,
+                          color: AppColor.primary,
+                        ),
                       ),
                     ),
                   ),
-                ),
 
-                if (state.isLoading)
-                  const SliverToBoxAdapter(
-                    child: Center(child: CircularProgressIndicator()),
-                  )
-                else
-                  SliverPadding(
-                    padding: EdgeInsets.symmetric(horizontal: 16.w),
-                    sliver: SliverList(
-                      delegate: SliverChildBuilderDelegate((context, index) {
-                        final item = state.articles[index];
-                        return Padding(
-                          padding: EdgeInsets.only(bottom: 16.h),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                Routes.articleDetailsScreen,
-                                arguments: item, // لازم يكون ArticleModel
-                              );
-                            },
-                            child: ArticleCard(article: item),
-                          ),
-                        );
-                      }, childCount: state.articles.length),
+                  if (state.isLoading)
+                    const SliverToBoxAdapter(
+                      child: Center(child: CircularProgressIndicator()),
+                    )
+                  else
+                    SliverPadding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      sliver: SliverList(
+                        delegate: SliverChildBuilderDelegate((context, index) {
+                          final item = state.articles[index];
+                          return Padding(
+                            padding: EdgeInsets.only(bottom: 16.h),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  Routes.articleDetailsScreen,
+                                  arguments: item,
+                                ).then((_) {
+                                  cubit
+                                      .loadInitialData(); // يعمل refresh لما ترجع من التفاصيل
+                                });
+                              },
+                              child: ArticleCard(article: item),
+                            ),
+                          );
+                        }, childCount: state.articles.length),
+                      ),
                     ),
-                  ),
 
-                SliverToBoxAdapter(child: SizedBox(height: 80.h)),
-              ],
+                  SliverToBoxAdapter(child: SizedBox(height: 80.h)),
+                ],
+              ),
             ),
           ),
 
@@ -182,7 +190,11 @@ class HomeScreen extends StatelessWidget {
       leading: Icon(icon, color: AppColor.accent),
       title: Text(title),
       onTap: () {
-        Navigator.pushNamed(context, route);
+        Navigator.pushNamed(context, route).then((_) {
+          context
+              .read<HomeCubit>()
+              .loadInitialData(); // يعمل refresh لما ترجع من أي شاشة
+        });
       },
     );
   }
