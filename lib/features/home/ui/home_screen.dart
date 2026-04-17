@@ -177,6 +177,7 @@ class HomeScreen extends StatelessWidget {
         Navigator.pushNamed(
           context,
           route,
+          // ignore: use_build_context_synchronously
         ).then((_) => context.read<HomeCubit>().loadInitialData());
       },
     );
