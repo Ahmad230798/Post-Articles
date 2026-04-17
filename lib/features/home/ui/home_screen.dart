@@ -23,7 +23,6 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: AppColor.backgroundLight,
 
-          // 🔹 SideMenu (Drawer)
           drawer: Drawer(
             child: ListView(
               padding: EdgeInsets.zero,
@@ -93,9 +92,7 @@ class HomeScreen extends StatelessWidget {
 
           body: SafeArea(
             child: RefreshIndicator(
-              onRefresh: () async {
-                await cubit.loadInitialData(); // سحب لتحديث الصفحة
-              },
+              onRefresh: () async => cubit.loadInitialData(),
               child: CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(child: HomeHeader()),
@@ -148,10 +145,7 @@ class HomeScreen extends StatelessWidget {
                                   context,
                                   Routes.articleDetailsScreen,
                                   arguments: item,
-                                ).then((_) {
-                                  cubit
-                                      .loadInitialData(); // يعمل refresh لما ترجع من التفاصيل
-                                });
+                                ).then((_) => cubit.loadInitialData());
                               },
                               child: ArticleCard(article: item),
                             ),
@@ -165,21 +159,11 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-
-          // 🔹 Floating Publish Button
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: AppColor.accent,
-            child: const Icon(Icons.add, color: Colors.white),
-            onPressed: () {
-              Navigator.pushNamed(context, Routes.publishStep1Screen);
-            },
-          ),
         );
       },
     );
   }
 
-  // 🔹 Helper for Drawer Items
   Widget _drawerItem(
     BuildContext context,
     IconData icon,
@@ -190,11 +174,10 @@ class HomeScreen extends StatelessWidget {
       leading: Icon(icon, color: AppColor.accent),
       title: Text(title),
       onTap: () {
-        Navigator.pushNamed(context, route).then((_) {
-          context
-              .read<HomeCubit>()
-              .loadInitialData(); // يعمل refresh لما ترجع من أي شاشة
-        });
+        Navigator.pushNamed(
+          context,
+          route,
+        ).then((_) => context.read<HomeCubit>().loadInitialData());
       },
     );
   }

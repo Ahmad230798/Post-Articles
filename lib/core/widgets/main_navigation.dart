@@ -6,6 +6,8 @@ import 'package:flutter_project/features/home/ui/home_screen.dart';
 import 'package:flutter_project/features/my_profile/ui/my_profile.dart';
 import 'package:flutter_project/features/saved/ui/saved_screen.dart';
 import 'package:flutter_project/features/home/cubit/home_cubit.dart';
+import 'package:flutter_project/core/routing/routes.dart';
+import 'package:flutter_project/core/constants/app_color.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -24,19 +26,28 @@ class _MainNavigationState extends State<MainNavigation> {
       child: Scaffold(
         body: IndexedStack(
           index: currentIndex,
-          children: [
+          children: const [
             HomeScreen(),
-            const ExploreScreen(),
-            const SavedScreen(),
-            const MyProfile(),
+            ExploreScreen(),
+            SavedScreen(),
+            MyProfile(),
           ],
         ),
+
+        floatingActionButton: FloatingActionButton(
+          heroTag: "main_fab",
+          backgroundColor: AppColor.accent,
+          child: const Icon(Icons.add, color: Colors.white),
+          onPressed: () {
+            Navigator.pushNamed(context, Routes.publishStep1Screen);
+          },
+        ),
+
         bottomNavigationBar: AppBottomNav(
           currentIndex: currentIndex,
           onTap: (index) {
             setState(() => currentIndex = index);
 
-            // 🔹 إذا رجعت على الـ Home tab، يعمل refresh
             if (index == 0) {
               context.read<HomeCubit>().loadInitialData();
             }
