@@ -19,7 +19,7 @@ class ADHeroImage extends StatelessWidget {
           image: DecorationImage(
             image: imageUrl != null
                 ? NetworkImage(imageUrl!)
-                : const AssetImage("assets/images/placeholder.png")
+                : const AssetImage("assets/images/myProfilePic.jpg")
                       as ImageProvider,
             fit: BoxFit.cover,
           ),

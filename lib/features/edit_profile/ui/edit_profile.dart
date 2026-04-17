@@ -12,7 +12,6 @@ import 'package:flutter_project/features/edit_profile/logic/cubit/edit_profile_c
 import 'package:flutter_project/features/edit_profile/logic/cubit/edit_profile_state.dart';
 import 'package:flutter_project/features/edit_profile/repo/edit_profile_repo.dart';
 import 'package:flutter_project/features/edit_profile/widget/edit_profile_form.dart';
-import 'package:flutter_project/features/edit_profile/widget/profile_image_edite.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EditProfile extends StatelessWidget {
@@ -86,8 +85,7 @@ class EditProfile extends StatelessWidget {
                           fontFamily: AppFont.publicSans,
                         ),
                       ),
-                      verticalspace(46),
-                      ProfileImageEdite(),
+
                       verticalspace(48),
                       EditProfileForm(formKey: formKey, cubit: cubit),
                       verticalspace(104),

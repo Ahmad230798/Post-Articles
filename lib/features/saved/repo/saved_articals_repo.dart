@@ -6,7 +6,6 @@ import 'package:flutter_project/features/saved/models/saved_articals_model.dart'
 
 class SavedArticalsRepo {
   final ApiServices api;
-
   SavedArticalsRepo({required this.api});
 
   Future<Either<Failure, List<SavedArticleModel>>> getSavedArticals() async {

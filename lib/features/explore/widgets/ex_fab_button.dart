@@ -11,6 +11,7 @@ class ExFabButton extends StatelessWidget {
     final cubit = context.read<ExploreCubit>();
 
     return FloatingActionButton(
+      heroTag: 'explore_filters_fab',
       backgroundColor: const Color(0xFF319795),
       child: const Icon(Icons.tune, color: Colors.white),
       onPressed: () async {
