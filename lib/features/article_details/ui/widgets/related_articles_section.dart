@@ -59,7 +59,7 @@ class ADRelatedArticles extends StatelessWidget {
                           a.coverImage!.isNotEmpty &&
                           a.coverImage!.startsWith("http"))
                       ? NetworkImage(a.coverImage!)
-                      : const AssetImage("assets/images/placeholder.png")
+                      : const AssetImage("assets/images/myProfilePic.jpg")
                             as ImageProvider,
                   fit: BoxFit.cover,
                 ),

@@ -15,7 +15,7 @@ class SavedArticleCard extends StatelessWidget {
         Navigator.pushNamed(
           context,
           "/articleDetailsScreen",
-          arguments: article,
+          arguments: article.article,
         );
       },
       child: Container(
@@ -57,7 +57,7 @@ class SavedArticleCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        article.article.slug,
+                        article.article.categoryName ?? "Unknown",
                         style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.bold,
@@ -79,7 +79,7 @@ class SavedArticleCard extends StatelessWidget {
 
                   // TITLE
                   Text(
-                    article.article.title,
+                    article.article.title!,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -94,7 +94,7 @@ class SavedArticleCard extends StatelessWidget {
                   // DESCRIPTION
                   if (article.article.description != null)
                     Text(
-                      article.article.description,
+                      article.article.description!,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(

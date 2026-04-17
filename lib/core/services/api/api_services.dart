@@ -31,9 +31,7 @@ class ApiServices {
               // ignore: unused_local_variable
               final service = SharedPreferencesService();
 
-              // final token = await service.getAccessToken();
-              final token =
-                  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc2NDYwNzAwLCJpYXQiOjE3NzYzNzQzMDAsImp0aSI6IjQ0NmM5NTcwYTJjYTQ3NmQ5YmMxYTg5ZTlkYWQzYWYxIiwidXNlcl9pZCI6IjcifQ.6gYIDK6JpTE6jm8qsx16d-kjr8XzOKNwi0PNZwVhszA";
+              final token = await service.getAccessToken();
 
               // ignore: unnecessary_null_comparison
               if (token != null && token.isNotEmpty) {
