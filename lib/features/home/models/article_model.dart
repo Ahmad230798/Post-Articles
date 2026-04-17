@@ -14,6 +14,8 @@ class ArticleModel extends Equatable {
   final int? commentsCount;
   final String? averageRating;
   final int? authorId;
+  final bool? isLiked;
+  final bool? isSaved;
 
   const ArticleModel({
     this.id,
@@ -29,6 +31,8 @@ class ArticleModel extends Equatable {
     this.likesCount,
     this.commentsCount,
     this.averageRating,
+    this.isLiked,
+    this.isSaved,
   });
 
   factory ArticleModel.fromJson(Map<String, dynamic> json) {
@@ -48,6 +52,8 @@ class ArticleModel extends Equatable {
           : int.tryParse(json["comments_count"] ?? "0"),
       averageRating: (json["average_rating"] ?? "0").toString(),
       authorId: json["author"]?["id"],
+      isLiked: json["is_liked"] ?? false,
+      isSaved: json["is_saved"] ?? false,
     );
   }
 

@@ -59,7 +59,8 @@ class AppRoute {
         );
 
       case Routes.commentsScreen:
-        return MaterialPageRoute(builder: (_) => CommentsScreen());
+        final slug = settings.arguments as String;
+        return MaterialPageRoute(builder: (_) => CommentsScreen(slug: slug));
       case Routes.savedScreen:
         return MaterialPageRoute(builder: (_) => SavedScreen());
       case Routes.homeScreen:
