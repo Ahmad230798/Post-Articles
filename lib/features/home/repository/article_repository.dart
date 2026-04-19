@@ -18,7 +18,7 @@ class ArticleRepository {
 
   Future<List<ArticleModel>> getArticlesByCategory(String slug) async {
     final response = await _api.getData(
-      url: "${ApiLink.baseUrl}/articles/?category=$slug&page_size=10",
+      url: "${ApiLink.baseUrl}/articles/?category__slug=$slug&page_size=10",
     );
 
     final List results = response["results"] ?? [];

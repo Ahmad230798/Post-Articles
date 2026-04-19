@@ -106,10 +106,6 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
 
-                  SliverToBoxAdapter(
-                    child: HomeHeroStory(article: state.featuredArticle),
-                  ),
-
                   SliverPadding(
                     padding: EdgeInsets.symmetric(
                       horizontal: 16.w,
