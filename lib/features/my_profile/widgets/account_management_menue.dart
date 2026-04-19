@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
+import 'package:flutter_project/core/helpers/extentions.dart';
 import 'package:flutter_project/core/helpers/spacing.dart';
+import 'package:flutter_project/core/routing/routes.dart';
+import 'package:flutter_project/features/saved/logic/cubit/saved_articals_cubit.dart';
 
 class AccountManagementMenue extends StatelessWidget {
   const AccountManagementMenue({super.key});
@@ -13,14 +17,25 @@ class AccountManagementMenue extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AccountManagementMenueElement(
-            icon: Icon(Icons.settings, color: AppColor.darkGray),
-            element: "Profile Settings",
+          InkWell(
+            onTap: () {
+              context.pushNamed(Routes.editProfile);
+            },
+            child: AccountManagementMenueElement(
+              icon: Icon(Icons.settings, color: AppColor.darkGray),
+              element: "Profile Settings",
+            ),
           ),
           verticalspace(18),
-          AccountManagementMenueElement(
-            element: "Saved Articles",
-            icon: Icon(Icons.bookmark_border, color: AppColor.darkGray),
+          InkWell(
+            onTap: () {
+              context.read<SavedArticalsCubit>().getSavedArticals();
+              context.pushNamed(Routes.savedScreen);
+            },
+            child: AccountManagementMenueElement(
+              element: "Saved Articles",
+              icon: Icon(Icons.bookmark_border, color: AppColor.darkGray),
+            ),
           ),
           verticalspace(18),
           AccountManagementMenueElement(

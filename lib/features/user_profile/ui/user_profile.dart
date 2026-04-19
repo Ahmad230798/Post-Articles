@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
+import 'package:flutter_project/core/helpers/extentions.dart';
 import 'package:flutter_project/core/helpers/spacing.dart';
 import 'package:flutter_project/core/services/api/api_services.dart';
 import 'package:flutter_project/features/user_profile/logic/cubit/user_profile_cubit.dart';
@@ -47,6 +48,12 @@ class UserProfile extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            IconButton(
+                              onPressed: () {
+                                context.pop();
+                              },
+                              icon: Icon(Icons.arrow_back),
+                            ),
                             ProfileHeader(
                               userName: user.username,
                               userTitle: user.title,

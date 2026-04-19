@@ -86,30 +86,86 @@ class _ArticleCardState extends State<ArticleCard>
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColor.veryLightGray,
           borderRadius: BorderRadius.circular(16.r),
           border: Border.all(color: AppColor.border),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // IMAGE
-            ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(16.r)),
-              child:
-                  (article.coverImage != null && article.coverImage!.isNotEmpty)
-                  ? Image.network(
-                      article.coverImage!,
-                      height: 160.h,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    )
-                  : Container(
-                      height: 160.h,
-                      width: double.infinity,
-                      color: Colors.grey.shade300,
-                      child: const Icon(Icons.image, size: 40),
+            // AUTHOR → PROFILE PAGE
+            Stack(
+              children: [
+                Column(
+                  children: [
+                    // IMAGE
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child:
+                          (article.coverImage != null &&
+                              article.coverImage!.isNotEmpty)
+                          ? Image.network(
+                              article.coverImage!,
+                              height: 250.h,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            )
+                          : Container(
+                              height: 160.h,
+                              width: double.infinity,
+                              color: Colors.grey.shade300,
+                              child: const Icon(Icons.image, size: 40),
+                            ),
                     ),
+                  ],
+                ),
+                Positioned(
+                  child: Container(
+                    width: 1.sw,
+                    decoration: BoxDecoration(
+                      color: AppColor.border.withOpacity(0.5),
+                    ),
+                    child: Row(
+                      children: [
+                        if (article.authorName != null) Spacer(),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                "/userProfileScreen",
+                                arguments: article.authorName,
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  article.authorName!,
+                                  style: TextStyle(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                SizedBox(width: 10.w),
+                                CircleAvatar(
+                                  radius: 18.r,
+                                  backgroundColor: Colors.grey.shade300,
+                                  child: const Icon(
+                                    Icons.person,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
 
             Padding(
@@ -232,39 +288,6 @@ class _ArticleCardState extends State<ArticleCard>
                   ),
 
                   SizedBox(height: 14.h),
-
-                  // AUTHOR → PROFILE PAGE
-                  if (article.authorName != null)
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          "/userProfileScreen",
-                          arguments: article.authorName,
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 18.r,
-                            backgroundColor: Colors.grey.shade300,
-                            child: const Icon(
-                              Icons.person,
-                              color: Colors.white,
-                            ),
-                          ),
-                          SizedBox(width: 10.w),
-                          Text(
-                            article.authorName!,
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w600,
-                              color: const Color(0xFF2D3748),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                 ],
               ),
             ),

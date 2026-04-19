@@ -7,7 +7,7 @@ import 'package:flutter_project/features/search/cubit/explore_filters_state.dart
 class ExploreCubit extends Cubit<ExploreState> {
   final ExploreRepository _repo = ExploreRepository();
 
-  ExploreCubit() : super(const ExploreState());
+  ExploreCubit() : super(const ExploreState(user: null));
 
   // 🔹 تحويل sort UI → ordering API
   String _mapSortToOrdering(String sort) {
@@ -105,7 +105,7 @@ class ExploreCubit extends Cubit<ExploreState> {
 
   // 🔹 Reset
   void resetFilters() {
-    emit(const ExploreState());
+    emit(const ExploreState(user: null));
     fetchArticles();
   }
 

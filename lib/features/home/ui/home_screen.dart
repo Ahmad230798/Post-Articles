@@ -9,7 +9,6 @@ import 'package:flutter_project/core/widgets/article_card.dart';
 import 'package:flutter_project/core/routing/routes.dart';
 
 import 'widgets/home_header.dart';
-import 'widgets/home_hero_story.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,8 +20,6 @@ class HomeScreen extends StatelessWidget {
         final cubit = context.read<HomeCubit>();
 
         return Scaffold(
-          backgroundColor: AppColor.backgroundLight,
-
           drawer: Drawer(
             child: ListView(
               padding: EdgeInsets.zero,

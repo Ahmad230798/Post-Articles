@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_project/features/auth/data/model/signup_model/register_response.dart';
 import 'package:flutter_project/features/home/models/article_model.dart';
 
 class ExploreState extends Equatable {
@@ -11,7 +12,7 @@ class ExploreState extends Equatable {
   final bool hasMore;
   final int page;
   final String? selectedCategorySlug;
-
+  final User? user;
   const ExploreState({
     this.searchQuery = '',
     this.selectedCategory = 0,
@@ -21,7 +22,7 @@ class ExploreState extends Equatable {
     this.isLoading = false,
     this.hasMore = true,
     this.page = 1,
-    this.selectedCategorySlug,
+    this.selectedCategorySlug, required this.user,
   });
 
   ExploreState copyWith({
@@ -43,7 +44,7 @@ class ExploreState extends Equatable {
       articles: articles ?? this.articles,
       isLoading: isLoading ?? this.isLoading,
       hasMore: hasMore ?? this.hasMore,
-      page: page ?? this.page,
+      page: page ?? this.page, user: user,
     );
   }
 

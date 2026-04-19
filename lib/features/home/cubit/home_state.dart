@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_project/features/auth/data/model/signup_model/register_response.dart';
 import 'package:flutter_project/features/home/models/article_model.dart';
 import 'package:flutter_project/features/home/models/category_model.dart';
 
@@ -8,13 +9,14 @@ class HomeState extends Equatable {
   final ArticleModel? featuredArticle;
   final List<ArticleModel> articles;
   final List<CategoryModel> categories;
+  final User? user;
 
   const HomeState({
     this.activeCategory = 0,
     this.isLoading = false,
     this.featuredArticle,
     this.articles = const [],
-    this.categories = const [],
+    this.categories = const [],  this.user,
   });
 
   HomeState copyWith({
@@ -29,7 +31,7 @@ class HomeState extends Equatable {
       isLoading: isLoading ?? this.isLoading,
       featuredArticle: featuredArticle ?? this.featuredArticle,
       articles: articles ?? this.articles,
-      categories: categories ?? this.categories,
+      categories: categories ?? this.categories, user:user,
     );
   }
 

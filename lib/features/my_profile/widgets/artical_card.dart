@@ -9,11 +9,15 @@ class ArticalCard extends StatelessWidget {
   final String kindAndDate;
   final String title;
   final String text;
+  final void Function()? onTap;
+  final int commentsCount;
   const ArticalCard({
     super.key,
     required this.kindAndDate,
     required this.title,
     required this.text,
+    this.onTap,
+    required this.commentsCount,
   });
 
   @override
@@ -49,11 +53,15 @@ class ArticalCard extends StatelessWidget {
           Row(
             children: [
               Spacer(),
-              Icon(Icons.mode_comment_outlined, size: 15),
-              Text("12"),
-              horizentalspace(16),
-              Icon(Icons.bookmark_border, size: 15),
-              Text("84"),
+              InkWell(
+                onTap: onTap,
+                child: Icon(Icons.mode_comment_outlined, size: 15),
+              ),
+              horizentalspace(10),
+              Text(commentsCount.toString()),
+              // horizentalspace(16),
+              // Icon(Icons.bookmark_border, size: 15),
+              // Text("84"),
             ],
           ),
         ],
