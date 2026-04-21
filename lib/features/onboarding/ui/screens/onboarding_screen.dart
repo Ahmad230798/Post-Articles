@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
+import 'package:flutter_project/core/helpers/extentions.dart';
+import 'package:flutter_project/core/routing/routes.dart';
 import 'package:flutter_project/features/onboarding/ui/widgets/onboarding1_image_and_description.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,10 +19,15 @@ class OnboardingScreen extends StatelessWidget {
               child: Row(
                 children: [
                   Expanded(child: SizedBox()),
-                  Text(
-                    "Skip",
-                    style: AppTextStyle.font16boldlightblue,
-                    textAlign: TextAlign.left,
+                  InkWell(
+                    onTap: () {
+                      context.pushNamed(Routes.loginScreen);
+                    },
+                    child: Text(
+                      "Skip",
+                      style: AppTextStyle.font16boldlightblue,
+                      textAlign: TextAlign.left,
+                    ),
                   ),
                 ],
               ),

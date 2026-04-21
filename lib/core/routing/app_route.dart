@@ -23,6 +23,7 @@ import 'package:flutter_project/features/onboarding/ui/page_controller.dart';
 import 'package:flutter_project/features/publish/step1/ui/publish_step1_screen.dart';
 import 'package:flutter_project/features/saved/ui/saved_screen.dart';
 import 'package:flutter_project/features/setting/ui/setting_screen.dart';
+import 'package:flutter_project/features/splash_screen/splash_screen.dart';
 import 'package:flutter_project/features/user_profile/ui/user_profile.dart';
 
 class AppRoute {
@@ -70,6 +71,8 @@ class AppRoute {
           builder: (_) => const ArticleDetailsScreen(),
           settings: settings,
         );
+      case Routes.splashScreen:
+        return MaterialPageRoute(builder: (_) => const SplashScreen());
 
       case Routes.userProfileScreen:
         final username = settings.arguments as String;

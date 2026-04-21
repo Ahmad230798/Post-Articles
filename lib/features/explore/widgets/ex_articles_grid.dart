@@ -12,6 +12,7 @@ class ExArticlesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ExploreCubit, ExploreState>(
       builder: (context, state) {
+         final user = state.user;
         if (state.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
@@ -30,7 +31,7 @@ class ExArticlesGrid extends StatelessWidget {
 
             return Padding(
               padding: const EdgeInsets.only(bottom: 12),
-              child: ArticleCard(article: article),
+              child: ArticleCard(article: article, user:user!),
             );
           },
         );

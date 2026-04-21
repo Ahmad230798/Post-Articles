@@ -16,7 +16,8 @@ class HomeState extends Equatable {
     this.isLoading = false,
     this.featuredArticle,
     this.articles = const [],
-    this.categories = const [],  this.user,
+    this.categories = const [],
+    this.user,
   });
 
   HomeState copyWith({
@@ -25,13 +26,15 @@ class HomeState extends Equatable {
     ArticleModel? featuredArticle,
     List<ArticleModel>? articles,
     List<CategoryModel>? categories,
+    User? user,
   }) {
     return HomeState(
       activeCategory: activeCategory ?? this.activeCategory,
       isLoading: isLoading ?? this.isLoading,
       featuredArticle: featuredArticle ?? this.featuredArticle,
       articles: articles ?? this.articles,
-      categories: categories ?? this.categories, user:user,
+      categories: categories ?? this.categories,
+      user: user ?? this.user,
     );
   }
 
@@ -42,5 +45,6 @@ class HomeState extends Equatable {
     featuredArticle,
     articles,
     categories,
+    user,
   ];
 }

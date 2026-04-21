@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/core/routing/routes.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
@@ -27,14 +28,17 @@ class HomeHeader extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, "/exploreFiltersScreen");
+                  Navigator.pushReplacementNamed(
+                    context,
+                    Routes.myProfileScreen,
+                  );
                 },
                 child: Icon(Icons.search, size: 24.sp, color: AppColor.primary),
               ),
               SizedBox(width: 12.w),
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, "/userProfileScreen");
+                  Navigator.pushNamed(context, Routes.myProfileScreen);
                 },
                 child: CircleAvatar(
                   radius: 16.r,

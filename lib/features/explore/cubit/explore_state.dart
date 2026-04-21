@@ -22,7 +22,8 @@ class ExploreState extends Equatable {
     this.isLoading = false,
     this.hasMore = true,
     this.page = 1,
-    this.selectedCategorySlug, required this.user,
+    this.selectedCategorySlug,
+    this.user,
   });
 
   ExploreState copyWith({
@@ -35,6 +36,7 @@ class ExploreState extends Equatable {
     bool? hasMore,
     int? page,
     String? selectedCategorySlug,
+    final User? user,
   }) {
     return ExploreState(
       searchQuery: searchQuery ?? this.searchQuery,
@@ -44,7 +46,8 @@ class ExploreState extends Equatable {
       articles: articles ?? this.articles,
       isLoading: isLoading ?? this.isLoading,
       hasMore: hasMore ?? this.hasMore,
-      page: page ?? this.page, user: user,
+      page: page ?? this.page,
+      user: user ?? this.user,
     );
   }
 
@@ -59,5 +62,7 @@ class ExploreState extends Equatable {
     hasMore,
     page,
     selectedCategorySlug,
+
+    user,
   ];
 }

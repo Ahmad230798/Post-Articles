@@ -116,7 +116,9 @@ class _OnboardingContainerState extends State<OnboardingContainer> {
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  context.pushReplacementNamed(Routes.loginScreen);
+                },
                 child: Text(
                   "Log In",
                   style: AppTextStyle.font16boldlightblue.copyWith(
