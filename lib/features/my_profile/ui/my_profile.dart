@@ -6,10 +6,8 @@ import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_project/core/helpers/extentions.dart';
 import 'package:flutter_project/core/helpers/spacing.dart';
 import 'package:flutter_project/core/routing/routes.dart';
-import 'package:flutter_project/core/services/api/api_services.dart';
 import 'package:flutter_project/features/my_profile/logic/cubit/my_profile_cubit.dart';
 import 'package:flutter_project/features/my_profile/logic/cubit/my_profile_state.dart';
-import 'package:flutter_project/features/my_profile/repo/my_profile_repo.dart';
 import 'package:flutter_project/features/my_profile/widgets/account_management_menue.dart';
 import 'package:flutter_project/features/my_profile/widgets/artical_card.dart';
 import 'package:flutter_project/features/my_profile/widgets/info_card.dart';
@@ -27,15 +25,15 @@ class MyProfile extends StatelessWidget {
             body: Center(child: CircularProgressIndicator()),
           );
         }
-    
+
         if (state is MyProfileFailure) {
           return Scaffold(body: Center(child: Text(state.errorMessage)));
         }
-    
+
         if (state is MyProfileLoaded) {
           final user = state.user;
           final articles = state.articles;
-    
+
           return Scaffold(
             appBar: AppBar(
               backgroundColor: Colors.white,
@@ -85,10 +83,7 @@ class MyProfile extends StatelessWidget {
                       ),
                     ),
                     verticalspace(32),
-                    Text(
-                      user.username,
-                      style: AppTextStyle.font36bolddarkblue,
-                    ),
+                    Text(user.username, style: AppTextStyle.font36bolddarkblue),
                     verticalspace(4),
                     Text(
                       user.academicStatus,
@@ -194,7 +189,7 @@ class MyProfile extends StatelessWidget {
                       ],
                     ),
                     verticalspace(32),
-    
+
                     if (articles.isEmpty)
                       Center(
                         child: Text(
@@ -209,7 +204,7 @@ class MyProfile extends StatelessWidget {
                         itemCount: articles.length,
                         itemBuilder: (BuildContext context, int index) {
                           final article = articles[index];
-    
+
                           return Padding(
                             padding: EdgeInsets.only(bottom: 32.h),
                             child: ArticalCard(
@@ -227,7 +222,7 @@ class MyProfile extends StatelessWidget {
                           );
                         },
                       ),
-    
+
                     verticalspace(48),
                     Text(
                       "ACCOUNT MANAGEMENT",
@@ -261,7 +256,7 @@ class MyProfile extends StatelessWidget {
             ),
           );
         }
-    
+
         return const SizedBox.shrink();
       },
     );
