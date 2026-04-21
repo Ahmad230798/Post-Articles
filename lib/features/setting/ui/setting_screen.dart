@@ -39,7 +39,6 @@ class SettingScreen extends StatelessWidget {
 
           if (state is MyProfileLoaded) {
             final user = state.user;
-            final articles = state.articles;
             final pref = SharedPreferencesService();
             return Scaffold(
               appBar: AppBar(

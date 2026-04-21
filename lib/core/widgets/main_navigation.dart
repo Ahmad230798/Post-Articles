@@ -22,42 +22,50 @@ class _MainNavigationState extends State<MainNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: currentIndex,
-        children: const [
-          HomeScreen(),
-          ExploreScreen(),
-          SavedScreen(),
-          MyProfile(),
-        ],
-      ),
+    return PopScope(
+      canPop: currentIndex == 0,
+      onPopInvoked: (didPop) {
+        if (currentIndex != 0) {
+          setState(() => currentIndex = 0);
+        }
+      },
+      child: Scaffold(
+        body: IndexedStack(
+          index: currentIndex,
+          children: const [
+            HomeScreen(),
+            ExploreScreen(),
+            SavedScreen(),
+            MyProfile(),
+          ],
+        ),
 
-      // ✔️ زر البوست يظهر فقط في الهوم
-      floatingActionButton: currentIndex == 0
-          ? FloatingActionButton(
-              heroTag: "main_fab",
-              backgroundColor: AppColor.accent,
-              child: const Icon(Icons.add, color: Colors.white),
-              onPressed: () {
-                Navigator.pushNamed(context, Routes.publishStep1Screen);
-              },
-            )
-          : null,
+        // ✔️ زر البوست يظهر فقط في الهوم
+        floatingActionButton: currentIndex == 0
+            ? FloatingActionButton(
+                heroTag: "main_fab",
+                backgroundColor: AppColor.accent,
+                child: const Icon(Icons.add, color: Colors.white),
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.publishStep1Screen);
+                },
+              )
+            : null,
 
-      bottomNavigationBar: AppBottomNav(
-        currentIndex: currentIndex,
-        onTap: (index) {
-          setState(() => currentIndex = index);
+        bottomNavigationBar: AppBottomNav(
+          currentIndex: currentIndex,
+          onTap: (index) {
+            setState(() => currentIndex = index);
 
-          if (index == 0) {
-            context.read<HomeCubit>().loadInitialData();
-          }
+            if (index == 0) {
+              context.read<HomeCubit>().loadInitialData();
+            }
 
-          if (index == 2) {
-            context.read<SavedArticalsCubit>().getSavedArticals();
-          }
-        },
+            if (index == 2) {
+              context.read<SavedArticalsCubit>().getSavedArticals();
+            }
+          },
+        ),
       ),
     );
   }

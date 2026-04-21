@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/core/helpers/extentions.dart';
+import 'package:flutter_project/core/routing/routes.dart';
+import 'package:flutter_project/features/auth/data/model/signup_model/register_response.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/services/api/api_services.dart';
@@ -6,8 +9,14 @@ import 'package:flutter_project/features/home/models/article_model.dart';
 
 class ArticleCard extends StatefulWidget {
   final ArticleModel article;
+  final User user;
   final void Function()? onTap;
-  const ArticleCard({super.key, required this.article, this.onTap});
+  const ArticleCard({
+    super.key,
+    required this.article,
+    this.onTap,
+    required this.user,
+  });
 
   @override
   State<ArticleCard> createState() => _ArticleCardState();
@@ -75,7 +84,7 @@ class _ArticleCardState extends State<ArticleCard>
   @override
   Widget build(BuildContext context) {
     final article = widget.article;
-
+    final user = widget.user;
     return InkWell(
       onTap: () {
         Navigator.pushNamed(
@@ -123,6 +132,7 @@ class _ArticleCardState extends State<ArticleCard>
                   child: Container(
                     width: 1.sw,
                     decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
                       color: AppColor.border.withOpacity(0.5),
                     ),
                     child: Row(
@@ -132,11 +142,11 @@ class _ArticleCardState extends State<ArticleCard>
                           padding: const EdgeInsets.all(8.0),
                           child: GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(
-                                context,
-                                "/userProfileScreen",
-                                arguments: article.authorName,
-                              );
+                              if (article.authorName == user.username) {
+                                context.pushNamed(Routes.myProfileScreen);
+                              } else {
+                                context.pushNamed(Routes.userProfileScreen);
+                              }
                             },
                             child: Row(
                               children: [
@@ -145,7 +155,7 @@ class _ArticleCardState extends State<ArticleCard>
                                   style: TextStyle(
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.w600,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                 ),
                                 SizedBox(width: 10.w),

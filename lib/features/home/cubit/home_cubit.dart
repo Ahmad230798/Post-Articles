@@ -1,12 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project/core/services/api/api_services.dart';
 import 'package:flutter_project/features/home/cubit/home_state.dart';
 import 'package:flutter_project/features/home/repository/article_repository.dart';
 import 'package:flutter_project/features/home/repository/category_repository.dart';
 import 'package:flutter_project/features/home/models/category_model.dart';
+import 'package:flutter_project/features/my_profile/repo/my_profile_repo.dart';
 
 class HomeCubit extends Cubit<HomeState> {
+  final MyProfileRepo _profileRepo = MyProfileRepo(apiServices: ApiServices());
   HomeCubit() : super(const HomeState()) {
     loadInitialData();
+    getUserInfo();
   }
 
   final ArticleRepository _articleRepo = ArticleRepository();
@@ -74,6 +78,22 @@ class HomeCubit extends Cubit<HomeState> {
       emit(state.copyWith(articles: response, isLoading: false));
     } catch (e) {
       emit(state.copyWith(isLoading: false));
+    }
+  }
+
+  Future<void> getUserInfo() async {
+    try {
+      final result = await _profileRepo.getUserProfile();
+      result.fold(
+        (failure) {
+          // Handle failure if needed
+        },
+        (user) {
+          emit(state.copyWith(user: user));
+        },
+      );
+    } catch (e) {
+      // Handle exception if needed
     }
   }
 }

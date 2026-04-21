@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project/core/helpers/extentions.dart';
+import 'package:flutter_project/core/services/services.dart';
 import 'package:flutter_project/core/widgets/category_pills.dart';
 import 'package:flutter_project/features/home/cubit/home_cubit.dart';
 import 'package:flutter_project/features/home/cubit/home_state.dart';
@@ -18,6 +20,7 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
         final cubit = context.read<HomeCubit>();
+        final user = state.user;
 
         return Scaffold(
           drawer: Drawer(
@@ -28,61 +31,80 @@ class HomeScreen extends StatelessWidget {
                   decoration: BoxDecoration(color: AppColor.accent),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      CircleAvatar(
+                    children: [
+                      const CircleAvatar(
                         radius: 30,
                         backgroundImage: AssetImage(
                           "assets/images/profile.png",
                         ),
                       ),
-                      SizedBox(height: 8),
-                      Text(
-                        "Majd",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                      const SizedBox(height: 8),
+                      if (user != null)
+                        Text(
+                          user.username,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Text(
-                        "majd@example.com",
-                        style: TextStyle(color: Colors.white70, fontSize: 14),
-                      ),
+                      if (user != null)
+                        Text(
+                          user.email,
+                          style: const TextStyle(
+                            color: Colors.white70,
+                            fontSize: 14,
+                          ),
+                        ),
                     ],
                   ),
                 ),
-                _drawerItem(context, Icons.explore, "Explore", Routes.main),
-                _drawerItem(
-                  context,
-                  Icons.bookmark,
-                  "Saved",
-                  Routes.savedScreen,
-                ),
-                _drawerItem(
-                  context,
-                  Icons.person,
-                  "Profile",
-                  Routes.userProfileScreen,
-                ),
-                _drawerItem(
-                  context,
-                  Icons.settings,
-                  "Settings",
-                  Routes.settingScreen,
-                ),
-                _drawerItem(
-                  context,
-                  Icons.comment,
-                  "Comments",
-                  Routes.commentsScreen,
-                ),
+                _drawerItem(context, Icons.explore, "Explore", () {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.main,
+                    // ignore: use_build_context_synchronously
+                  ).then((_) => context.read<HomeCubit>().loadInitialData());
+                }),
+                _drawerItem(context, Icons.bookmark, "Saved", () {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.savedScreen,
+                    // ignore: use_build_context_synchronously
+                  ).then((_) => context.read<HomeCubit>().loadInitialData());
+                }),
+                _drawerItem(context, Icons.person, "Profile", () {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.myProfileScreen,
+                    // ignore: use_build_context_synchronously
+                  ).then((_) => context.read<HomeCubit>().loadInitialData());
+                }),
+                _drawerItem(context, Icons.settings, "Settings", () {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.settingScreen,
+                    // ignore: use_build_context_synchronously
+                  ).then((_) => context.read<HomeCubit>().loadInitialData());
+                }),
+                _drawerItem(context, Icons.comment, "Comments", () {
+                  Navigator.pushNamed(
+                    context,
+                    Routes.commentsScreen,
+                    // ignore: use_build_context_synchronously
+                  ).then((_) => context.read<HomeCubit>().loadInitialData());
+                }),
                 SizedBox(height: 280.h),
-                _drawerItem(
-                  context,
-                  Icons.logout,
-                  "Logout",
-                  Routes.onBoardingScreen,
-                ),
+                _drawerItem(context, Icons.logout, "Logout", () async {
+                  final pref = SharedPreferencesService();
+                  await pref.clearTokens();
+                  context.pushAndRemoveUntil(
+                    Routes.loginScreen,
+                    predicate: (route) {
+                      return false;
+                    },
+                  );
+                }),
               ],
             ),
           ),
@@ -130,6 +152,7 @@ class HomeScreen extends StatelessWidget {
                       sliver: SliverList(
                         delegate: SliverChildBuilderDelegate((context, index) {
                           final item = state.articles[index];
+
                           return Padding(
                             padding: EdgeInsets.only(bottom: 16.h),
                             child: GestureDetector(
@@ -140,7 +163,7 @@ class HomeScreen extends StatelessWidget {
                                   arguments: item,
                                 ).then((_) => cubit.loadInitialData());
                               },
-                              child: ArticleCard(article: item),
+                              child: ArticleCard(article: item, user: user!),
                             ),
                           );
                         }, childCount: state.articles.length),
@@ -161,18 +184,13 @@ class HomeScreen extends StatelessWidget {
     BuildContext context,
     IconData icon,
     String title,
-    String route,
+
+    void Function()? onTap,
   ) {
     return ListTile(
       leading: Icon(icon, color: AppColor.accent),
       title: Text(title),
-      onTap: () {
-        Navigator.pushNamed(
-          context,
-          route,
-          // ignore: use_build_context_synchronously
-        ).then((_) => context.read<HomeCubit>().loadInitialData());
-      },
+      onTap: onTap,
     );
   }
 }

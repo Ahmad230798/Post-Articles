@@ -1,13 +1,18 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project/core/services/api/api_services.dart';
 import 'package:flutter_project/features/explore/cubit/explore_state.dart';
 import 'package:flutter_project/features/explore/repository/explore_repository.dart';
 import 'package:flutter_project/features/home/models/category_model.dart';
+import 'package:flutter_project/features/my_profile/repo/my_profile_repo.dart';
 import 'package:flutter_project/features/search/cubit/explore_filters_state.dart';
 
 class ExploreCubit extends Cubit<ExploreState> {
   final ExploreRepository _repo = ExploreRepository();
+  final MyProfileRepo _profileRepo = MyProfileRepo(apiServices: ApiServices());
 
-  ExploreCubit() : super(const ExploreState(user: null));
+  ExploreCubit() : super(const ExploreState()) {
+    getUserInfo();
+  }
 
   // 🔹 تحويل sort UI → ordering API
   String _mapSortToOrdering(String sort) {
@@ -123,5 +128,21 @@ class ExploreCubit extends Cubit<ExploreState> {
     );
 
     fetchArticles();
+  }
+
+  Future<void> getUserInfo() async {
+    try {
+      final result = await _profileRepo.getUserProfile();
+      result.fold(
+        (failure) {
+          // Handle failure if needed
+        },
+        (user) {
+          emit(state.copyWith(user: user));
+        },
+      );
+    } catch (e) {
+      // Handle exception if needed
+    }
   }
 }
