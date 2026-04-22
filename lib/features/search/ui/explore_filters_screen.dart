@@ -97,8 +97,6 @@ class _ExploreFiltersScreenState extends State<ExploreFiltersScreen> {
                               ),
                       ),
 
-                      SliverToBoxAdapter(child: EFPriceRange()),
-
                       SliverToBoxAdapter(
                         child: EFSortBy(
                           selected: state.selectedSort,

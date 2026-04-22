@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/core/widgets/app_top_nav_bar.dart';
 import 'package:flutter_project/core/widgets/category_pills.dart';
+import 'package:flutter_project/features/home/cubit/home_cubit.dart';
 import 'package:flutter_project/features/saved/logic/cubit/saved_articals_cubit.dart';
 import 'package:flutter_project/features/saved/logic/cubit/saved_articals_state.dart';
 import 'package:flutter_project/features/saved/widgets/artice_card.dart';
@@ -49,11 +50,8 @@ class SavedScreen extends StatelessWidget {
                 Column(
                   children: [
                     const AppTopNavBar(
-                      title: "ScholarLink",
-                      showBack: true,
-                      actions: [
-                        Icon(Icons.notifications, color: Color(0xFF1A365D)),
-                      ],
+                      title: "Saved Articles",
+                      showBack: false,
                     ),
 
                     Expanded(
@@ -68,19 +66,6 @@ class SavedScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SavedHeader(articlesCount: savedArticles.length),
-                            SizedBox(height: 24.h),
-
-                            const CategoryPills(
-                              variant: CategoryVariant.pills,
-                              categories: [
-                                "All Library",
-                                "Neuroscience",
-                                "Quantum Physics",
-                                "Economics",
-                              ],
-                              activeIndex: 0,
-                            ),
-
                             SizedBox(height: 24.h),
 
                             LayoutBuilder(

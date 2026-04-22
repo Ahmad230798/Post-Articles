@@ -60,25 +60,13 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 _drawerItem(context, Icons.explore, "Explore", () {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.main,
-                    // ignore: use_build_context_synchronously
-                  ).then((_) => context.read<HomeCubit>().loadInitialData());
+                  context.pushNamed(Routes.exploreScreen);
                 }),
                 _drawerItem(context, Icons.bookmark, "Saved", () {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.savedScreen,
-                    // ignore: use_build_context_synchronously
-                  ).then((_) => context.read<HomeCubit>().loadInitialData());
+                  context.pushNamed(Routes.savedScreen);
                 }),
                 _drawerItem(context, Icons.person, "Profile", () {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.myProfileScreen,
-                    // ignore: use_build_context_synchronously
-                  ).then((_) => context.read<HomeCubit>().loadInitialData());
+                  context.pushNamed(Routes.myProfileScreen);
                 }),
                 _drawerItem(context, Icons.settings, "Settings", () {
                   Navigator.pushNamed(
@@ -87,13 +75,7 @@ class HomeScreen extends StatelessWidget {
                     // ignore: use_build_context_synchronously
                   ).then((_) => context.read<HomeCubit>().loadInitialData());
                 }),
-                _drawerItem(context, Icons.comment, "Comments", () {
-                  Navigator.pushNamed(
-                    context,
-                    Routes.commentsScreen,
-                    // ignore: use_build_context_synchronously
-                  ).then((_) => context.read<HomeCubit>().loadInitialData());
-                }),
+
                 SizedBox(height: 280.h),
                 _drawerItem(context, Icons.logout, "Logout", () async {
                   final pref = SharedPreferencesService();

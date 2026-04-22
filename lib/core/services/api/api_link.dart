@@ -13,7 +13,4 @@ class ApiLink {
   static String followUser(String userName) {
     return '$baseUrl/users/$userName/follow/';
   }
-  // static const String logout = '$baseUrl/api/logout';
-
-  /// ================= Movies =================
 }

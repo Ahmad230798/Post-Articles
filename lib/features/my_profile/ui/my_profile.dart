@@ -6,6 +6,7 @@ import 'package:flutter_project/core/constants/text_style.dart';
 import 'package:flutter_project/core/helpers/extentions.dart';
 import 'package:flutter_project/core/helpers/spacing.dart';
 import 'package:flutter_project/core/routing/routes.dart';
+import 'package:flutter_project/core/services/services.dart';
 import 'package:flutter_project/features/my_profile/logic/cubit/my_profile_cubit.dart';
 import 'package:flutter_project/features/my_profile/logic/cubit/my_profile_state.dart';
 import 'package:flutter_project/features/my_profile/widgets/account_management_menue.dart';
@@ -38,17 +39,12 @@ class MyProfile extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Colors.white,
               title: Text(
-                "ScholarLink",
+                "My Profile",
                 style: AppTextStyle.font20boldPrimary.copyWith(
                   letterSpacing: -0.25,
                 ),
               ),
               actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.notifications_none),
-                ),
-                horizentalspace(10),
                 Container(
                   width: 28.w,
                   height: 28.h,
@@ -235,18 +231,30 @@ class MyProfile extends StatelessWidget {
                     verticalspace(26),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(Icons.logout, size: 24, color: AppColor.red),
-                          horizentalspace(12),
-                          Text(
-                            "Logout",
-                            style: AppTextStyle.font14meduimbluegray.copyWith(
-                              color: AppColor.red,
+                      child: InkWell(
+                        onTap: () async {
+                          final pref = SharedPreferencesService();
+                          await pref.clearTokens();
+                          context.pushAndRemoveUntil(
+                            Routes.loginScreen,
+                            predicate: (route) {
+                              return false;
+                            },
+                          );
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(Icons.logout, size: 24, color: AppColor.red),
+                            horizentalspace(12),
+                            Text(
+                              "Logout",
+                              style: AppTextStyle.font14meduimbluegray.copyWith(
+                                color: AppColor.red,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     verticalspace(90),

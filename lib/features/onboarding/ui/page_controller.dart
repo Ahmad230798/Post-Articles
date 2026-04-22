@@ -20,6 +20,11 @@ class OnboardingContainer extends StatefulWidget {
 class _OnboardingContainerState extends State<OnboardingContainer> {
   final PageController _controller = PageController();
   int currentPage = 0;
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +57,7 @@ class _OnboardingContainerState extends State<OnboardingContainer> {
                 duration: const Duration(milliseconds: 300),
                 margin: const EdgeInsets.symmetric(horizontal: 4),
                 height: 8,
-                width: currentPage == index ? 32 : 8,
+                width: currentPage == index ? 16 : 8,
                 decoration: BoxDecoration(
                   color: currentPage == index ? Colors.teal : Colors.grey,
                   borderRadius: BorderRadius.circular(10),

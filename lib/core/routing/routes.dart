@@ -16,4 +16,5 @@ class Routes {
   static const String myProfileScreen = '/myProfileScreen';
   static const String editProfile = '/editProfile';
   static const String splashScreen = '/splashScreen';
+  static const String exploreScreen = '/exploreScreen';
 }

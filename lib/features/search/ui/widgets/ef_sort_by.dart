@@ -13,7 +13,7 @@ class EFSortBy extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final options = ["Most Relevant", "Newest Arrivals", "Price: High to Low"];
+    final options = ["Most Relevant", "Newest Arrivals"];
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),

@@ -22,7 +22,7 @@ class HomeHeader extends StatelessWidget {
             child: Icon(Icons.menu, size: 28.sp, color: AppColor.primary),
           ),
 
-          Text("InsightHub", style: AppTextStyle.font20boldPrimary),
+          Text("Home Page", style: AppTextStyle.font20boldPrimary),
 
           Row(
             children: [
