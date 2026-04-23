@@ -55,13 +55,6 @@ class EditProfile extends StatelessWidget {
                     letterSpacing: -0.25,
                   ),
                 ),
-                actions: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.notifications_none),
-                  ),
-                  horizentalspace(20),
-                ],
               ),
               body: SingleChildScrollView(
                 child: Padding(
@@ -92,7 +85,11 @@ class EditProfile extends StatelessWidget {
                       AppTextButton(
                         buttonText: "Discard Changes",
                         onPressed: () {
-                          context.pushReplacementNamed(Routes.myProfileScreen);
+                          cubit.updateProfileInfo();
+                          context.pushAndRemoveUntil(
+                            Routes.myProfileScreen,
+                            predicate: (route) => false,
+                          );
                         },
                         backgroundcolor: Colors.white,
                         textStyle: AppTextStyle.font16mediumblack,
@@ -105,6 +102,10 @@ class EditProfile extends StatelessWidget {
                             ? null
                             : () {
                                 cubit.updateProfileInfo();
+                                context.pushAndRemoveUntil(
+                                  Routes.myProfileScreen,
+                                  predicate: (route) => false,
+                                );
                               },
                       ),
                       verticalspace(100),

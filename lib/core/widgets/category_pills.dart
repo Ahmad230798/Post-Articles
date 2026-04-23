@@ -133,10 +133,13 @@ class CategoryPills extends StatelessWidget {
                 children: List.generate(categories.length, (index) {
                   return SizedBox(
                     width: (MediaQuery.of(context).size.width - 48.w) / 2,
-                    child: _categoryTile(
-                      Icons.category,
-                      categories[index],
-                      index == activeIndex,
+                    child: GestureDetector(
+                      onTap: () => onTap?.call(index),
+                      child: _categoryTile(
+                        Icons.category,
+                        categories[index],
+                        index == activeIndex,
+                      ),
                     ),
                   );
                 }),
