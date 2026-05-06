@@ -16,6 +16,7 @@ import 'package:flutter_project/features/comments/ui/comments_screen.dart';
 import 'package:flutter_project/features/edit_profile/ui/edit_profile.dart';
 import 'package:flutter_project/features/explore/explore_screen.dart';
 import 'package:flutter_project/features/my_profile/ui/my_profile.dart';
+import 'package:flutter_project/features/notification_screen/ui/notification_screen.dart';
 import 'package:flutter_project/features/publish/cubit/publish_cubit.dart';
 import 'package:flutter_project/features/publish/repo/publish_repository.dart';
 import 'package:flutter_project/features/search/ui/explore_filters_screen.dart';
@@ -91,6 +92,8 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => EditProfile());
       case Routes.exploreScreen:
         return MaterialPageRoute(builder: (_) => const ExploreScreen());
+      case Routes.notificationScreen:
+        return MaterialPageRoute(builder: (_) => const NotificationScreen());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

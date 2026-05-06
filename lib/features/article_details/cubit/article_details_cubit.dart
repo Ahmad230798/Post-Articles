@@ -82,4 +82,15 @@ class ArticleDetailsCubit extends Cubit<ArticleDetailsState> {
       emit(state.copyWith(related: relatedModels));
     } catch (_) {}
   }
+
+  Future<void> addRate(String slug, int rate) async {
+    try {
+      await repo.addRate(slug, rate);
+
+      // optional: update article rating locally or reload article
+      await loadArticle(slug);
+    } catch (e) {
+      emit(state.copyWith(error: e.toString()));
+    }
+  }
 }

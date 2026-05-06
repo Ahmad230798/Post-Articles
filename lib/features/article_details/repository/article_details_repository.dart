@@ -48,4 +48,8 @@ class ArticleDetailsRepository {
     );
     return response["results"];
   }
+
+  Future<void> addRate(String slug, int rate) async {
+    await _api.postData(url: ApiLink.putARate(slug), body: {"rating": rate});
+  }
 }

@@ -1,6 +1,9 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project/features/article_details/cubit/article_details_cubit.dart';
+import 'package:flutter_project/features/home/models/article_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_project/core/constants/app_color.dart';
 import 'package:flutter_project/core/constants/text_style.dart';
@@ -10,6 +13,7 @@ class ADActionsButtons extends StatelessWidget {
   final VoidCallback onBookmark;
   final VoidCallback onCite;
   final VoidCallback onLike;
+  final ArticleModel article;
 
   const ADActionsButtons({
     super.key,
@@ -17,6 +21,7 @@ class ADActionsButtons extends StatelessWidget {
     required this.onBookmark,
     required this.onCite,
     required this.onLike,
+    required this.article,
   });
 
   @override
@@ -25,15 +30,66 @@ class ADActionsButtons extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
       child: Row(
         children: [
-          _actionButton(Icons.picture_as_pdf, "Download PDF", () {}),
-          SizedBox(width: 12.w),
-          _actionButton(Icons.format_quote, "Cite", onCite),
-          SizedBox(width: 12.w),
-          _actionButton(
-            isBookmarked ? Icons.favorite : Icons.favorite_border,
-            isBookmarked ? "Liked" : "Like",
-            onBookmark,
-          ),
+          _actionButton(Icons.picture_as_pdf, "Rate", () {
+            final cubit = context.read<ArticleDetailsCubit>();
+            showDialog(
+              context: context,
+              builder: (context) {
+                int selectedRating = 0;
+                return StatefulBuilder(
+                  builder: (context, setDialogState) {
+                    return AlertDialog(
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text(
+                            "Cancel",
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                        ElevatedButton(
+                          onPressed: selectedRating == 0
+                              ? null
+                              : () {
+                                  cubit.addRate(article.slug!, selectedRating);
+                                  Navigator.pop(context);
+                                },
+                          child: const Text("Submit"),
+                        ),
+                      ],
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text("How would you rate this article?"),
+                          const SizedBox(height: 16),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: List.generate(5, (index) {
+                              final starNumber = index + 1;
+                              return IconButton(
+                                onPressed: () {
+                                  setDialogState(() {
+                                    selectedRating = starNumber;
+                                  });
+                                },
+                                icon: Icon(
+                                  starNumber <= selectedRating
+                                      ? Icons.star
+                                      : Icons.star_border,
+                                  color: AppColor.green,
+                                  size: 32,
+                                ),
+                              );
+                            }),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                );
+              },
+            );
+          }),
         ],
       ),
     );

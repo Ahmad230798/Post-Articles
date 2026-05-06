@@ -1,4 +1,3 @@
-
 class Routes {
   static const String main = "/main";
 
@@ -17,4 +16,5 @@ class Routes {
   static const String editProfile = '/editProfile';
   static const String splashScreen = '/splashScreen';
   static const String exploreScreen = '/exploreScreen';
+  static const String notificationScreen = '/notificationScreen';
 }

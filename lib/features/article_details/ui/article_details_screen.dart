@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_project/core/helpers/extentions.dart';
+import 'package:flutter_project/core/routing/routes.dart';
 import 'package:flutter_project/features/home/models/article_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -55,9 +57,13 @@ class ArticleDetailsScreen extends StatelessWidget {
                             showBack: true,
                             centerTitle: false,
                             trailing: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                context.pushReplacementNamed(
+                                  Routes.notificationScreen,
+                                );
+                              },
                               icon: const Icon(
-                                Icons.share,
+                                Icons.notifications,
                                 color: Color(0xFF1A365D),
                               ),
                             ),
@@ -99,6 +105,7 @@ class ArticleDetailsScreen extends StatelessWidget {
                             onBookmark: () => cubit.toggleBookmark(slug!),
                             onCite: () => cubit.loadCitation(slug!),
                             onLike: () {},
+                            article: article,
                           ),
                         ),
 
