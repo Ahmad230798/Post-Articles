@@ -7,9 +7,10 @@ class ApiLink {
   static const String getMyProfile = '$baseUrl/users/me/';
   static const String getMySavedArticls = '$baseUrl/articles/bookmarks/';
   static const String getAllNotification = "$baseUrl/notifications/";
-static String get markAllAsRead {
-  return "$baseUrl/notifications/read-all/";
-}
+  static String get markAllAsRead {
+    return "$baseUrl/notifications/mark-all-read/";
+  }
+
   static String putARate(String slug) {
     return "$baseUrl/articles/$slug/rate/";
   }

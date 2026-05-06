@@ -43,7 +43,7 @@ class NotificationCubit extends Cubit<NotificationState> {
         final updated = current.map((e) {
           return e.copyWith(isRead: true);
         }).toList();
-
+        getAllNotifications();
         emit(NotificationSuccess(notifications: updated));
       }
     });

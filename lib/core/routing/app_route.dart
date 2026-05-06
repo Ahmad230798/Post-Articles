@@ -16,6 +16,8 @@ import 'package:flutter_project/features/comments/ui/comments_screen.dart';
 import 'package:flutter_project/features/edit_profile/ui/edit_profile.dart';
 import 'package:flutter_project/features/explore/explore_screen.dart';
 import 'package:flutter_project/features/my_profile/ui/my_profile.dart';
+import 'package:flutter_project/features/notification_screen/cubit/notification_cubit.dart';
+import 'package:flutter_project/features/notification_screen/repository/notification_repo.dart';
 import 'package:flutter_project/features/notification_screen/ui/notification_screen.dart';
 import 'package:flutter_project/features/publish/cubit/publish_cubit.dart';
 import 'package:flutter_project/features/publish/repo/publish_repository.dart';
@@ -93,7 +95,11 @@ class AppRoute {
       case Routes.exploreScreen:
         return MaterialPageRoute(builder: (_) => const ExploreScreen());
       case Routes.notificationScreen:
-        return MaterialPageRoute(builder: (_) => const NotificationScreen());
+        return MaterialPageRoute(builder: (_) => BlocProvider(
+  create: (_) =>
+      NotificationCubit(repo: NotificaionRepo())..getAllNotifications(),
+  child: NotificationScreen(),
+));
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_project/features/notification_screen/cubit/notification_cubit.dart';
 import 'package:flutter_project/features/notification_screen/model/notification_model.dart';
 import 'package:flutter_project/features/notification_screen/widgets/notification_item.dart';
@@ -26,10 +25,12 @@ class NotificationList extends StatelessWidget {
           subtitle: item.description,
           condition: item.isLiked,
           time: timeAgo(item.createdAt),
-          onPressed: () {
-            cubit.markAsRead(item.id.toString());
-            item.isLiked = !item.isLiked;
-          },
+          onPressed: item.isLiked
+              ? () {}
+              : () {
+                  cubit.markAsRead(item.id.toString());
+                  item.isLiked = !item.isLiked;
+                },
         );
       },
     );
